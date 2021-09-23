@@ -48,7 +48,7 @@ class Recipe(db.Model):
 
         pictures = [{
             'id': picture.id,
-            'imgUrl': picture.imgUrl,
+            'imgUrl': picture.img_url,
             'order': picture.order,
             'userId': picture.user_id,
         } for picture in self.pictures]

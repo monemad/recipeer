@@ -8,6 +8,12 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
+import { getUsers } from './store/users';
+import { getRecipes } from './store/recipes';
+import { getIngredients } from './store/ingredients';
+import { getUnits } from './store/units';
+import { getTypes } from './store/types';
+import { getAttributes } from './store/attributes';
 
 function App() {
     const [loaded, setLoaded] = useState(false);
@@ -16,6 +22,12 @@ function App() {
     useEffect(() => {
         (async() => {
         await dispatch(authenticate());
+        await dispatch(getUsers());
+        await dispatch(getRecipes());
+        await dispatch(getIngredients());
+        await dispatch(getUnits());
+        await dispatch(getTypes());
+        await dispatch(getAttributes());
         setLoaded(true);
         })();
     }, [dispatch]);
