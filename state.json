@@ -14,6 +14,7 @@
                     "order": 1,
                     "multiplier": 1.5,
                     "ingredientId": 1,
+                    "quantity": 2,
                     "unitId": 4,
                     "recipeId": 4
                 }

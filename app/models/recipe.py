@@ -34,8 +34,7 @@ class Recipe(db.Model):
             'order': ing.order,
             'quantity': ing.quantity,
             'ingredientId': ing.ingredient_id,
-            'unitId': ing.unit_id,
-            'recipeId': ing.recipe_id
+            'unitId': ing.unit_id
         } for ing in self.ingredients]
 
         attributes = [attr.id for attr in self.attributes]
