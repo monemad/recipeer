@@ -8,7 +8,11 @@ from .recipe_type_joins import seed_recipe_type_joins, undo_recipe_type_joins
 from .feedback import seed_feedback, undo_feedback
 from .ratings import seed_ratings, undo_ratings
 from .instructions import seed_instructions, undo_instructions
+from .ingredients import seed_ingredients, undo_ingredients
 from .units import seed_units, undo_units
+from .recipe_ingredients import seed_recipe_ingredients, undo_recipe_ingredients
+from .user_ingredients import seed_user_ingredients, undo_user_ingredients
+from .pictures import seed_pictures, undo_pictures
 
 seed_commands = AppGroup('seed')
 
@@ -23,7 +27,11 @@ def seed():
     seed_feedback()
     seed_ratings()
     seed_instructions()
+    seed_ingredients()
     seed_units()
+    seed_recipe_ingredients()
+    seed_user_ingredients()
+    seed_pictures()
 
 @seed_commands.command('undo')
 def undo():
@@ -36,4 +44,8 @@ def undo():
     undo_feedback()
     undo_ratings()
     undo_instructions()
+    undo_ingredients()
     undo_units()
+    undo_recipe_ingredients()
+    undo_user_ingredients()
+    undo_pictures()

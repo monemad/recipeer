@@ -48,7 +48,7 @@ class User(db.Model, UserMixin):
             'order': item.order,
             'multiplier': item.multiplier,
             'ingredientId': item.recipe_ingredient.ingredient_id,
-            'unitId': item.recipe_ingedient.unit_id,
+            'unitId': item.recipe_ingredient.unit_id,
             'recipeId': item.recipe_ingredient.recipe_id
         } for item in self.shopping_list]
         ratings = [{
