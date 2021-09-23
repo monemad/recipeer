@@ -14,6 +14,7 @@
                     "order": 1,
                     "multiplier": 1.5,
                     "ingredientId": 1,
+                    "quantity": 2,
                     "unitId": 4,
                     "recipeId": 4
                 }
@@ -41,7 +42,7 @@
     "recipes": {
         "1": {
             "id": 1,
-            "title": "Braised Lemongrass Short Rib",
+            "title": "Braised Lemongrass Short Ribs",
             "difficulty": 3,
             "cookTime": 500,
             "types": [1, 4],

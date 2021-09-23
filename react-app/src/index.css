@@ -1,0 +1,10 @@
+:root {
+    --bg-color: white;
+    --primary-color: rgb(197, 134, 18);
+    --secondary-color: gray;
+    --tertiary-color: rgb(6, 6, 83);
+}
+
+body {
+    background-color: var(--bg-color);
+}
