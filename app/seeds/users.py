@@ -2,19 +2,19 @@ from app.models import db, User
 
 def seed_users():
     demo = User(
-        username='Demo', email='demo@user.com', password='password')
+        first_name='Demo', last_name='User', username='Demo', email='demo@user.com', password='password', img_url='https://i.imgur.com/Sm559aj.png')
     ivy = User(
-        username='WellHelloIvy', email='ivy@huynh.com', password='password')
+        first_name='Ivy', last_name='Huynh', username='WellHelloIvy', email='ivy@huynh.com', password='password', img_url='https://i.imgur.com/Sm559aj.png')
     kris = User(
-        username='k_mart', email='kris@mart.com', password='password')
+        first_name='Kristian', last_name='Martinez', username='k_mart', email='kris@mart.com', password='password', img_url='https://i.imgur.com/Sm559aj.png')
     zane = User(
-        username='TheChamp', email='thechamp@thechamp.com', password='password')
+        first_name='Zane', last_name='Hamadi', username='TheChamp', email='thechamp@thechamp.com', password='password', img_url='https://i.imgur.com/Sm559aj.png')
     shawn = User(
-        username='ForlornShinobi', email='shawn@boyle.com', password='password')
+        first_name='Shawn', last_name='Boyle', username='ForlornShinobi', email='shawn@boyle.com', password='password', img_url='https://i.imgur.com/Sm559aj.png')
     kiara = User(
-        username='keipara', email='kiara@mendaros.com', password='password')
+        first_name='Kiara', last_name='Mendaros', username='keipara', email='kiara@mendaros.com', password='password', img_url='https://i.imgur.com/Sm559aj.png')
     moiz = User(
-        username='wizkika', email='therealwizkika@gmail.com', password='password')
+        first_name='Moiz', last_name='Ahmad', username='wizkika', email='therealwizkika@gmail.com', password='password', img_url='https://i.imgur.com/Sm559aj.png')
 
     db.session.add(demo)
     db.session.add(ivy)

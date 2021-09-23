@@ -1,0 +1,118 @@
+{
+    "session": {
+        "user": {
+            "id": 1,
+            "firstName": "Demo",
+            "lastName": "User",
+            "username": "demouser",
+            "email": "demo@user.com",
+            "imgUrl": "https://i.imgur.com/Sm559aj.png",
+            "recipes": [1, 3, 5, 7],
+            "shoppingList": [
+                {
+                    "id": 1,
+                    "order": 1,
+                    "multiplier": 1.5,
+                    "ingredientId": 1,
+                    "unitId": 4,
+                    "recipeId": 4
+                }
+            ],
+            "ratings": [
+                {
+                    "id": 1,
+                    "recipeId": 1,
+                    "value": 5
+                }
+            ]
+        }
+    },
+
+    "users": {
+        "1": {
+            "id": 1,
+            "username": "demouser",
+            "firstName": "Demo",
+            "imgUrl": "https://i.imgur.com/Sm559aj.png",
+            "recipes": [1, 3, 5, 7]
+        } 
+    },
+
+    "recipes": {
+        "1": {
+            "id": 1,
+            "title": "Braised Lemongrass Short Rib",
+            "difficulty": 3,
+            "cookTime": 500,
+            "types": [1, 4],
+            "instructions": [
+                {
+                    "id": 1,
+                    "step": "Do the thing!",
+                    "order": 1
+                }
+            ],
+            "ingredients": [
+                {
+                    "id": 1,
+                    "order": 1, 
+                    "quantity": 3,
+                    "ingredientId": 1,
+                    "unitId": 1
+                }
+            ], 
+            "attributes": [1, 2, 3],
+            "userId": 1,
+            "ratings": [
+                {
+                    "id": 1,
+                    "userId": 1,
+                    "value": 5
+                }
+            ],
+            "pictures": [
+                {
+                    "id": 1,
+                    "imgUrl": "https://i.imgur.com/Sm559aj.png",
+                    "order": 1,
+                    "user_id": 1
+                }
+            ],
+            "feedback": [
+                {
+                    "id": 1,
+                    "content": "Delicious! I subbed the beef with chocolate and it was fantastic",
+                    "userId": 1
+                }
+            ]
+        }
+    },
+
+    "ingredients": {
+        "1": {
+            "id": 1,
+            "name": "butter"
+        }
+    },
+
+    "units": {
+        "1": {
+            "id": 1,
+            "name": "cup"
+        }
+    },
+
+    "types": {
+        "1": {
+            "id": 1,
+            "name": "breakfast"
+        }
+    },
+
+    "attributes": {
+        "1": {
+            "id": 1,
+            "name": "gluten-free"
+        }
+    }
+}
