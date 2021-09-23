@@ -41,7 +41,7 @@
     "recipes": {
         "1": {
             "id": 1,
-            "title": "Braised Lemongrass Short Rib",
+            "title": "Braised Lemongrass Short Ribs",
             "difficulty": 3,
             "cookTime": 500,
             "types": [1, 4],
