@@ -48,7 +48,10 @@ function App() {
                     <Recipe />
                 </Route>
                 <ProtectedRoute path='/profile'>
-                    <h1>Profile Page</h1>
+                    <User profile={true}/>
+                </ProtectedRoute>
+                <ProtectedRoute path='/users/:userId'>
+                    <User />
                 </ProtectedRoute>
                 <ProtectedRoute path='/discover'>
                     <h1>Discover Page</h1>
