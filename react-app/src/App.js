@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import LoginForm from './components/auth/LoginForm';
-import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
 import User from './components/User';
+import Recipe from './components/Recipe';
 import { authenticate } from './store/session';
 import { getUsers } from './store/users';
 import { getRecipes } from './store/recipes';
@@ -40,22 +38,25 @@ function App() {
         <>
             <NavBar />
             <Switch>
-                <Route path='/login' exact={true}>
-                    <LoginForm />
+                <Route exact path='/'>
+                    <h1>Home</h1>
                 </Route>
-                <Route path='/sign-up' exact={true}>
-                    <SignUpForm />
-                </Route>
-                <ProtectedRoute path='/users' exact={true} >
-                    <UsersList/>
-                </ProtectedRoute>
-                <ProtectedRoute path='/users/:userId' exact={true} >
+                <Route path='/users/:userId'>
                     <User />
+                </Route>
+                <Route path='/recipes/:recipeId'>
+                    <Recipe />
+                </Route>
+                <ProtectedRoute path='/profile'>
+                    <h1>Profile Page</h1>
                 </ProtectedRoute>
-                <ProtectedRoute path='/' exact={true} >
-                    <h1>Recipeer</h1>
+                <ProtectedRoute path='/discover'>
+                    <h1>Discover Page</h1>
                 </ProtectedRoute>
             </Switch>
+            <footer>
+                <h1>Footer Goes Here</h1>
+            </footer>
         </>
     );
 }

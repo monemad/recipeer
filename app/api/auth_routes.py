@@ -1,8 +1,11 @@
 from flask import Blueprint, request
+from werkzeug.utils import secure_filename
 from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
+from .aws_s3 import public_file_upload
+import os
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -60,10 +63,27 @@ def sign_up():
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        img_url = None
+        img_file = None
+        if "img_file" in request.files:
+            img_file = request.files["img_file"]
+
+        if img_file:
+            try:
+                temp_file_name = "app/api/tmp" + secure_filename(img_file.filename)
+                img_file.save(temp_file_name)
+                img_url = public_file_upload(temp_file_name, "recipeer-bucket")
+                os.remove(temp_file_name)
+            except KeyError:
+                pass
+                
         user = User(
+            first_name=form.data['first_name'],
+            last_name=form.data['last_name'],
             username=form.data['username'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            img_url=img_url
         )
         db.session.add(user)
         db.session.commit()
