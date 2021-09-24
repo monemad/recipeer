@@ -24,6 +24,7 @@ const NavBar = () => {
                 </>
                 :
                 <>
+                    Welcome, {sessionUser.username}
                     <LogoutButton />
                 </>
             }
