@@ -1,0 +1,18 @@
+nav > * {
+    height: 100%;
+}
+
+.profile-img.nav-profile-img {
+    width: 40px;
+    height: 40px;
+}
+
+.nav-auth {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-auth button {
+    height: 50px;
+    width: fit-content;
+}

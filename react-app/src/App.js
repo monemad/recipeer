@@ -37,26 +37,28 @@ function App() {
     return (
         <>
             <NavBar />
-            <Switch>
-                <Route exact path='/'>
-                    <h1>Home</h1>
-                </Route>
-                <Route path='/users/:userId'>
-                    <User />
-                </Route>
-                <Route path='/recipes/:recipeId'>
-                    <Recipe />
-                </Route>
-                <ProtectedRoute path='/profile'>
-                    <User profile={true}/>
-                </ProtectedRoute>
-                <ProtectedRoute path='/users/:userId'>
-                    <User />
-                </ProtectedRoute>
-                <ProtectedRoute path='/discover'>
-                    <h1>Discover Page</h1>
-                </ProtectedRoute>
-            </Switch>
+            <div id='content'>
+                <Switch>
+                    <Route exact path='/'>
+                        <h1>Home</h1>
+                    </Route>
+                    <Route path='/users/:userId'>
+                        <User />
+                    </Route>
+                    <Route path='/recipes/:recipeId'>
+                        <Recipe />
+                    </Route>
+                    <ProtectedRoute path='/profile'>
+                        <User profile={true}/>
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/users/:userId'>
+                        <User />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/discover'>
+                        <h1>Discover Page</h1>
+                    </ProtectedRoute>
+                </Switch>
+            </div>
             <footer>
                 <h1>Footer Goes Here</h1>
             </footer>

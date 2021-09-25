@@ -15,19 +15,27 @@ const NavBar = () => {
             <NavLink to='/' exact={true} activeClassName='active'>
                 Home
             </NavLink>
+            <NavLink to='/' exact={true} activeClassName='active'>
+                Search
+            </NavLink>
 
-            { !authenticated ?
-                <>
-                    <LoginFormModal />
+            <h2>Recipeer</h2>
 
-                    <SignUpFormModal />
-                </>
-                :
-                <>
-                    Welcome, {sessionUser.username}
-                    <LogoutButton />
-                </>
-            }
+            <div className='nav-auth'>
+                { !authenticated ?
+                    <>
+                        <LoginFormModal />
+                        <SignUpFormModal />
+                    </>
+                    :
+                    <>
+                        <NavLink to='/'>Discover</NavLink>
+                        Welcome, {sessionUser.username}
+                        <NavLink to='/profile'><img className='profile-img nav-profile-img' src={sessionUser.imgUrl} alt={sessionUser.username}/></NavLink>
+                        <LogoutButton />
+                    </>
+                }
+            </div>
 
         </nav>
     );

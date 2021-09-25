@@ -97,6 +97,35 @@ export const signUp = (firstName, lastName, username, email, password, imgFile) 
     }
 }
 
+export const editUser = (firstName, lastName, username, password, imgFile, userId) => async (dispatch) => {
+
+	const form = new FormData()
+    form.append("user_id", userId)
+    form.append("first_name", firstName)
+    form.append("last_name", lastName)
+    form.append("username", username)
+    form.append("password", password)
+    form.append("img_file", imgFile)
+
+    const response = await fetch('/api/auth/edit', {
+        method: 'PUT',
+        body: form,
+    });
+    
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setUser(data))
+        return null;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+        return data.errors;
+        }
+    } else {
+        return ['An error occurred. Please try again.']
+    }
+}
+
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case SET_USER:
