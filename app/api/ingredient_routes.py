@@ -8,3 +8,9 @@ ingredient_routes = Blueprint('ingredients', __name__)
 def ingredients():
     ingredients = Ingredient.query.all()
     return {'ingredients': [ingredient.to_dict() for ingredient in ingredients]}
+
+# @ingredient_routes.route('/')
+# @login_required
+# def ingredients():
+#     ingredients = Ingredient.query.all()
+#     return {'ingredients': [ingredient.to_dict() for ingredient in ingredients]}

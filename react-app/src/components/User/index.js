@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
+import EditUserFormModal from '../modals/EditUserFormModal';
 
 function User({profile = false}) {
     const sessionUser = useSelector(state => state.session.user)
@@ -16,11 +17,14 @@ function User({profile = false}) {
         <>
             <div className='profile-banner'>
                 <div className='profile-img-div'>
-                    <img src={user.imgUrl} alt={user.username} width='300px'/>
+                    <img className='profile-img' src={user.imgUrl} alt={user.username} width='300px'/>
                 </div>
                 <div className='username-div'>
                     <h1>{user.username}</h1>
                 </div>
+                { profile &&
+                    <EditUserFormModal />
+                }
             </div>
             <div className='user-recipes'>
                 <h2>Recipes</h2>

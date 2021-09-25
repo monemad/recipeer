@@ -1,10 +1,72 @@
+@import './components/NavBar/NavBar.css';
+
 :root {
     --bg-color: white;
     --primary-color: rgb(197, 134, 18);
     --secondary-color: gray;
     --tertiary-color: rgb(6, 6, 83);
+    --navbar-height: 50px;
+    --footer-height: 15%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    padding: 0;
+    margin: 0;
 }
 
 body {
     background-color: var(--bg-color);
+}
+
+#root {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100vh;
+}
+
+nav {
+    position: fixed;
+    display: grid;
+    grid-template-columns: 20% 20% 20% 40%;
+    grid-template-rows: var(--navbar-height);
+    text-align: center;
+    height: var(--navbar-height);
+    top: 0px;
+    width: 100vw;
+    z-index: 2;
+    background-color: var(--secondary-color);
+}
+
+#content {
+    padding: 3em 25% 0;
+    position: absolute;
+    top: var(--navbar-height);
+    width: 100%;
+    height: calc(100vh - var(--navbar-height) - var(--footer-height));
+    z-index: 1;
+}
+
+footer {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    height: var(--footer-height);
+    bottom: 0px;
+    width: 100vw;
+    z-index: 2;
+    background-color: var(--secondary-color);
+}
+
+.profile-img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
 }
