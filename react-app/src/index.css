@@ -39,7 +39,6 @@ nav {
     height: var(--navbar-height);
     top: 0px;
     width: 100vw;
-    z-index: 2;
     background-color: var(--secondary-color);
 }
 
@@ -49,7 +48,7 @@ nav {
     top: var(--navbar-height);
     width: 100%;
     height: calc(100vh - var(--navbar-height) - var(--footer-height));
-    z-index: 1;
+    overflow-y: auto;
 }
 
 footer {
@@ -60,7 +59,6 @@ footer {
     height: var(--footer-height);
     bottom: 0px;
     width: 100vw;
-    z-index: 2;
     background-color: var(--secondary-color);
 }
 
