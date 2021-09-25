@@ -73,13 +73,12 @@ function RecipeIngredientsForm({ recipeId }) {
         ingredients.forEach(async (ing, idx) => {
             const ingredientId = await dispatch(createIngredient(ing.trim()))
             const recipeIngredient = {
-                order: idx,
+                order: idx+1,
                 quantity: quantities[idx],
                 ingredientId: ingredientId,
                 unitId: units[idx],
                 recipeId
             }
-            
         })
     }
     
