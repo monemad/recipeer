@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
+import IngredientsForm from '../IngredientsForm';
 import EditUserFormModal from '../modals/EditUserFormModal';
 
 function User({profile = false}) {
@@ -31,6 +32,7 @@ function User({profile = false}) {
                 {user.recipes.map(recipeId => 
                     <div key={recipeId}><Link to={`/recipes/${recipeId}`}>{recipes[recipeId].title}</Link></div>)}
             </div>
+            <IngredientsForm />
         </>
     );
 }
