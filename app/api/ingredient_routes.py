@@ -14,7 +14,7 @@ def ingredients():
 def create_ingredient():
     name = request.get_json()['name']
     ingredient = Ingredient.query.filter(Ingredient.name == name).first()
-    if ingredient: return "Ingredient exists in database", 409
+    if ingredient: return ingredient.to_dict()
     new_ingredient = Ingredient(name=name)
     db.session.add(new_ingredient)
     db.session.commit()

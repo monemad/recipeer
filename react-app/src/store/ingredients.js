@@ -38,6 +38,7 @@ export const createIngredient = ingredient => async (dispatch) => {
     if (response.ok) {
         const ingredient = await response.json()
         dispatch(addIngredient(ingredient))
+        return ingredient.id
     }
 }
 
