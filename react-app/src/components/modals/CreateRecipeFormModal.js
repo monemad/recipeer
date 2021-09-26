@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
-import RecipeForm from '../RecipeForm';
+import CreateRecipeForm from '../Recipe/CreateRecipeForm';
 
 function RecipeFormModal() {
     const [showModal, setShowModal] = useState(false);
@@ -9,8 +9,8 @@ function RecipeFormModal() {
         <>
         <button onClick={() => setShowModal(true)}>Create Recipe</button>
         {showModal && (
-            <Modal onClose={() => setShowModal(false)} className="recipe-form-modal">
-                <RecipeForm setShowModal={setShowModal}/>
+            <Modal onClose={() => setShowModal(false)} className="create-recipe-form-modal">
+                <CreateRecipeForm setShowModal={setShowModal}/>
             </Modal>
         )}
         </>
