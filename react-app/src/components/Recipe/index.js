@@ -11,13 +11,13 @@ function Recipe() {
     const types = useSelector(state => state.types);
     const users = useSelector(state => state.users);
     const recipe = recipes[recipeId];
-    const rating = recipe.ratings.reduce((accum, rating) => accum + rating.value, 0)/recipe.ratings.length
+    const rating = recipe.ratings.reduce((accum, rating) => accum + rating.value, 0)/recipe.ratings.length || 0
 
     return (
         <>
             <h1>{recipe.title}</h1>
             <div>
-                <img src={recipe.pictures[0].imgUrl} alt={recipe.title}/>
+                <img src={recipe.pictures[0]?.imgUrl} alt={recipe.title}/>
                 <p>Rating: {rating} stars</p>
                 <p>Recipe Developer: {users[recipe.userId].firstName} {users[recipe.userId].lastName}</p>
                 <p>Cook Time: {recipe.cookTime} minutes</p>

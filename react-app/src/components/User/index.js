@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
-import RecipeIngredientsForm from '../RecipeIngredientsForm';
 import EditUserFormModal from '../modals/EditUserFormModal';
+import RecipeFormModal from '../modals/CreateRecipeFormModal';
 
 function User({profile = false}) {
     const sessionUser = useSelector(state => state.session.user)
@@ -32,7 +32,7 @@ function User({profile = false}) {
                 {user.recipes.map(recipeId => 
                     <div key={recipeId}><Link to={`/recipes/${recipeId}`}>{recipes[recipeId].title}</Link></div>)}
             </div>
-            <RecipeIngredientsForm recipeId={1}/>
+            <RecipeFormModal />
         </>
     );
 }
