@@ -10,7 +10,7 @@ def recipes():
     return {'recipes': [recipe.to_dict() for recipe in recipes]}
 
 
-@recipe_routes.route('/<int:id>')
+@recipe_routes.route('/<int:id>/')
 def recipe(id):
     recipe = Recipe.query.get(id)
     return recipe.to_dict()
@@ -28,6 +28,15 @@ def create_recipe():
     db.session.add(new_recipe)
     db.session.commit()
     return new_recipe.to_dict()
+
+@recipe_routes.route('/<int:id>/', methods=['DELETE'])
+def delete_recipe(id):
+    recipe = Recipe.query.get(id)
+    recipe.attributes.clear()
+    recipe.types.clear()
+    db.session.delete(recipe)
+    db.session.commit()
+    return {'message': 'Successfully deleted!'}
 
 
 @recipe_routes.route('/<int:recipe_id>/attributes/', methods=['POST'])

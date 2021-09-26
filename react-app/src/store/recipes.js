@@ -3,6 +3,7 @@ const clone = rfdc();
 
 const LOAD_RECIPES = 'recipes/LOAD_RECIPES';
 const ADD_RECIPE = 'recipes/ADD_RECIPES';
+const REMOVE_RECIPE = 'recipes/REMOVE_RECIPE';
 
 const loadRecipes = data => ({
     type: LOAD_RECIPES,
@@ -12,6 +13,11 @@ const loadRecipes = data => ({
 const addRecipe = recipe => ({
     type: ADD_RECIPE,
     recipe
+})
+
+const removeRecipe = recipeId => ({
+    type: REMOVE_RECIPE,
+    recipeId
 })
 
 export const getRecipes = () => async (dispatch) => {
@@ -43,6 +49,17 @@ export const createRecipe = data => async (dispatch) => {
         const recipe = await response.json()
         dispatch(addRecipe(recipe))
         return recipe.id
+    }
+}
+
+export const deleteRecipe = recipeId => async (dispatch) => {
+
+    const response = await fetch(`/api/recipes/${recipeId}/`, {
+        method: 'DELETE'
+    })
+
+    if (response.ok) {
+        dispatch(removeRecipe(recipeId))
     }
 }
 
@@ -155,6 +172,9 @@ export default function reducer(state=initialState, action) {
             return stateCopy;
         case ADD_RECIPE:
             stateCopy[action.recipe.id] = action.recipe;
+            return stateCopy;
+        case REMOVE_RECIPE:
+            delete stateCopy[action.recipeId];
             return stateCopy;
         default:
             return state;

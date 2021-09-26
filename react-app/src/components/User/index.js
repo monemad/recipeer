@@ -11,8 +11,6 @@ function User({profile = false}) {
     const { userId }  = useParams();
 
     const user = profile ? sessionUser : users[userId];
-    console.log(user);
-
 
     return (
         <>
@@ -29,8 +27,8 @@ function User({profile = false}) {
             </div>
             <div className='user-recipes'>
                 <h2>Recipes</h2>
-                {user.recipes.map(recipeId => 
-                    <div key={recipeId}><Link to={`/recipes/${recipeId}`}>{recipes[recipeId].title}</Link></div>)}
+                {user.recipes?.map(recipeId => 
+                    <div key={recipeId}><Link to={`/recipes/${recipeId}`}>{recipes[recipeId]?.title}</Link></div>)}
             </div>
             <RecipeFormModal />
         </>

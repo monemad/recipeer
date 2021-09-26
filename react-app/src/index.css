@@ -69,3 +69,7 @@ footer {
     object-fit: cover;
     border-radius: 50%;
 }
+
+.modal-content {
+    overflow-y: auto;
+}
