@@ -14,9 +14,9 @@ function Recipe() {
     const types = useSelector(state => state.types);
     const users = useSelector(state => state.users);
     const recipe = recipes[recipeId];
-    const rating = recipe.ratings.reduce((accum, rating) => accum + rating.value, 0)/recipe.ratings.length;
+    const rating = recipe?.ratings.reduce((accum, rating) => accum + rating.value, 0)/recipe.ratings.length;
 
-    const authorized = recipe?.userId === sessionUser.id;
+    const authorized = recipe?.userId === sessionUser?.id;
 
     const pictureObj = {}
     recipe?.pictures.forEach(pic => {

@@ -57,6 +57,11 @@ class Recipe(db.Model):
             'content': feedback.content,
             'userId': feedback.user_id,
         } for feedback in self.feedback]
+        
+        def sort_by_id(e):
+            return e['id']
+
+        feedback.sort(key=sort_by_id)
 
         return {
             'id': self.id,

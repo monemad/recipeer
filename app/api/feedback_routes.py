@@ -17,3 +17,26 @@ def create_feedback():
     db.session.commit()
     updated_recipe = Recipe.query.get(recipe_id)
     return updated_recipe.to_dict()
+
+
+@feedback_routes.route('/<int:id>/', methods=['PUT'])
+@login_required
+def edit_feedback(id):
+    data = request.get_json()
+    feedback = Feedback.query.get(id)
+    recipe_id = feedback.recipe_id
+    feedback.content = data['content']
+    db.session.commit()
+    updated_recipe = Recipe.query.get(recipe_id)
+    return updated_recipe.to_dict()
+
+
+@feedback_routes.route('/<int:id>/', methods=['DELETE'])
+@login_required
+def delete_feedback(id):
+    feedback = Feedback.query.get(id)
+    recipe_id = feedback.recipe_id
+    db.session.delete(feedback)
+    db.session.commit()
+    updated_recipe = Recipe.query.get(recipe_id)
+    return updated_recipe.to_dict()
