@@ -160,6 +160,56 @@ export const createPicture = data => async (dispatch) => {
     }
 }
 
+export const addFeedback = data => async (dispatch) => {
+
+    const response = await fetch(`/api/feedback/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            content: data.content,
+            recipe_id: data.recipeId,
+            user_id: data.userId
+        })
+    })
+
+    if (response.ok) {
+        const recipe = await response.json()
+        dispatch(addRecipe(recipe))
+    }
+}
+
+export const editFeedback = data => async (dispatch) => {
+
+    const response = await fetch(`/api/feedback/${data.feedbackId}/`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            content: data.content
+        })
+    })
+
+    if (response.ok) {
+        const recipe = await response.json()
+        dispatch(addRecipe(recipe))
+    }
+}
+
+export const deleteFeedback = feedbackId => async (dispatch) => {
+
+    const response = await fetch(`/api/feedback/${feedbackId}/`, {
+        method: 'DELETE'
+    })
+
+    if (response.ok) {
+        const recipe = await response.json()
+        dispatch(addRecipe(recipe))
+    }
+}
+
 const initialState = {};
 
 export default function reducer(state=initialState, action) {

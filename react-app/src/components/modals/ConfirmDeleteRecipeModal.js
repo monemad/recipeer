@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
-import ConfirmDeleteRecipe from '../Recipe/ConfirmDeleteRecipe';
+import ConfirmDeleteRecipe from '../RecipeComponents/ConfirmDeleteRecipe';
 
 function ConfirmDeleteRecipeModal({ recipeId }) {
     const [showModal, setShowModal] = useState(false);

@@ -16,6 +16,7 @@ from .api.attribute_routes import attribute_routes
 from .api.recipe_ingredient_routes import recipe_ingredient_routes
 from .api.instruction_routes import instruction_routes
 from .api.picture_routes import picture_routes
+from .api.feedback_routes import feedback_routes
 
 from .seeds import seed_commands
 
@@ -33,7 +34,7 @@ def load_user(id):
     return User.query.get(int(id))
 
 
-# Tell flask about our seed commands
+# Add our seed commands to flask
 app.cli.add_command(seed_commands)
 
 app.config.from_object(Config)
@@ -47,10 +48,11 @@ app.register_blueprint(attribute_routes, url_prefix='/api/attributes')
 app.register_blueprint(recipe_ingredient_routes, url_prefix='/api/recipe-ingredients')
 app.register_blueprint(instruction_routes, url_prefix='/api/instructions')
 app.register_blueprint(picture_routes, url_prefix='/api/pictures')
+app.register_blueprint(feedback_routes, url_prefix='/api/feedback')
 db.init_app(app)
 Migrate(app, db)
 
-# Application Security
+# Impleme
 CORS(app)
 
 
