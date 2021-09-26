@@ -1,9 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import ConfirmDeleteRecipeModal from "../modals/ConfirmDeleteRecipeModal";
 
 function Recipe() {
     const { recipeId } = useParams();
+    const sessionUser = useSelector(state => state.session.user)
     const recipes = useSelector(state => state.recipes);
     const units = useSelector(state => state.units);
     const ingredients = useSelector(state => state.ingredients);
@@ -11,7 +13,9 @@ function Recipe() {
     const types = useSelector(state => state.types);
     const users = useSelector(state => state.users);
     const recipe = recipes[recipeId];
-    const rating = recipe.ratings.reduce((accum, rating) => accum + rating.value, 0)/recipe.ratings.length || 0
+    const rating = recipe.ratings.reduce((accum, rating) => accum + rating.value, 0)/recipe.ratings.length;
+
+    const authorized = recipe?.userId === sessionUser.id;
 
     const pictureObj = {}
     recipe?.pictures.forEach(pic => {
@@ -21,9 +25,10 @@ function Recipe() {
     return (
         <>
             <h1>{recipe.title}</h1>
+            {authorized && <ConfirmDeleteRecipeModal recipeId={recipe?.id}/>}
             <div>
                 { pictureObj[0] && <img className='recipe-img' src={pictureObj[0]} alt={recipe.title}/>}
-                <p>Rating: {rating} stars</p>
+                { recipe?.ratings.length ? <p>Rating: {rating} stars ({recipe.ratings.length} ratings)</p> : <p>Be the first to rate this recipe!</p>}
                 <p>Recipe Developer: {users[recipe.userId].firstName} {users[recipe.userId].lastName}</p>
                 <p>Cook Time: {recipe.cookTime} minutes</p>
                 <p>{recipe.attributes.map(id => <span key={id}>{attributes[id].name} </span>)}</p>
