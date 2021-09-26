@@ -61,7 +61,7 @@ class Recipe(db.Model):
         def sort_by_id(e):
             return e['id']
 
-        feedback.sort(key=sort_by_id)
+        feedback.sort(reverse=True, key=sort_by_id)
 
         return {
             'id': self.id,
