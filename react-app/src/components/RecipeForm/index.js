@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createRecipe, createRecipeIngredient, createInstruction } from '../../store/recipes';
+import { createRecipe, createRecipeIngredient, createInstruction, addAttribute, addType } from '../../store/recipes';
 import { createIngredient } from '../../store/ingredients';
 
 function RecipeForm({ setShowModal }) {
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user)
     const unitsState = useSelector(state => state.units)
+    const attributesArray = Object.values(useSelector(state => state.attributes))
+    const typesArray = Object.values(useSelector(state => state.types))
 
     const [title, setTitle] = useState('')
     const [difficulty, setDifficulty] = useState(1)
@@ -17,6 +19,9 @@ function RecipeForm({ setShowModal }) {
     const [ingredients, setIngredients] = useState([''])
 
     const [steps, setSteps] = useState([''])
+
+    const [attributes, setAttributes] = useState(Array(attributesArray.length).fill(false))
+    const [types, setTypes] = useState(Array(typesArray.length).fill(false))
 
     const unitOptions = Object.values(unitsState).map(unit => 
         <option key={unit.id} value={unit.id}>{unit.name}</option>    
@@ -68,6 +73,24 @@ function RecipeForm({ setShowModal }) {
         setSteps(newSteps)
     }
 
+    const updateTag = e => {
+        const idx = e.target.id;
+        switch (e.target.className) {
+            case 'attribute':
+                const newAttributes = [...attributes];
+                newAttributes[idx] = newAttributes[idx] ? false : true;
+                setAttributes(newAttributes);
+                break
+            case 'type':
+                const newTypes = [...types];
+                newTypes[idx] = newTypes[idx] ? false : true;
+                setTypes(newTypes);
+                break;
+            default:
+                break;
+        }
+    } 
+
     const addRecipeIngredient = e => {
         e.preventDefault();
         let newQuantities = [...quantities]
@@ -113,7 +136,7 @@ function RecipeForm({ setShowModal }) {
     const handleSubmit = async e => {
         e.preventDefault();
         
-        // Create Recipe
+        // create Recipe
         const recipe = {
             title,
             difficulty,
@@ -123,7 +146,7 @@ function RecipeForm({ setShowModal }) {
 
         const recipeId = await dispatch(createRecipe(recipe))
 
-        // Create RecipeIngredients
+        // create RecipeIngredients
         ingredients.forEach(async (ing, idx) => {
             // create Ingredient (will successfully create if Ingredient does not alredy exist in database)
             const ingredientId = await dispatch(createIngredient(ing.trim()))
@@ -137,6 +160,7 @@ function RecipeForm({ setShowModal }) {
             await dispatch(createRecipeIngredient(recipeIngredient))
         })
 
+        // create Instructions
         steps.forEach(async (step, idx) => {
             const instruction = {
                 order: idx+1,
@@ -144,6 +168,28 @@ function RecipeForm({ setShowModal }) {
                 recipeId
             }
             await dispatch(createInstruction(instruction))
+        })
+
+        // create RecipeAttributeJoins
+        attributes.forEach(async (attr, idx) => {
+            if (attr) {
+                const data = {
+                    attributeId: attributesArray[idx].id,
+                    recipeId
+                }
+                await dispatch(addAttribute(data))
+            }
+        })
+
+
+        types.forEach(async (type, idx) => {
+            if (type) {
+                const data = {
+                    typeId: typesArray[idx].id,
+                    recipeId
+                }
+                await dispatch(addType(data))
+            }
         })
 
         setShowModal(false);
@@ -243,6 +289,36 @@ function RecipeForm({ setShowModal }) {
                         <div>
                             {idx === steps.length-1 && <button type='button' onClick={addStep}>Add Step</button>}
                         </div>
+                    </div>
+                )}
+            </div>
+            <div className='recipe-attributes'>
+                <h3>Attributes</h3>
+                {attributesArray.map((attr, idx) =>
+                    <div key={attr.id}>
+                        <label>{attr.name}</label>
+                        <input
+                            id={idx}
+                            className='attribute'
+                            type='checkbox'
+                            checked={attributes[idx] === true}
+                            onChange={updateTag}
+                        />
+                    </div>
+                )}
+            </div>
+            <div className='recipe-types'>
+                <h3>Types</h3>
+                {typesArray.map((type, idx) =>
+                    <div key={type.id}>
+                        <label>{type.name}</label>
+                        <input
+                            id={idx}
+                            className='type'
+                            type='checkbox'
+                            checked={types[idx] === true}
+                            onChange={updateTag}
+                        />
                     </div>
                 )}
             </div>

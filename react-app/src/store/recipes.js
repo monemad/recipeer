@@ -48,7 +48,7 @@ export const createRecipe = data => async (dispatch) => {
 
 export const createRecipeIngredient = data => async (dispatch) => {
 
-    const response = await fetch('/api/recipes/ingredients/', {
+    const response = await fetch(`/api/recipes/${data.recipeId}/ingredients/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -58,7 +58,6 @@ export const createRecipeIngredient = data => async (dispatch) => {
             quantity: data.quantity,
             ingredient_id: data.ingredientId,
             unit_id: data.unitId,
-            recipe_id: data.recipeId
         })
     })
 
@@ -70,7 +69,7 @@ export const createRecipeIngredient = data => async (dispatch) => {
 
 export const createInstruction = data => async (dispatch) => {
 
-    const response = await fetch('/api/recipes/instructions/', {
+    const response = await fetch(`/api/recipes/${data.recipeId}/instructions/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -78,7 +77,40 @@ export const createInstruction = data => async (dispatch) => {
         body: JSON.stringify({
             order: data.order,
             step: data.step,
-            recipe_id: data.recipeId
+        })
+    })
+
+    if (response.ok) {
+        const recipe = await response.json()
+        dispatch(addRecipe(recipe))
+    }
+}
+export const addAttribute = data => async (dispatch) => {
+
+    const response = await fetch(`/api/recipes/${data.recipeId}/attributes/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            attribute_id: data.attributeId
+        })
+    })
+
+    if (response.ok) {
+        const recipe = await response.json()
+        dispatch(addRecipe(recipe))
+    }
+}
+export const addType = data => async (dispatch) => {
+
+    const response = await fetch(`/api/recipes/${data.recipeId}/types/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            type_id: data.typeId
         })
     })
 
