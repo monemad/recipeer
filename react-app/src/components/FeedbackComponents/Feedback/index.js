@@ -1,11 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import CreateFeedbackForm from '../CreateFeedbackForm';
 
 function Feedback({ recipe, users, sessionUser }) {
 
     return (
         <div className='feedback-section-div'>
             <h2>Recipe Feedback</h2>
+            <CreateFeedbackForm recipe={recipe} sessionUser={sessionUser} />
             {recipe.feedback.map(fb => 
                 <div className='feedback-div'>
                     <div className='feedback-img-div'>
