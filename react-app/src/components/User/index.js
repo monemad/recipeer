@@ -30,7 +30,7 @@ function User({profile = false}) {
                 {user.recipes?.map(recipeId => 
                     <div key={recipeId}><Link to={`/recipes/${recipeId}`}>{recipes[recipeId]?.title}</Link></div>)}
             </div>
-            <CreateRecipeFormModal />
+            { profile && <CreateRecipeFormModal />}
         </>
     );
 }

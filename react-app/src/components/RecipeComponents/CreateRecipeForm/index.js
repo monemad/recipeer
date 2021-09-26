@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createRecipe, createRecipeIngredient, createInstruction, addAttribute, addType, createPicture } from '../../store/recipes';
-import { createIngredient } from '../../store/ingredients';
+import { createRecipe, createRecipeIngredient, createInstruction, addAttribute, addType, createPicture } from '../../../store/recipes';
+import { createIngredient } from '../../../store/ingredients';
 
-function RecipeForm({ setShowModal }) {
+function CreateRecipeForm({ setShowModal }) {
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user)
     const unitsState = useSelector(state => state.units)
@@ -372,4 +372,4 @@ function RecipeForm({ setShowModal }) {
     )
 }
 
-export default RecipeForm
+export default CreateRecipeForm

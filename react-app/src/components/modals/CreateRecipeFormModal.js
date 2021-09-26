@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
-import CreateRecipeForm from '../Recipe/CreateRecipeForm';
+import CreateRecipeForm from '../RecipeComponents/CreateRecipeForm';
 
 function RecipeFormModal() {
     const [showModal, setShowModal] = useState(false);

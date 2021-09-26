@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import User from './components/User';
-import Recipe from './components/Recipe';
+import Recipe from './components/RecipeComponents/Recipe';
 import { authenticate } from './store/session';
 import { getUsers } from './store/users';
 import { getRecipes } from './store/recipes';

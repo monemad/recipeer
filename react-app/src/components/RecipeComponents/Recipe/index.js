@@ -1,7 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import ConfirmDeleteRecipeModal from "../modals/ConfirmDeleteRecipeModal";
+import ConfirmDeleteRecipeModal from "../../modals/ConfirmDeleteRecipeModal";
+import Feedback from "../../FeedbackComponents/Feedback"
 
 function Recipe() {
     const { recipeId } = useParams();
@@ -45,9 +46,7 @@ function Recipe() {
                     </div>
                 )}
             </ol>
-            <ul>
-                {recipe.feedback.map(fb => <li key={fb.id}>{users[fb.userId].username}: {fb.content}</li>)}
-            </ul>
+            <Feedback recipe={recipe} users={users} sessionUser={sessionUser}/>
         </>
     )
 }
