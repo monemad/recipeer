@@ -141,8 +141,11 @@ function RecipeForm({ setShowModal }) {
         e.preventDefault()
         const idx = e.target.value
         let newSteps = [...steps]
+        let newPictures = {...pictures}
         newSteps.splice(idx, 1)
+        delete newPictures[+idx+1]
         setSteps(newSteps)
+        setPictures(newPictures)
     }
 
     const handleSubmit = async e => {
@@ -205,13 +208,15 @@ function RecipeForm({ setShowModal }) {
         })
 
         Object.values(pictures).forEach(async pic => {
-            const picture = {
-                imgFile: pic.imgFile,
-                order: pic.order,
-                recipeId,
-                userId: sessionUser.id
+            if (pic.imgFile) {
+                const picture = {
+                    imgFile: pic.imgFile,
+                    order: pic.order,
+                    recipeId,
+                    userId: sessionUser.id
+                }
+                await dispatch(createPicture(picture))
             }
-            await dispatch(createPicture(picture))
         })
 
         setShowModal(false);
