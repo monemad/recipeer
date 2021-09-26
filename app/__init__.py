@@ -13,6 +13,9 @@ from .api.ingredient_routes import ingredient_routes
 from .api.unit_routes import unit_routes
 from .api.type_routes import type_routes
 from .api.attribute_routes import attribute_routes
+from .api.recipe_ingredient_routes import recipe_ingredient_routes
+from .api.instruction_routes import instruction_routes
+from .api.picture_routes import picture_routes
 
 from .seeds import seed_commands
 
@@ -41,6 +44,9 @@ app.register_blueprint(ingredient_routes, url_prefix='/api/ingredients')
 app.register_blueprint(unit_routes, url_prefix='/api/units')
 app.register_blueprint(type_routes, url_prefix='/api/types')
 app.register_blueprint(attribute_routes, url_prefix='/api/attributes')
+app.register_blueprint(recipe_ingredient_routes, url_prefix='/api/recipe-ingredients')
+app.register_blueprint(instruction_routes, url_prefix='/api/instructions')
+app.register_blueprint(picture_routes, url_prefix='/api/pictures')
 db.init_app(app)
 Migrate(app, db)
 

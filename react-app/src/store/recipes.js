@@ -48,7 +48,7 @@ export const createRecipe = data => async (dispatch) => {
 
 export const createRecipeIngredient = data => async (dispatch) => {
 
-    const response = await fetch('/api/recipes/ingredients/', {
+    const response = await fetch(`/api/recipe-ingredients/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ export const createRecipeIngredient = data => async (dispatch) => {
 
 export const createInstruction = data => async (dispatch) => {
 
-    const response = await fetch('/api/recipes/instructions/', {
+    const response = await fetch(`/api/instructions/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -80,6 +80,61 @@ export const createInstruction = data => async (dispatch) => {
             step: data.step,
             recipe_id: data.recipeId
         })
+    })
+
+    if (response.ok) {
+        const recipe = await response.json()
+        dispatch(addRecipe(recipe))
+    }
+}
+
+export const addAttribute = data => async (dispatch) => {
+
+    const response = await fetch(`/api/recipes/${data.recipeId}/attributes/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            attribute_id: data.attributeId
+        })
+    })
+
+    if (response.ok) {
+        const recipe = await response.json()
+        dispatch(addRecipe(recipe))
+    }
+}
+
+export const addType = data => async (dispatch) => {
+
+    const response = await fetch(`/api/recipes/${data.recipeId}/types/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            type_id: data.typeId
+        })
+    })
+
+    if (response.ok) {
+        const recipe = await response.json()
+        dispatch(addRecipe(recipe))
+    }
+}
+
+export const createPicture = data => async (dispatch) => {
+
+    const form = new FormData()
+    form.append('img_file', data.imgFile)
+    form.append('order', data.order)
+    form.append('recipe_id', data.recipeId)
+    form.append('user_id', data.userId)
+
+    const response = await fetch(`/api/pictures/`, {
+        method: 'POST',
+        body: form
     })
 
     if (response.ok) {
