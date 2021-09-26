@@ -15,6 +15,7 @@ def recipe(id):
     recipe = Recipe.query.get(id)
     return recipe.to_dict()
 
+
 @recipe_routes.route('/', methods=['POST'])
 @login_required
 def create_recipe():
@@ -28,33 +29,6 @@ def create_recipe():
     db.session.commit()
     return new_recipe.to_dict()
 
-@recipe_routes.route('/<int:recipe_id>/ingredients/', methods=['POST'])
-@login_required
-def create_recipe_ingredient(recipe_id):
-    data = request.get_json()
-    order = data['order']
-    quantity = data['quantity']
-    ingredient_id = data['ingredient_id']
-    unit_id = data['unit_id']
-
-    new_recipe_ingredient = RecipeIngredient(order=order, quantity=quantity, ingredient_id=ingredient_id, unit_id=unit_id, recipe_id=recipe_id)
-    db.session.add(new_recipe_ingredient)
-    db.session.commit()
-    updated_recipe = Recipe.query.get(recipe_id)
-    return updated_recipe.to_dict()
-
-@recipe_routes.route('/<int:recipe_id>/instructions/', methods=['POST'])
-@login_required
-def create_instruction(recipe_id):
-    data = request.get_json()
-    order = data['order']
-    step = data['step']
-
-    new_instruction = Instruction(order=order, step=step, recipe_id=recipe_id)
-    db.session.add(new_instruction)
-    db.session.commit()
-    updated_recipe = Recipe.query.get(recipe_id)
-    return updated_recipe.to_dict()
 
 @recipe_routes.route('/<int:recipe_id>/attributes/', methods=['POST'])
 @login_required
@@ -66,6 +40,7 @@ def create_recipe_attribute_join(recipe_id):
     db.session.commit()
     updated_recipe = Recipe.query.get(recipe_id)
     return updated_recipe.to_dict()
+
 
 @recipe_routes.route('/<int:recipe_id>/types/', methods=['POST'])
 @login_required

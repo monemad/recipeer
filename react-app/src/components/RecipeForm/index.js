@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createRecipe, createRecipeIngredient, createInstruction, addAttribute, addType } from '../../store/recipes';
+import { createRecipe, createRecipeIngredient, createInstruction, addAttribute, addType, createPicture } from '../../store/recipes';
 import { createIngredient } from '../../store/ingredients';
 
 function RecipeForm({ setShowModal }) {
@@ -22,6 +22,8 @@ function RecipeForm({ setShowModal }) {
 
     const [attributes, setAttributes] = useState(Array(attributesArray.length).fill(false))
     const [types, setTypes] = useState(Array(typesArray.length).fill(false))
+
+    const [pictures, setPictures] = useState({})
 
     const unitOptions = Object.values(unitsState).map(unit => 
         <option key={unit.id} value={unit.id}>{unit.name}</option>    
@@ -90,6 +92,16 @@ function RecipeForm({ setShowModal }) {
                 break;
         }
     } 
+
+    const updatePictures = e => {
+        const order = +e.target.id;
+        const newPictures = {...pictures}
+        newPictures[order] = {
+            order,
+            imgFile: e.target.files[0]
+        }
+        setPictures(newPictures)
+    }
 
     const addRecipeIngredient = e => {
         e.preventDefault();
@@ -192,6 +204,16 @@ function RecipeForm({ setShowModal }) {
             }
         })
 
+        Object.values(pictures).forEach(async pic => {
+            const picture = {
+                imgFile: pic.imgFile,
+                order: pic.order,
+                recipeId,
+                userId: sessionUser.id
+            }
+            await dispatch(createPicture(picture))
+        })
+
         setShowModal(false);
     }
     
@@ -229,6 +251,15 @@ function RecipeForm({ setShowModal }) {
                         value={cookTime}
                         onChange={updateCookTime}
                         required
+                    />
+                </div>
+                <div>
+                    <label>Picture</label>
+                    <input
+                        id='0'
+                        type='file'
+                        name='recipeImg'
+                        onChange={updatePictures}
                     />
                 </div>
             </div>
@@ -285,6 +316,15 @@ function RecipeForm({ setShowModal }) {
                                 required
                             />
                             {steps.length > 1 && <button value={idx} type='button' onClick={removeStep}>Remove Step</button>}
+                        </div>
+                        <div>
+                            <label>Picture</label>
+                            <input
+                                id={idx+1}
+                                type='file'
+                                name={`recipeImg${idx+1}`}
+                                onChange={updatePictures}
+                            />
                         </div>
                         <div>
                             {idx === steps.length-1 && <button type='button' onClick={addStep}>Add Step</button>}

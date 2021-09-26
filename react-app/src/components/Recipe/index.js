@@ -13,11 +13,16 @@ function Recipe() {
     const recipe = recipes[recipeId];
     const rating = recipe.ratings.reduce((accum, rating) => accum + rating.value, 0)/recipe.ratings.length || 0
 
+    const pictureObj = {}
+    recipe?.pictures.forEach(pic => {
+        pictureObj[pic.order] = pic.imgUrl
+    })
+
     return (
         <>
             <h1>{recipe.title}</h1>
             <div>
-                <img src={recipe.pictures[0]?.imgUrl} alt={recipe.title}/>
+                { pictureObj[0] && <img className='recipe-img' src={pictureObj[0]} alt={recipe.title}/>}
                 <p>Rating: {rating} stars</p>
                 <p>Recipe Developer: {users[recipe.userId].firstName} {users[recipe.userId].lastName}</p>
                 <p>Cook Time: {recipe.cookTime} minutes</p>
@@ -28,7 +33,12 @@ function Recipe() {
                 {recipe.ingredients.map(ing => <li key={ing.id}>{ing.quantity} {units[ing.unitId].name} {ingredients[ing.ingredientId].name}</li>)}
             </ul>
             <ol>
-                {recipe.instructions.map(ins => <li key={ins.id}>{ins.step}</li>)}
+                {recipe.instructions.map(ins => 
+                    <div key={ins.id}>
+                        <li>{ins.step}</li>
+                        { pictureObj[ins.order] && <img className='instruction-img' src={pictureObj[ins.order]} alt={ins.order}/>}
+                    </div>
+                )}
             </ol>
             <ul>
                 {recipe.feedback.map(fb => <li key={fb.id}>{users[fb.userId].username}: {fb.content}</li>)}
