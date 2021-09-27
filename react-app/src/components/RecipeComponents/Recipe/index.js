@@ -3,13 +3,13 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import ConfirmDeleteRecipeModal from "../../modals/ConfirmDeleteRecipeModal";
 import Feedback from "../../FeedbackComponents/Feedback"
+import RecipeIngredients from "../RecipeIngredients";
+import RecipeInstructions from "../RecipeInstructions";
 
 function Recipe() {
     const { recipeId } = useParams();
     const sessionUser = useSelector(state => state.session.user)
     const recipes = useSelector(state => state.recipes);
-    const units = useSelector(state => state.units);
-    const ingredients = useSelector(state => state.ingredients);
     const attributes = useSelector(state => state.attributes);
     const types = useSelector(state => state.types);
     const users = useSelector(state => state.users);
@@ -27,25 +27,19 @@ function Recipe() {
         <>
             <h1>{recipe.title}</h1>
             {authorized && <ConfirmDeleteRecipeModal recipeId={recipe?.id}/>}
-            <div>
+            <div className='recipe-details'>
                 { pictureObj[0] && <img className='recipe-img' src={pictureObj[0]} alt={recipe.title}/>}
                 { recipe?.ratings.length ? <p>Rating: {rating} stars ({recipe.ratings.length} ratings)</p> : <p>Be the first to rate this recipe!</p>}
                 <p>Recipe Developer: {users[recipe.userId].firstName} {users[recipe.userId].lastName}</p>
                 <p>Cook Time: {recipe.cookTime} minutes</p>
                 <p>{recipe.attributes.map(id => <span key={id}>{attributes[id].name} </span>)}</p>
                 <p>{recipe.types.map(id => <span key={id}>{types[id].name} </span>)}</p>
+                { authorized && 
+                    <button>Edit details</button>
+                }
             </div>
-            <ul>
-                {recipe.ingredients.map(ing => <li key={ing.id}>{ing.quantity} {units[ing.unitId].name} {ingredients[ing.ingredientId].name}</li>)}
-            </ul>
-            <ol>
-                {recipe.instructions.map(ins => 
-                    <div key={ins.id}>
-                        <li>{ins.step}</li>
-                        { pictureObj[ins.order] && <img className='instruction-img' src={pictureObj[ins.order]} alt={ins.order}/>}
-                    </div>
-                )}
-            </ol>
+            <RecipeIngredients recipe={recipe} authorized={authorized}/>
+            <RecipeInstructions recipe={recipe} pictureObj={pictureObj} authorized={authorized}/>
             <Feedback recipe={recipe} users={users} sessionUser={sessionUser}/>
         </>
     )

@@ -2,6 +2,12 @@ from .db import db
 from .recipe_type_join import recipe_type_joins_table
 from .recipe_attribute_join import recipe_attribute_joins_table
 
+def sort_by_id(e):
+    return e['id']
+
+def sort_by_order(e):
+    return e['order']
+
 class Recipe(db.Model):
     __tablename__ = "recipes"
 
@@ -29,6 +35,8 @@ class Recipe(db.Model):
             'order': instr.order
         } for instr in self.instructions]
 
+        instructions.sort(key=sort_by_order)
+
         ingredients = [{
             'id': ing.id,
             'order': ing.order,
@@ -36,6 +44,8 @@ class Recipe(db.Model):
             'ingredientId': ing.ingredient_id,
             'unitId': ing.unit_id
         } for ing in self.ingredients]
+
+        ingredients.sort(key=sort_by_order)
 
         attributes = [attr.id for attr in self.attributes]
 
@@ -57,9 +67,6 @@ class Recipe(db.Model):
             'content': feedback.content,
             'userId': feedback.user_id,
         } for feedback in self.feedback]
-        
-        def sort_by_id(e):
-            return e['id']
 
         feedback.sort(reverse=True, key=sort_by_id)
 
