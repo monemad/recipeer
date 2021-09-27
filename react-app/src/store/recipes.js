@@ -85,6 +85,38 @@ export const createRecipeIngredient = data => async (dispatch) => {
     }
 }
 
+export const editRecipeIngredient = data => async (dispatch) => {
+
+    const response = await fetch(`/api/recipe-ingredients/${data.recipeIngredientId}/`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            quantity: data.quantity,
+            ingredient_id: data.ingredientId,
+            unit_id: data.unitId,
+        })
+    })
+
+    if (response.ok) {
+        const recipe = await response.json()
+        dispatch(addRecipe(recipe))
+    }
+}
+
+export const deleteRecipeIngredient = recipeIngredientId => async (dispatch) => {
+
+    const response = await fetch(`/api/recipe-ingredients/${recipeIngredientId}/`, {
+        method: 'DELETE'
+    })
+
+    if (response.ok) {
+        const recipe = await response.json()
+        dispatch(addRecipe(recipe))
+    }
+}
+
 export const createInstruction = data => async (dispatch) => {
 
     const response = await fetch(`/api/instructions/`, {
