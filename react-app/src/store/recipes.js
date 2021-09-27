@@ -137,6 +137,36 @@ export const createInstruction = data => async (dispatch) => {
     }
 }
 
+export const editInstruction = data => async (dispatch) => {
+
+    const response = await fetch(`/api/instructions/${data.instructionId}/`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            step: data.step
+        })
+    })
+
+    if (response.ok) {
+        const recipe = await response.json()
+        dispatch(addRecipe(recipe))
+    }
+}
+
+export const deleteInstruction = instructionId => async (dispatch) => {
+
+    const response = await fetch(`/api/instructions/${instructionId}/`, {
+        method: 'DELETE'
+    })
+
+    if (response.ok) {
+        const recipe = await response.json()
+        dispatch(addRecipe(recipe))
+    }
+}
+
 export const addAttribute = data => async (dispatch) => {
 
     const response = await fetch(`/api/recipes/${data.recipeId}/attributes/`, {
@@ -184,6 +214,18 @@ export const createPicture = data => async (dispatch) => {
     const response = await fetch(`/api/pictures/`, {
         method: 'POST',
         body: form
+    })
+
+    if (response.ok) {
+        const recipe = await response.json()
+        dispatch(addRecipe(recipe))
+    }
+}
+
+export const deletePicture = pictureId => async (dispatch) => {
+
+    const response = await fetch(`/api/pictures/${pictureId}/`, {
+        method: 'DELETE',
     })
 
     if (response.ok) {

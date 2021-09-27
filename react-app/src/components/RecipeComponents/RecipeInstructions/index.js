@@ -1,4 +1,9 @@
 import React from 'react'
+import ConfirmDeleteInstructionModal from '../../modals/ConfirmDeleteInstructionModal'
+import ConfirmDeletePictureModal from '../../modals/ConfirmDeletePictureModal'
+import CreateInstructionFormModal from '../../modals/CreateInstructionFormModal'
+import CreatePictureFormModal from '../../modals/CreatePictureFormModal'
+import EditInstructionFormModal from '../../modals/EditInstructionFormModal'
 
 function RecipeInstructions({ recipe, pictureObj, authorized }) {
 
@@ -8,13 +13,30 @@ function RecipeInstructions({ recipe, pictureObj, authorized }) {
             <ol>
                 {recipe.instructions.map(ins => 
                     <div key={ins.id}>
-                        <li>{ins.step}</li>
-                        { pictureObj[ins.order] && <img className='instruction-img' src={pictureObj[ins.order]} alt={ins.order}/>}
+                        <li>
+                            <div>
+                                {ins.step}
+                                { authorized && 
+                                    <>
+                                        <EditInstructionFormModal instruction={ins} />
+                                        <ConfirmDeleteInstructionModal instructionId={ins.id} />
+                                    </>
+                                }
+                            </div>
+                        </li>
+                        { pictureObj[ins.order] ? 
+                            <>
+                                <img className='instruction-img' src={pictureObj[ins.order].imgUrl} alt={ins.order}/>
+                                {authorized && <ConfirmDeletePictureModal pictureId={pictureObj[ins.order].id} />}
+                            </>
+                            :
+                            authorized && <CreatePictureFormModal recipe={recipe} order={ins.order}/>
+                        }
                     </div>
                 )}
             </ol>
             { authorized && 
-                <button>Add instruction</button>
+                <CreateInstructionFormModal recipe={recipe} />
             }
         </div>
     )

@@ -8,6 +8,7 @@ import os
 
 picture_routes = Blueprint('pictures', __name__)
 
+
 @picture_routes.route('/', methods=['POST'])
 @login_required
 def create_picture():
@@ -32,6 +33,17 @@ def create_picture():
 
     new_picture = Picture(img_url=img_url, order=order, recipe_id=recipe_id, user_id=user_id)
     db.session.add(new_picture)
+    db.session.commit()
+    updated_recipe = Recipe.query.get(recipe_id)
+    return updated_recipe.to_dict()
+
+
+@picture_routes.route('/<int:id>/', methods=['DELETE'])
+@login_required
+def delete_picture(id):
+    picture = Picture.query.get(id)
+    recipe_id = picture.recipe_id
+    db.session.delete(picture)
     db.session.commit()
     updated_recipe = Recipe.query.get(recipe_id)
     return updated_recipe.to_dict()

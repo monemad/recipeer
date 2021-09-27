@@ -13,7 +13,7 @@ function Feedback({ recipe, users, sessionUser }) {
             {recipe.feedback.map(fb => 
                 <div className='feedback-div' key={fb.id}>
                     <div className='feedback-img-div'>
-                        <img className='user-comment-img' src={users[fb.userId].imgUrl} alt={users[fb.user.id].username}/>
+                        <img className='user-comment-img' src={users[fb.userId].imgUrl} alt={users[fb.userId]?.username}/>
                     </div>
                     <div className='feedback'>
                         <Link to={`/users/${fb.userId}`}><p className='feedback-author'>{users[fb.userId].firstName}</p></Link>
