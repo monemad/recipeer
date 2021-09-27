@@ -192,6 +192,18 @@ export const createPicture = data => async (dispatch) => {
     }
 }
 
+export const deletePicture = pictureId => async (dispatch) => {
+
+    const response = await fetch(`/api/pictures/${pictureId}/`, {
+        method: 'DELETE',
+    })
+
+    if (response.ok) {
+        const recipe = await response.json()
+        dispatch(addRecipe(recipe))
+    }
+}
+
 export const addFeedback = data => async (dispatch) => {
 
     const response = await fetch(`/api/feedback/`, {

@@ -20,7 +20,10 @@ function Recipe() {
 
     const pictureObj = {}
     recipe?.pictures.forEach(pic => {
-        pictureObj[pic.order] = pic.imgUrl
+        pictureObj[pic.order] = {
+            imgUrl: pic.imgUrl,
+            id: pic.id
+        }
     })
 
     return (
@@ -28,7 +31,7 @@ function Recipe() {
             <h1>{recipe.title}</h1>
             {authorized && <ConfirmDeleteRecipeModal recipeId={recipe?.id}/>}
             <div className='recipe-details'>
-                { pictureObj[0] && <img className='recipe-img' src={pictureObj[0]} alt={recipe.title}/>}
+                { pictureObj[0] && <img className='recipe-img' src={pictureObj[0].imgUrl} alt={recipe.title}/>}
                 { recipe?.ratings.length ? <p>Rating: {rating} stars ({recipe.ratings.length} ratings)</p> : <p>Be the first to rate this recipe!</p>}
                 <p>Recipe Developer: {users[recipe.userId].firstName} {users[recipe.userId].lastName}</p>
                 <p>Cook Time: {recipe.cookTime} minutes</p>

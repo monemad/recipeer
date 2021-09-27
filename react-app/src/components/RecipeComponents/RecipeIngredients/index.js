@@ -16,8 +16,12 @@ function RecipeIngredients({ recipe, authorized }) {
                     <li key={ing.id}>
                         <div>
                             {ing.quantity} {units[ing.unitId].name} {ingredients[ing.ingredientId].name}
-                            <EditRecipeIngredientFormModal recipeIngredient={ing}/>
-                            <ConfirmDeleteRecipeIngredientModal recipeIngredientId={ing.id} />
+                            { authorized && 
+                            <>
+                                <EditRecipeIngredientFormModal recipeIngredient={ing}/>
+                                <ConfirmDeleteRecipeIngredientModal recipeIngredientId={ing.id} />
+                            </>
+                            }
                         </div>
                     </li>
                 )}

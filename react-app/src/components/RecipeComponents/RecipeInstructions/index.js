@@ -1,4 +1,6 @@
 import React from 'react'
+import ConfirmDeletePictureModal from '../../modals/ConfirmDeletePictureModal'
+import CreatePictureFormModal from '../../modals/CreatePictureFormModal'
 
 function RecipeInstructions({ recipe, pictureObj, authorized }) {
 
@@ -9,7 +11,14 @@ function RecipeInstructions({ recipe, pictureObj, authorized }) {
                 {recipe.instructions.map(ins => 
                     <div key={ins.id}>
                         <li>{ins.step}</li>
-                        { pictureObj[ins.order] && <img className='instruction-img' src={pictureObj[ins.order]} alt={ins.order}/>}
+                        { pictureObj[ins.order] ? 
+                            <>
+                                <img className='instruction-img' src={pictureObj[ins.order].imgUrl} alt={ins.order}/>
+                                {authorized && <ConfirmDeletePictureModal pictureId={pictureObj[ins.order].id} />}
+                            </>
+                            :
+                            authorized && <CreatePictureFormModal recipe={recipe} order={ins.order}/>
+                        }
                     </div>
                 )}
             </ol>
