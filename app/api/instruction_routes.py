@@ -40,7 +40,8 @@ def delete_instruction(id):
     recipe_id = instruction.recipe_id
     order = instruction.order
     picture = Picture.query.filter(Picture.recipe_id == recipe_id, Picture.order == order).first()
-    db.session.delete(picture)
+    if picture:
+        db.session.delete(picture)
     db.session.delete(instruction)
     db.session.commit()
     updated_recipe = Recipe.query.get(recipe_id)
