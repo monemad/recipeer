@@ -12,7 +12,7 @@ function CreateInstructionForm({ setShowModal, recipe }) {
 
     const handleSubmit = async e => {
         e.preventDefault()
-        const order = recipe.ingredients[recipe.instructions.length-1].order + 1
+        const order = recipe.instructions[recipe.instructions.length-1].order + 1
         const instruction = {
             recipeId: recipe.id,
             step,
