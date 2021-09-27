@@ -5,6 +5,8 @@ import ConfirmDeleteRecipeModal from "../../modals/ConfirmDeleteRecipeModal";
 import Feedback from "../../FeedbackComponents/Feedback"
 import RecipeIngredients from "../RecipeIngredients";
 import RecipeInstructions from "../RecipeInstructions";
+import ConfirmDeletePictureModal from "../../modals/ConfirmDeletePictureModal";
+import CreatePictureFormModal from "../../modals/CreatePictureFormModal";
 
 function Recipe() {
     const { recipeId } = useParams();
@@ -31,15 +33,25 @@ function Recipe() {
             <h1>{recipe.title}</h1>
             {authorized && <ConfirmDeleteRecipeModal recipeId={recipe?.id}/>}
             <div className='recipe-details'>
-                { pictureObj[0] && <img className='recipe-img' src={pictureObj[0].imgUrl} alt={recipe.title}/>}
-                { recipe?.ratings.length ? <p>Rating: {rating} stars ({recipe.ratings.length} ratings)</p> : <p>Be the first to rate this recipe!</p>}
+                { pictureObj[0] ?
+                    <>
+                        <img className='recipe-img' src={pictureObj[0].imgUrl} alt={recipe.title}/>
+                        { authorized &&  <ConfirmDeletePictureModal pictureId={pictureObj[0].id} />}
+                    </>
+                    :
+                    authorized && <CreatePictureFormModal recipe={recipe} order={0}/>
+                }
+                { recipe?.ratings.length ? 
+                    <p>Rating: {rating} stars ({recipe.ratings.length} ratings)</p> 
+                    : 
+                    <p>Be the first to rate this recipe!</p>
+                }
                 <p>Recipe Developer: {users[recipe.userId].firstName} {users[recipe.userId].lastName}</p>
                 <p>Cook Time: {recipe.cookTime} minutes</p>
+                <p>Difficulty: {recipe.difficulty}</p>
                 <p>{recipe.attributes.map(id => <span key={id}>{attributes[id].name} </span>)}</p>
                 <p>{recipe.types.map(id => <span key={id}>{types[id].name} </span>)}</p>
-                { authorized && 
-                    <button>Edit details</button>
-                }
+                { authorized && <button>Edit details</button> }
             </div>
             <RecipeIngredients recipe={recipe} authorized={authorized}/>
             <RecipeInstructions recipe={recipe} pictureObj={pictureObj} authorized={authorized}/>

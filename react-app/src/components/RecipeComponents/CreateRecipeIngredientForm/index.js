@@ -35,7 +35,7 @@ function CreateRecipeIngredientForm({ setShowModal, recipe }) {
     const handleSubmit = async e => {
         e.preventDefault()    
         const ingredientId = await dispatch(createIngredient(ingredient.trim()))
-        const order = recipe.ingredients[recipe.ingredients.length-1].order
+        const order = recipe.ingredients[recipe.ingredients.length-1].order + 1
         const recipeIngredient = {
             quantity,
             ingredientId: ingredientId,
