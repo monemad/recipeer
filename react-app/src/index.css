@@ -3,9 +3,10 @@
 @import './components/FeedbackComponents/FeedbackComponents.css';
 
 :root {
-    --bg-color: white;
+    --bg-color: #FEFBEA;
     --primary-color: rgb(197, 134, 18);
-    --secondary-color: gray;
+    /* --secondary-color: #CC998D; */
+    --secondary-color: #A44200;
     --tertiary-color: rgb(6, 6, 83);
     --navbar-height: 50px;
     --footer-height: 15%;
@@ -51,12 +52,14 @@ nav {
     width: 100%;
     height: calc(100vh - var(--navbar-height) - var(--footer-height));
     overflow-y: auto;
+    /* text-align: center; */
 }
 
 footer {
     position: fixed;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
+    align-items: center;
     text-align: center;
     height: var(--footer-height);
     bottom: 0px;

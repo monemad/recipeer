@@ -5,6 +5,7 @@ import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import User from './components/User';
 import Recipe from './components/RecipeComponents/Recipe';
+import Footer from './components/Footer';
 import { authenticate } from './store/session';
 import { getUsers } from './store/users';
 import { getRecipes } from './store/recipes';
@@ -60,7 +61,7 @@ function App() {
                 </Switch>
             </div>
             <footer>
-                <h1>Footer Goes Here</h1>
+                <Footer />
             </footer>
         </>
     );
