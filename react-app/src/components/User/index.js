@@ -34,4 +34,5 @@ function User({profile = false}) {
         </>
     );
 }
+
 export default User;

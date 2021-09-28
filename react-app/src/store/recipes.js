@@ -52,6 +52,27 @@ export const createRecipe = data => async (dispatch) => {
     }
 }
 
+export const editRecipe = data => async (dispatch) => {
+
+    const response = await fetch(`/api/recipes/${data.recipeId}/`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            title: data.title,
+            difficulty: data.difficulty,
+            cook_time: data.cookTime,
+        })
+    })
+
+    if (response.ok) {
+        const recipe = await response.json()
+        dispatch(addRecipe(recipe))
+        return recipe.id
+    }
+}
+
 export const deleteRecipe = recipeId => async (dispatch) => {
 
     const response = await fetch(`/api/recipes/${recipeId}/`, {
@@ -185,6 +206,18 @@ export const addAttribute = data => async (dispatch) => {
     }
 }
 
+export const removeAttribute = data => async (dispatch) => {
+
+    const response = await fetch(`/api/recipes/${data.recipeId}/attributes/${data.attributeId}/`, {
+        method: 'DELETE'
+    })
+
+    if (response.ok) {
+        const recipe = await response.json()
+        dispatch(addRecipe(recipe))
+    }
+}
+
 export const addType = data => async (dispatch) => {
 
     const response = await fetch(`/api/recipes/${data.recipeId}/types/`, {
@@ -195,6 +228,18 @@ export const addType = data => async (dispatch) => {
         body: JSON.stringify({
             type_id: data.typeId
         })
+    })
+
+    if (response.ok) {
+        const recipe = await response.json()
+        dispatch(addRecipe(recipe))
+    }
+}
+
+export const removeType = data => async (dispatch) => {
+
+    const response = await fetch(`/api/recipes/${data.recipeId}/types/${data.typeId}/`, {
+        method: 'DELETE'
     })
 
     if (response.ok) {

@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
-import CreateRecipeForm from '../RecipeComponents/CreateRecipeForm';
+import EditRecipeForm from '../RecipeComponents/EditRecipeForm';
 
-function CreateRecipeFormModal() {
+function EditRecipeFormModal({ recipe }) {
     const [showModal, setShowModal] = useState(false);
 
     return (
         <>
-        <button onClick={() => setShowModal(true)}>Create Recipe</button>
+        <button onClick={() => setShowModal(true)}>Edit Details</button>
         {showModal && (
             <Modal onClose={() => setShowModal(false)} className="create-recipe-form-modal">
-                <CreateRecipeForm setShowModal={setShowModal}/>
+                <EditRecipeForm setShowModal={setShowModal} recipe={recipe}/>
             </Modal>
         )}
         </>
     );
 }
 
-export default CreateRecipeFormModal;
+export default EditRecipeFormModal;

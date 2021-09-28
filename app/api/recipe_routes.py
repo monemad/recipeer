@@ -29,6 +29,22 @@ def create_recipe():
     db.session.commit()
     return new_recipe.to_dict()
 
+
+@recipe_routes.route('/<int:id>/', methods=['PUT'])
+@login_required
+def edit_recipe(id):
+    data = request.get_json()
+    title = data['title']
+    difficulty = data['difficulty']
+    cook_time = data['cook_time']
+    recipe = Recipe.query.get(id)
+    recipe.title = title
+    recipe.difficulty = difficulty
+    recipe.cook_time = cook_time
+    db.session.commit()
+    return recipe.to_dict()
+
+
 @recipe_routes.route('/<int:id>/', methods=['DELETE'])
 def delete_recipe(id):
     recipe = Recipe.query.get(id)
@@ -51,6 +67,15 @@ def create_recipe_attribute_join(recipe_id):
     return updated_recipe.to_dict()
 
 
+@recipe_routes.route('/<int:recipe_id>/attributes/<int:attribute_id>/', methods=['DELETE'])
+@login_required
+def delete_recipe_attribute_join(recipe_id, attribute_id):
+    db.session.execute(recipe_attribute_joins_table.delete().where(recipe_attribute_joins_table.c.recipe_id == recipe_id).where(recipe_attribute_joins_table.c.attribute_id == attribute_id))
+    db.session.commit()
+    updated_recipe = Recipe.query.get(recipe_id)
+    return updated_recipe.to_dict()
+
+
 @recipe_routes.route('/<int:recipe_id>/types/', methods=['POST'])
 @login_required
 def create_recipe_type_join(recipe_id):
@@ -58,6 +83,15 @@ def create_recipe_type_join(recipe_id):
     type_id = data['type_id']
 
     db.session.execute(recipe_type_joins_table.insert().values(type_id=type_id, recipe_id=recipe_id))
+    db.session.commit()
+    updated_recipe = Recipe.query.get(recipe_id)
+    return updated_recipe.to_dict()
+
+
+@recipe_routes.route('/<int:recipe_id>/types/<int:type_id>/', methods=['DELETE'])
+@login_required
+def delete_recipe_type_join(recipe_id, type_id):
+    db.session.execute(recipe_type_joins_table.delete().where(recipe_type_joins_table.c.recipe_id == recipe_id).where(recipe_type_joins_table.c.type_id == type_id))
     db.session.commit()
     updated_recipe = Recipe.query.get(recipe_id)
     return updated_recipe.to_dict()

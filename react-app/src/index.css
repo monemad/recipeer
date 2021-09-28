@@ -3,10 +3,12 @@
 @import './components/FeedbackComponents/FeedbackComponents.css';
 
 :root {
-    --bg-color: white;
+    --bg-color: rgba(254, 251, 234, 1);
     --primary-color: rgb(197, 134, 18);
-    --secondary-color: gray;
-    --tertiary-color: rgb(6, 6, 83);
+    /* --secondary-color: #CC998D; */
+    /* --secondary-color: #A44200; */
+    --secondary-color: rgba(60, 0, 8, 1);
+    --tertiary-color: white;
     --navbar-height: 50px;
     --footer-height: 15%;
 }
@@ -51,12 +53,14 @@ nav {
     width: 100%;
     height: calc(100vh - var(--navbar-height) - var(--footer-height));
     overflow-y: auto;
+    /* text-align: center; */
 }
 
 footer {
     position: fixed;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
+    align-items: center;
     text-align: center;
     height: var(--footer-height);
     bottom: 0px;

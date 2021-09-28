@@ -7,6 +7,7 @@ import RecipeIngredients from "../RecipeIngredients";
 import RecipeInstructions from "../RecipeInstructions";
 import ConfirmDeletePictureModal from "../../modals/ConfirmDeletePictureModal";
 import CreatePictureFormModal from "../../modals/CreatePictureFormModal";
+import EditRecipeFormModal from "../../modals/EditRecipeFormModal";
 
 function Recipe() {
     const { recipeId } = useParams();
@@ -51,7 +52,7 @@ function Recipe() {
                 <p>Difficulty: {recipe.difficulty}</p>
                 <p>{recipe.attributes.map(id => <span key={id}>{attributes[id].name} </span>)}</p>
                 <p>{recipe.types.map(id => <span key={id}>{types[id].name} </span>)}</p>
-                { authorized && <button>Edit details</button> }
+                { authorized && <EditRecipeFormModal recipe={recipe} /> }
             </div>
             <RecipeIngredients recipe={recipe} authorized={authorized}/>
             <RecipeInstructions recipe={recipe} pictureObj={pictureObj} authorized={authorized}/>
