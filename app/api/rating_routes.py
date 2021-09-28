@@ -25,7 +25,7 @@ def edit_rating(id):
     value = request.get_json()['value']
     rating = Rating.query.get(id)
     rating.value = value
-    db.session.commit
+    db.session.commit()
     recipe = Recipe.query.get(rating.recipe_id)
     return recipe.to_dict()
 
@@ -36,5 +36,6 @@ def delete_rating(id):
     rating = Rating.query.get(id)
     recipe_id = rating.recipe_id
     db.session.delete(rating)
+    db.session.commit()
     recipe = Recipe.query.get(recipe_id)
     return recipe.to_dict()
