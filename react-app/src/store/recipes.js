@@ -329,6 +329,56 @@ export const deleteFeedback = feedbackId => async (dispatch) => {
     }
 }
 
+export const addRating = data => async (dispatch) => {
+
+    const response = await fetch(`/api/ratings/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            value: data.value,
+            recipe_id: data.recipeId,
+            user_id: data.userId
+        })
+    })
+
+    if (response.ok) {
+        const recipe = await response.json()
+        dispatch(addRecipe(recipe))
+    }
+}
+
+export const editRating = data => async (dispatch) => {
+
+    const response = await fetch(`/api/ratings/${data.ratingId}/`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            value: data.value
+        })
+    })
+
+    if (response.ok) {
+        const recipe = await response.json()
+        dispatch(addRecipe(recipe))
+    }
+}
+
+export const deleteRating = ratingId => async (dispatch) => {
+
+    const response = await fetch(`/api/ratings/${ratingId}/`, {
+        method: 'DELETE'
+    })
+
+    if (response.ok) {
+        const recipe = await response.json()
+        dispatch(addRecipe(recipe))
+    }
+}
+
 const initialState = {};
 
 export default function reducer(state=initialState, action) {

@@ -17,6 +17,7 @@ from .api.recipe_ingredient_routes import recipe_ingredient_routes
 from .api.instruction_routes import instruction_routes
 from .api.picture_routes import picture_routes
 from .api.feedback_routes import feedback_routes
+from .api.rating_routes import rating_routes
 
 from .seeds import seed_commands
 
@@ -49,6 +50,7 @@ app.register_blueprint(recipe_ingredient_routes, url_prefix='/api/recipe-ingredi
 app.register_blueprint(instruction_routes, url_prefix='/api/instructions')
 app.register_blueprint(picture_routes, url_prefix='/api/pictures')
 app.register_blueprint(feedback_routes, url_prefix='/api/feedback')
+app.register_blueprint(rating_routes, url_prefix='/api/ratings')
 db.init_app(app)
 Migrate(app, db)
 
