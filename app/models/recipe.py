@@ -29,6 +29,8 @@ class Recipe(db.Model):
     def to_dict(self):
         types = [type.id for type in self.types]
 
+        types.sort()
+
         instructions = [{
             'id': instr.id,
             'step': instr.step,
@@ -48,6 +50,8 @@ class Recipe(db.Model):
         ingredients.sort(key=sort_by_order)
 
         attributes = [attr.id for attr in self.attributes]
+
+        attributes.sort()
 
         ratings = [{
             'id': rating.id,

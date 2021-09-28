@@ -3,11 +3,12 @@
 @import './components/FeedbackComponents/FeedbackComponents.css';
 
 :root {
-    --bg-color: #FEFBEA;
+    --bg-color: rgba(254, 251, 234, 1);
     --primary-color: rgb(197, 134, 18);
     /* --secondary-color: #CC998D; */
-    --secondary-color: #A44200;
-    --tertiary-color: rgb(6, 6, 83);
+    /* --secondary-color: #A44200; */
+    --secondary-color: rgba(60, 0, 8, 1);
+    --tertiary-color: white;
     --navbar-height: 50px;
     --footer-height: 15%;
 }
