@@ -25,10 +25,10 @@ function RecipeInstructions({ recipe, pictureObj, authorized }) {
                             </div>
                         </li>
                         { pictureObj[ins.order] ? 
-                            <>
-                                <img className='instruction-img' src={pictureObj[ins.order].imgUrl} alt={ins.order}/>
+                            <div className='recipe-picture-div'>
+                                <img className='instruction-picture' src={pictureObj[ins.order].imgUrl} alt={ins.order}/>
                                 {authorized && <ConfirmDeletePictureModal pictureId={pictureObj[ins.order].id} />}
-                            </>
+                            </div>
                             :
                             authorized && <CreatePictureFormModal recipe={recipe} order={ins.order}/>
                         }
