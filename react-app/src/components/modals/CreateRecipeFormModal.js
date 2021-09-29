@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import CreateRecipeForm from '../RecipeComponents/CreateRecipeForm';
 
-function CreateRecipeFormModal() {
+function CreateRecipeFormModal({ triggerRender, setTriggerRender }) {
     const [showModal, setShowModal] = useState(false);
 
     return (
@@ -10,7 +10,7 @@ function CreateRecipeFormModal() {
         <button onClick={() => setShowModal(true)}>Create Recipe</button>
         {showModal && (
             <Modal onClose={() => setShowModal(false)} className="create-recipe-form-modal">
-                <CreateRecipeForm setShowModal={setShowModal}/>
+                <CreateRecipeForm setShowModal={setShowModal} triggerRender={triggerRender} setTriggerRender={setTriggerRender}/>
             </Modal>
         )}
         </>

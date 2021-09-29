@@ -7,7 +7,7 @@ function ConfirmDeletePictureModal({ pictureId }) {
 
     return (
         <>
-        <button onClick={() => setShowModal(true)}>Delete</button>
+        <i className='delete-picture fas fa-trash-alt' onClick={() => setShowModal(true)}></i>
         {showModal && (
             <Modal onClose={() => setShowModal(false)} className="confirm-delete-modal">
                 <ConfirmDeletePicture setShowModal={setShowModal} pictureId={pictureId}/>

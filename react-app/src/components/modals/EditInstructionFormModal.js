@@ -7,7 +7,7 @@ function EditInstructionFormModal({ instruction }) {
 
     return (
         <>
-        <button onClick={() => setShowModal(true)}>🖊</button>
+        <i className="edit-instruction fas fa-pencil-alt" onClick={() => setShowModal(true)}></i>
         {showModal && (
             <Modal onClose={() => setShowModal(false)} className="edit-instruction-modal">
                 <EditInstructionForm setShowModal={setShowModal} instruction={instruction}/>

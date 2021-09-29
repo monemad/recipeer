@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createIngredient } from '../../../store/ingredients'
 import { editRecipeIngredient } from '../../../store/recipes'
+import ConfirmDeleteRecipeIngredientModal from '../../modals/ConfirmDeleteRecipeIngredientModal'
 
 function EditRecipeIngredientForm({ setShowModal, recipeIngredient }) {
     const dispatch = useDispatch()
@@ -77,6 +78,7 @@ function EditRecipeIngredientForm({ setShowModal, recipeIngredient }) {
                 </div>
                 <button>Edit</button>
             </form>
+            <ConfirmDeleteRecipeIngredientModal recipeIngredientId={recipeIngredient.id} />
         </div>
     )
 }

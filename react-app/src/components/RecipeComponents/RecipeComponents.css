@@ -1,9 +1,168 @@
-.recipe-img {
-    height: 30vh;
+.recipe-picture-div {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    max-height: 40vh;
+    text-align: center;
+    background-color: rgb(0, 0, 0);
 }
 
-.instruction-img {
+.recipe-picture-div > .delete-picture {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.delete-picture {
+    display: none;
+    cursor: pointer;
+}
+
+.recipe-picture-div:hover .delete-picture {
+    display: inline;
+    color: var(--delete-icon-color);
+}
+
+.recipe-picture {
+    max-width: 100%;
+    max-height: 40vh;
+    object-fit: scale-down;
+}
+
+.picture-placeholder {
     height: 20vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 2.5em;
+}
+
+.recipe-picture-bottom-banner {
+    position: absolute;
+    display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    grid-template-areas: 
+        "difficulty rating cook-time";
+    align-items: center;
+    bottom: 0px;
+    height: 2.5em;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+.difficulty {
+    grid-area: difficulty;
+}
+
+.cook-time {
+    grid-area: cook-time;
+}
+
+.rating {
+    grid-area: rating;
+}
+
+.average-rating {
+    font-size: 0.9em;
+}
+
+.recipe-header-div {
+    margin: 1em 0 1.5em;
+    text-align: center;
+}
+
+.recipe-header-div * {
+    margin: 0;
+}
+
+.recipe-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5em;
+}
+
+
+.fa-edit {
+    position: relative;
+    top: -0.3em;
+    cursor: pointer;
+    margin-left: 0.5em;
+}
+
+.tag-div {
+    margin: 0.5em 0;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.recipe-type-div {
+    margin-bottom: 0;
+}
+
+.tag {
+    border: 2px solid var(--secondary-color);
+    padding: 0.1em 0.3em;
+    margin: 0.2em;
+    text-align: center;
+    width: fit-content;
+    background-color: white;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+
+.recipe-ingredients {
+    position: fixed;
+    transform: translate(-100%);
+    width: fit-content;
+    padding-right: 5em;
+    /* top: calc(var(--navbar-height) + 40vh); */
+    bottom: var(--footer-height);
+    min-height: calc(var(--content-height) - 40vh);
+    max-height: var(--content-height);
+    border: 1px solid black;
+    overflow-y: auto;
+}
+
+.instruction {
+    margin-bottom: 2em;
+}
+
+.fa-pencil-alt {
+    position: relative;
+    top: 0.2em;
+    cursor: pointer;
+    margin-left: 0.5em;
+}
+
+.instruction-text {
+    display: flex;
+}
+
+.instruction-text p {
+    margin-top: 0.5em;
+}
+
+.instruction-text h2 {
+    font-size: 2em;
+    margin-top: 0;
+}
+
+.instruction-step-header {
+    display: flex;
+    margin-right: 3em;
+}
+
+div.instruction-picture-div {
+    background-color: transparent;
+    max-height: 30vh;
+}
+
+.instruction-picture {
+    max-height: 30vh;
 }
 
 .user-rating {

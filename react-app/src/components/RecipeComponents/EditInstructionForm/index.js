@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { editInstruction } from '../../../store/recipes'
+import ConfirmDeleteInstructionModal from '../../modals/ConfirmDeleteInstructionModal';
 
 function EditInstructionForm({ setShowModal, instruction }) {
     const dispatch = useDispatch()
@@ -33,6 +34,7 @@ function EditInstructionForm({ setShowModal, instruction }) {
                 <button>Edit</button>
                 <button type='button' onClick={e => setShowModal(false)}>Cancel</button>
             </form>
+            <ConfirmDeleteInstructionModal instructionId={instruction.id} />
         </div>
     )
 }

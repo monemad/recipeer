@@ -1,6 +1,5 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import ConfirmDeleteRecipeIngredientModal from '../../modals/ConfirmDeleteRecipeIngredientModal';
 import CreateRecipeIngredientFormModal from '../../modals/CreateRecipeIngredientFormModal';
 import EditRecipeIngredientFormModal from '../../modals/EditRecipeIngredientFormModal';
 
@@ -16,12 +15,7 @@ function RecipeIngredients({ recipe, authorized }) {
                     <li key={ing.id}>
                         <div>
                             {ing.quantity} {units[ing.unitId].name} {ingredients[ing.ingredientId].name}
-                            { authorized && 
-                            <>
-                                <EditRecipeIngredientFormModal recipeIngredient={ing}/>
-                                <ConfirmDeleteRecipeIngredientModal recipeIngredientId={ing.id} />
-                            </>
-                            }
+                            { authorized && <EditRecipeIngredientFormModal recipeIngredient={ing}/> }
                         </div>
                     </li>
                 )}

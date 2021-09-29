@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createRecipe, createRecipeIngredient, createInstruction, addAttribute, addType, createPicture } from '../../../store/recipes';
 import { createIngredient } from '../../../store/ingredients';
 
-function CreateRecipeForm({ setShowModal }) {
+function CreateRecipeForm({ setShowModal, triggerRender, setTriggerRender }) {
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user)
     const unitsState = useSelector(state => state.units)
@@ -219,13 +219,14 @@ function CreateRecipeForm({ setShowModal }) {
             }
         })
 
+        setTriggerRender(triggerRender ? false : true)
         setShowModal(false);
     }
     
     return (
         <form onSubmit={handleSubmit}>
             <h2>Create a Recipe!</h2>
-            <div className='recipe-details'>
+            <div className='recipe-details-form'>
                 <div>
                     <label>Recipe Title: </label>
                     <input
@@ -268,7 +269,7 @@ function CreateRecipeForm({ setShowModal }) {
                     />
                 </div>
             </div>
-            <div className='recipe-ingredients'>
+            <div className='recipe-ingredients-form'>
                 <h3>Ingredients</h3>
                 {ingredients.map((ing, idx) =>
                     <div key={idx}>
@@ -308,7 +309,7 @@ function CreateRecipeForm({ setShowModal }) {
                     </div>
                 )}
             </div>
-            <div className='recipe-instructions'>
+            <div className='recipe-instructions-form'>
                 <h3>Instructions</h3>
                 {steps.map((step, idx) =>
                     <div key={idx}>
