@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import ConfirmDeleteRecipeModal from "../../modals/ConfirmDeleteRecipeModal";
+import { Link, useParams } from "react-router-dom";
 import Feedback from "../../FeedbackComponents/Feedback"
 import RecipeIngredients from "../RecipeIngredients";
 import RecipeInstructions from "../RecipeInstructions";
@@ -69,14 +68,14 @@ function Recipe() {
     }
 
     return (
-        <>
+        <div className='recipe-page'>
             
             <div className='recipe-details'>
                 <div className='recipe-picture-div'>
                     { pictureObj[0] ?
                         <>
                             <img className='recipe-picture' src={pictureObj[0].imgUrl} alt={recipe.title}/>
-                            { authorized &&  <ConfirmDeletePictureModal pictureId={pictureObj[0].id} />}
+                            { editRecipe &&  <ConfirmDeletePictureModal pictureId={pictureObj[0].id} />}
                         </>
                         :
                         <div className='picture-placeholder'>
@@ -105,22 +104,25 @@ function Recipe() {
                         </div>
                     </div>
                 </div>
-                <h1>{recipe.title}</h1>
-                { authorized && <i className="fas fa-edit" onClick={toggleEditRecipe}></i> }
-                {editRecipe && <ConfirmDeleteRecipeModal recipeId={recipe?.id}/>}
-                <div>                    
-                    
+                <div className='recipe-header-div'>
+                    <div className='recipe-header'>
+                        <h1>{recipe.title}</h1>
+                        { authorized && <i className="fas fa-edit" onClick={toggleEditRecipe}></i> }
+                    </div>                 
+                    <p>Recipe Developer: <Link to={`/users/${recipe.userId}`}>{users[recipe.userId].firstName} {users[recipe.userId].lastName}</Link></p>
                 </div>
-                
-                <p>Recipe Developer: {users[recipe.userId].firstName} {users[recipe.userId].lastName}</p>
-                <p>{recipe.attributes.map(id => <span key={id}>{attributes[id].name} </span>)}</p>
-                <p>{recipe.types.map(id => <span key={id}>{types[id].name} </span>)}</p>
+                <div className='tag-div recipe-attribute-div'>
+                    {recipe.attributes.map(id => <div key={id} className='tag recipe-attribute'>{attributes[id].name} </div>)}
+                </div>
+                <div className='tag-div recipe-type-div'>
+                    {recipe.types.map(id => <div key={id} className='tag recipe-type'>{types[id].name} </div>)}
+                </div>
                 { editRecipe && <EditRecipeFormModal recipe={recipe} /> }
             </div>
             <RecipeIngredients recipe={recipe} authorized={editRecipe}/>
             <RecipeInstructions recipe={recipe} pictureObj={pictureObj} authorized={editRecipe}/>
             <Feedback recipe={recipe} users={users} sessionUser={sessionUser}/>
-        </>
+        </div>
     )
 }
 

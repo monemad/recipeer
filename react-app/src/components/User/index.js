@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, Redirect } from 'react-router-dom';
 import EditUserFormModal from '../modals/EditUserFormModal';
 import CreateRecipeFormModal from '../modals/CreateRecipeFormModal';
 import { authenticate } from '../../store/session';
@@ -12,11 +12,20 @@ function User({profile = false}) {
     const recipes = useSelector(state => state.recipes)
     const { userId }  = useParams();
 
+    const [triggerRender, setTriggerRender] = useState(false)
+
     const user = profile ? sessionUser : users[userId];
 
+    
     useEffect(() => {
         dispatch(authenticate())
-    }, [dispatch, sessionUser])
+    }, [dispatch, triggerRender])
+    
+    if (user.id === sessionUser.id && !profile) {
+        return (
+            <Redirect to='/profile'></Redirect>
+        )
+    }
 
     return (
         <>
@@ -36,7 +45,7 @@ function User({profile = false}) {
                 {user.recipes?.map(recipeId => 
                     <div key={recipeId}><Link to={`/recipes/${recipeId}`}>{recipes[recipeId]?.title}</Link></div>)}
             </div>
-            { profile && <CreateRecipeFormModal />}
+            { profile && <CreateRecipeFormModal triggerRender={triggerRender} setTriggerRender={setTriggerRender}/>}
         </>
     );
 }

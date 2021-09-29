@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { editRecipe, addAttribute, removeAttribute, addType, removeType } from '../../../store/recipes'
+import ConfirmDeleteRecipeModal from '../../modals/ConfirmDeleteRecipeModal'
 
 function EditRecipeForm({ setShowModal, recipe }) {
     const dispatch = useDispatch()
@@ -153,6 +154,7 @@ function EditRecipeForm({ setShowModal, recipe }) {
                 <button>Update</button>
                 <button type='button' onClick={e => setShowModal(false)}>Cancel</button>
             </form>
+            <ConfirmDeleteRecipeModal recipeId={recipe.id} />
         </div>
     )
 }

@@ -18,7 +18,7 @@ function Feedback({ recipe, users, sessionUser }) {
                     <div className='feedback'>
                         <Link to={`/users/${fb.userId}`}><p className='feedback-author'>{users[fb.userId].firstName}</p></Link>
                         <p className='feedback-content'>{fb.content}</p>
-                        { sessionUser.id === fb.userId && 
+                        { sessionUser?.id === fb.userId && 
                             <div>
                                 <EditFeedbackFormModal feedback={fb}/>
                                 <ConfirmDeleteFeedbackModal feedbackId={fb.id}/>

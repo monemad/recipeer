@@ -7,7 +7,7 @@ function EditRecipeIngredientFormModal({ recipeIngredient }) {
 
     return (
         <>
-        <button onClick={() => setShowModal(true)}>🖊</button>
+        <i className="edit-ingredient fas fa-pencil-alt" onClick={() => setShowModal(true)}></i>
         {showModal && (
             <Modal onClose={() => setShowModal(false)} className="edit-ingredient-modal">
                 <EditRecipeIngredientForm setShowModal={setShowModal} recipeIngredient={recipeIngredient}/>
