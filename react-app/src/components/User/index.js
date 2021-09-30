@@ -36,7 +36,7 @@ function User({profile = false}) {
                     <img className='profile-img' src={user.imgUrl} alt={user.username} width='300px'/>
                 </div>
                 <div className='username-div'>
-                    <h1 className='header'>{user.username}</h1>
+                    <h2 className='header'>{user.username}</h2>
                 </div>
                 { profile &&
                     <EditUserFormModal />

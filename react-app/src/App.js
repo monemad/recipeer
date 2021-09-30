@@ -41,7 +41,7 @@ function App() {
             <div id='content'>
                 <Switch>
                     <Route exact path='/'>
-                        <h1>Home</h1>
+                        <h2>Home</h2>
                     </Route>
                     <Route path='/users/:userId'>
                         <User />
@@ -56,7 +56,7 @@ function App() {
                         <User />
                     </ProtectedRoute>
                     <ProtectedRoute path='/discover'>
-                        <h1>Discover Page</h1>
+                        <h2>Discover Page</h2>
                     </ProtectedRoute>
                 </Switch>
             </div>
