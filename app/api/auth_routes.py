@@ -16,7 +16,11 @@ def validation_errors_to_error_messages(validation_errors):
     errorMessages = []
     for field in validation_errors:
         for error in validation_errors[field]:
-            errorMessages.append(f'{field} : {error}')
+            if isinstance(error, list):
+                for err in error:
+                    errorMessages.append(f'{field} : {err}')
+            else:
+                errorMessages.append(f'{field} : {error}')
     return errorMessages
 
 
@@ -43,6 +47,15 @@ def login():
         login_user(user)
         return user.to_session_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@auth_routes.route('/demo', methods=['GET'])
+def demo():
+    """
+    Logs in the demo user
+    """
+    demo = User.query.filter(User.id == 1).first()
+    login_user(demo)
+    return demo.to_session_dict()
 
 
 @auth_routes.route('/logout')
