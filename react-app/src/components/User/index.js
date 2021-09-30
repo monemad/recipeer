@@ -4,17 +4,19 @@ import { useParams, Link, Redirect } from 'react-router-dom';
 import EditUserFormModal from '../modals/EditUserFormModal';
 import CreateRecipeFormModal from '../modals/CreateRecipeFormModal';
 import { authenticate } from '../../store/session';
+import RecipeCard from '../RecipeComponents/RecipeCard';
 
 function User({profile = false}) {
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user)
     const users = useSelector(state => state.users)
-    const recipes = useSelector(state => state.recipes)
+    const recipes = Object.values(useSelector(state => state.recipes))
     const { userId }  = useParams();
 
     const [triggerRender, setTriggerRender] = useState(false)
 
     const user = profile ? sessionUser : users[userId];
+    const userRecipes = recipes.filter(recipe => recipe.userId === user.id)
 
     
     useEffect(() => {
@@ -34,16 +36,18 @@ function User({profile = false}) {
                     <img className='profile-img' src={user.imgUrl} alt={user.username} width='300px'/>
                 </div>
                 <div className='username-div'>
-                    <h1>{user.username}</h1>
+                    <h1 className='header'>{user.username}</h1>
                 </div>
                 { profile &&
                     <EditUserFormModal />
                 }
             </div>
+            <h2 className='header'>Recipes</h2>
             <div className='user-recipes'>
-                <h2>Recipes</h2>
-                {user.recipes?.map(recipeId => 
-                    <div key={recipeId}><Link to={`/recipes/${recipeId}`}>{recipes[recipeId]?.title}</Link></div>)}
+                {userRecipes?.map(recipe => 
+                    // <div key={recipe.id}><Link to={`/recipes/${recipe.id}`}>{recipe.title}</Link></div>
+                    <RecipeCard key={recipe.id} recipe={recipe} />
+                )}
             </div>
             { profile && <CreateRecipeFormModal triggerRender={triggerRender} setTriggerRender={setTriggerRender}/>}
         </>

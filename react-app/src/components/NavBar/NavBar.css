@@ -1,5 +1,6 @@
-nav > * {
-    height: 100%;
+nav * {
+    /* height: 100%; */
+    margin: auto 0;
 }
 
 .profile-img.nav-profile-img {
@@ -10,9 +11,22 @@ nav > * {
 .nav-auth {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .nav-auth button {
-    height: 50px;
+    height: 30px;
     width: fit-content;
+}
+
+.home-link {
+    font-size: 28px;
+}
+
+.logo {
+    font-size: 40px;
+}
+
+.welcome {
+    font-size: 28px;
 }

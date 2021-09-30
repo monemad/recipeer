@@ -14,14 +14,14 @@ const NavBar = () => {
 
     return (
         <nav>
-            <NavLink to='/' exact={true} activeClassName='active'>
+            <NavLink to='/' exact={true} className='home-link'>
                 Home
             </NavLink>
-            <NavLink to='/' exact={true} activeClassName='active'>
+            {/* <NavLink to='/' exact={true} activeClassName='active'>
                 Search
-            </NavLink>
+            </NavLink> */}
 
-            <h2>Recipeer</h2>
+            <h2 className='logo'>Recipeer</h2>
 
             <div className='nav-auth'>
                 { !authenticated ?
@@ -32,8 +32,8 @@ const NavBar = () => {
                     </>
                     :
                     <>
-                        <NavLink to='/'>Discover</NavLink>
-                        Welcome, {sessionUser.username}
+                        {/* <NavLink to='/'>Discover</NavLink> */}
+                        <span className='welcome'>Welcome, {sessionUser.username}</span>
                         <NavLink to='/profile'><img className='profile-img nav-profile-img' src={sessionUser.imgUrl} alt={sessionUser.username}/></NavLink>
                         <LogoutButton />
                     </>

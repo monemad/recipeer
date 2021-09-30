@@ -36,16 +36,26 @@ body {
     height: 100vh;
 }
 
+.header {
+    font-family: 'Reenie Beanie', cursive;
+}
+
 nav {
     position: fixed;
     display: grid;
-    grid-template-columns: 20% 20% 20% 40%;
+    grid-template-columns: 40% 20% 30% 10%;
     grid-template-rows: var(--navbar-height);
     text-align: center;
     height: var(--navbar-height);
     top: 0px;
     width: 100vw;
     background-color: var(--secondary-color);
+    color: var(--bg-color);
+    font-family: 'Reenie Beanie', cursive;
+}
+
+nav a:visited {
+    color: var(--bg-color); 
 }
 
 #content {
@@ -58,6 +68,7 @@ nav {
     width: 100%;
     height: var(--content-height);
     overflow-y: auto;
+    background-color: var(--bg-color);
     /* text-align: center; */
 }
 
@@ -77,11 +88,22 @@ footer {
     background-color: var(--secondary-color);
 }
 
+footer * {
+    color: var(--bg-color);
+}
+
 .profile-img {
     width: 200px;
     height: 200px;
     object-fit: cover;
     border-radius: 50%;
+}
+
+.user-recipes {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
 }
 
 .modal-content {
