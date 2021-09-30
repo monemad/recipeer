@@ -66,6 +66,8 @@ class Recipe(db.Model):
             'userId': picture.user_id,
         } for picture in self.pictures]
 
+        pictures.sort(key=sort_by_order)
+
         feedback = [{
             'id': feedback.id,
             'content': feedback.content,
