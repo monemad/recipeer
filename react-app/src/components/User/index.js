@@ -33,7 +33,7 @@ function User({profile = false}) {
         <>
             <div className='profile-banner'>
                 <div className='profile-img-div'>
-                    <img className='profile-img' src={user.imgUrl} alt={user.username} width='300px'/>
+                    <img className='profile-img' src={user.imgUrl || '/images/default-profile.jpeg'} alt={user.username} width='300px'/>
                 </div>
                 <div className='username-div'>
                     <h2 className='header'>{user.username}</h2>
