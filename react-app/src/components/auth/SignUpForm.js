@@ -24,8 +24,10 @@ const SignUpForm = ({ setShowModal }) => {
             } else {
                 setShowModal(false)
             }
+        } else {
+            setErrors(['Passwords do not match'])
         }
-    };
+    }
 
     const updateFirstName = (e) => {
         setFirstName(e.target.value);

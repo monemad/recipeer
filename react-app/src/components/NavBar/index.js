@@ -1,11 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import LoginFormModal from '../modals/LoginFormModal';
 import SignUpFormModal from '../modals/SignUpFormModal';
+import { demo } from '../../store/session';
 
 const NavBar = () => {
+    const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user)
 
     const authenticated = sessionUser !== null;
@@ -26,6 +28,7 @@ const NavBar = () => {
                     <>
                         <LoginFormModal />
                         <SignUpFormModal />
+                        <button onClick={async e => await dispatch(demo())}>Demo User</button>
                     </>
                     :
                     <>

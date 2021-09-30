@@ -67,6 +67,16 @@ export const logout = () => async (dispatch) => {
     }
 };
 
+export const demo = () => async (dispatch) => {
+    const response = await fetch('/api/auth/demo');
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setUser(data))
+        return null;
+    }
+};
+
 
 export const signUp = (firstName, lastName, username, email, password, imgFile) => async (dispatch) => {
 
