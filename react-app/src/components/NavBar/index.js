@@ -34,7 +34,7 @@ const NavBar = () => {
                     <>
                         {/* <NavLink to='/'>Discover</NavLink> */}
                         <span className='welcome'>Welcome, {sessionUser.username}</span>
-                        <NavLink to='/profile'><img className='profile-img nav-profile-img' src={sessionUser.imgUrl || '/images/default-profile.jpeg'} alt={sessionUser.username}/></NavLink>
+                        <NavLink to='/profile'><img className='profile-img nav-profile-img' src={sessionUser.imgUrl || 'https://recipeer-bucket.s3.us-west-1.amazonaws.com/tmpdefault-profile.jpeg'} alt={sessionUser.username}/></NavLink>
                         <LogoutButton />
                     </>
                 }
