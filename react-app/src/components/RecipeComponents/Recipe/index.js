@@ -8,6 +8,7 @@ import ConfirmDeletePictureModal from "../../modals/ConfirmDeletePictureModal";
 import CreatePictureFormModal from "../../modals/CreatePictureFormModal";
 import EditRecipeFormModal from "../../modals/EditRecipeFormModal";
 import { addRating, deleteRating, editRating } from "../../../store/recipes";
+import ImageModal from "../../modals/ImageModal";
 
 function Recipe() {
     const dispatch = useDispatch()
@@ -23,8 +24,19 @@ function Recipe() {
     const userRating = recipe?.ratings.find(rating => rating.userId === sessionUser?.id)
     const authorized = recipe?.userId === sessionUser?.id;
     const [editRecipe, setEditRecipe] = useState(false);
+    const [showImageModal, setShowImageModal] = useState(false)
+
+    const pictureObj = {}
+    recipe?.pictures.forEach(pic => {
+        pictureObj[pic.order] = {
+            imgUrl: pic.imgUrl,
+            id: pic.id
+        }
+    })
 
     useEffect(() => {
+        // const recipePicDiv = document.querySelector('.recipe-picture-div')
+        // recipePicDiv?.style.backgroundImage = `url(${pictureObj[0].imgUrl})`;
         const stars = Array.from(document.querySelectorAll('.fa-star'));
         stars.forEach(star => {
             star.classList.remove('user-rating')
@@ -39,14 +51,6 @@ function Recipe() {
     const toggleEditRecipe = e => {
         setEditRecipe(!editRecipe)
     }
-
-    const pictureObj = {}
-    recipe?.pictures.forEach(pic => {
-        pictureObj[pic.order] = {
-            imgUrl: pic.imgUrl,
-            id: pic.id
-        }
-    })
 
     const handleRating = async e => {
         const value = +e.target.id
@@ -74,7 +78,8 @@ function Recipe() {
                 <div className='recipe-picture-div'>
                     { pictureObj[0] ?
                         <>
-                            <img className='recipe-picture' src={pictureObj[0].imgUrl} alt={recipe.title}/>
+                            <img className='recipe-picture' onClick={e=>setShowImageModal(true)} src={pictureObj[0].imgUrl} alt={recipe.title}/>
+                            { showImageModal && <ImageModal imgUrl={pictureObj[0].imgUrl} showModal={showImageModal} setShowModal={setShowImageModal}/>}
                             { editRecipe &&  <ConfirmDeletePictureModal pictureId={pictureObj[0].id} />}
                         </>
                         :
@@ -106,10 +111,10 @@ function Recipe() {
                 </div>
                 <div className='recipe-header-div'>
                     <div className='recipe-header'>
-                        <h1>{recipe.title}</h1>
+                        <h1 className='header'>{recipe.title}</h1>
                         { authorized && <i className="fas fa-edit" onClick={toggleEditRecipe}></i> }
                     </div>                 
-                    <p>Recipe Developer: <Link to={`/users/${recipe.userId}`}>{users[recipe.userId].firstName} {users[recipe.userId].lastName}</Link></p>
+                    <p>Recipe Developer: <Link to={`/users/${recipe?.userId}`}>{users[recipe.userId]?.firstName} {users[recipe.userId]?.lastName}</Link></p>
                 </div>
                 <div className='tag-div recipe-attribute-div'>
                     {recipe.attributes.map(id => <div key={id} className='tag recipe-attribute'>{attributes[id].name} </div>)}

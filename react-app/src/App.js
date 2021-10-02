@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import User from './components/User';
@@ -13,10 +13,12 @@ import { getIngredients } from './store/ingredients';
 import { getUnits } from './store/units';
 import { getTypes } from './store/types';
 import { getAttributes } from './store/attributes';
+import Home from './components/Home';
 
 function App() {
     const [loaded, setLoaded] = useState(false);
     const dispatch = useDispatch();
+    const sessionUser = useSelector(state => state.session.user)
 
     useEffect(() => {
         (async() => {
@@ -37,11 +39,11 @@ function App() {
 
     return (
         <>
-            <NavBar />
+            <NavBar sessionUser={sessionUser}/>
             <div id='content'>
                 <Switch>
                     <Route exact path='/'>
-                        <h2>Home</h2>
+                        <Home authenticated={sessionUser} />
                     </Route>
                     <Route path='/users/:userId'>
                         <User />

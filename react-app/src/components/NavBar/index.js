@@ -1,16 +1,13 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import LoginFormModal from '../modals/LoginFormModal';
 import SignUpFormModal from '../modals/SignUpFormModal';
 import { demo } from '../../store/session';
 
-const NavBar = () => {
+const NavBar = ({ sessionUser }) => {
     const dispatch = useDispatch()
-    const sessionUser = useSelector(state => state.session.user)
-
-    const authenticated = sessionUser !== null;
 
     return (
         <nav>
@@ -21,10 +18,10 @@ const NavBar = () => {
                 Search
             </NavLink> */}
 
-            <h2 className='logo'>Recipeer</h2>
+            <Link to='/' className='logo-link'><h2 className='logo'>Recipeer</h2></Link>
 
             <div className='nav-auth'>
-                { !authenticated ?
+                { !sessionUser ?
                     <>
                         <LoginFormModal />
                         <SignUpFormModal />
