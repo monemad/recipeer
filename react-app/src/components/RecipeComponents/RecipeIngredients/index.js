@@ -12,7 +12,7 @@ function RecipeIngredients({ recipe, authorized }) {
         <>
             <div className={`recipe-ingredients-container ${show ? 'show' : 'hide'}`}>
             {/* <div className={`recipe-ingredients-container`}> */}
-                <h2>Ingredients</h2>
+                <h2 className='header'>Ingredients</h2>
                 {/* <i className="fas fa-chevron-right toggle-ingredients"></i> */}
                 <div className='recipe-ingredients'>
                     {recipe.ingredients.map(ing => 

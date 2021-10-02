@@ -3,14 +3,11 @@
 @import './components/FeedbackComponents/FeedbackComponents.css';
 
 :root {
-    --bg-color: rgba(254, 251, 234, 1);
-    --primary-color: rgb(197, 134, 18);
-    /* --secondary-color: #CC998D; */
-    /* --secondary-color: #A44200; */
+    --bg-color: #fefbea;
+    --primary-color: rgb(60, 0, 8);
     --secondary-color: rgba(60, 0, 8, 1);
-    --tertiary-color: white;
     --delete-icon-color: rgb(192, 0, 0);
-    --navbar-height: 50px;
+    --navbar-height: 75px;
     --footer-height: 100px;
     --content-height: calc(100vh - var(--navbar-height) - var(--footer-height));
 }
@@ -44,15 +41,19 @@ body {
 nav {
     position: fixed;
     display: grid;
-    grid-template-columns: 40% 20% 30% 10%;
+    grid-template-columns: 25% 50% 25%;
     grid-template-rows: var(--navbar-height);
     text-align: center;
-    height: var(--navbar-height);
+    min-height: var(--navbar-height);
+    height: fit-content;
     top: 0px;
     width: 100vw;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     color: var(--bg-color);
     font-family: 'Reenie Beanie', cursive;
+    border-bottom: 1px solid black;
+    box-shadow: 0px 0px 4px 1px black;
+    z-index: 1;
 }
 
 nav a:visited {
@@ -63,7 +64,7 @@ nav a:visited {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 25% 0;
+    padding: 0 25%;
     position: absolute;
     top: var(--navbar-height);
     width: 100%;
@@ -86,11 +87,15 @@ footer {
     height: var(--footer-height);
     bottom: 0px;
     width: 100vw;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
 }
 
 footer * {
     color: var(--bg-color);
+}
+
+.profile-img-div {
+    width: fit-content;
 }
 
 .profile-img {
@@ -100,13 +105,86 @@ footer * {
     border-radius: 50%;
 }
 
-.user-recipes {
+.recipe-cards {
     display: flex;
     justify-content: space-between;
     width: 100%;
     flex-wrap: wrap;
 }
 
-.modal-content {
+#content button {
+    border: none;
+    width: fit-content;
+    height: 1.7em;
+    font-family: 'Reenie Beanie', cursive;
+    font-size: 1.3em;
+    font-weight: bold;
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+}
+
+form {
+    max-height: 80vh;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form > div {
+    margin-bottom: 1em;
+}
+
+form input {
+    border: none;
+    outline: none;
+}
+
+.splash {
+    position: absolute;
+    top: 0px;
+    height: calc(100vh - var(--navbar-height) - var(--footer-height));
+    background-image: url('https://recipeer-bucket.s3.amazonaws.com/tmppexels-pixabay-326268.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+}
+
+.splash > .screen {
+    position: inherit;
+    width: inherit;
+    height: inherit;
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.splash > span {
+    font-size: 5vw;
+    font-weight: bold;
+    font-family: "Reenie Beanie", cursive;
+    color: black;
+    text-shadow: 1px 1px 5px var(--bg-color), -1px -1px 5px var(--bg-color);
+    z-index: 2;
+    user-select: none;
+    /* text-shadow: rgb(254, 251, 234) 1px 0px 0px, rgb(254, 251, 234) 0.540302px 0.841471px 0px, rgb(254, 251, 234) -0.416147px 0.909297px 0px, rgb(254, 251, 234) -0.989992px 0.14112px 0px, rgb(254, 251, 234) -0.653644px -0.756802px 0px, rgb(254, 251, 234) 0.283662px -0.958924px 0px, rgb(254, 251, 234) 0.96017px -0.279415px 0px; */
+}
+
+
+.splash > .share-recipes {
+    position: inherit;
+    top: 28vh;
+    left: 2%;
+    display: flex;
+    flex-direction: column;
+}
+
+.splash > .discover-recipes {
+    position: inherit;
+    top: 50vh;
+    left: 20%;
+}
+
+img {
+    display: block;
+    margin: 0 auto;
 }

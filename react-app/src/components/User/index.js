@@ -5,6 +5,7 @@ import EditUserFormModal from '../modals/EditUserFormModal';
 import CreateRecipeFormModal from '../modals/CreateRecipeFormModal';
 import { authenticate } from '../../store/session';
 import RecipeCard from '../RecipeComponents/RecipeCard';
+import ImageModal from '../modals/ImageModal';
 
 function User({profile = false}) {
     const dispatch = useDispatch()
@@ -14,6 +15,7 @@ function User({profile = false}) {
     const { userId }  = useParams();
 
     const [triggerRender, setTriggerRender] = useState(false)
+    const [showImageModal, setShowImageModal] = useState(false)
 
     const user = profile ? sessionUser : users[userId];
     const userRecipes = recipes.filter(recipe => recipe.userId === user.id)
@@ -23,17 +25,18 @@ function User({profile = false}) {
         dispatch(authenticate())
     }, [dispatch, triggerRender])
     
-    if (user.id === sessionUser.id && !profile) {
+    if (user.id === sessionUser?.id && !profile) {
         return (
             <Redirect to='/profile'></Redirect>
         )
     }
 
     return (
-        <>
+        user && <>
             <div className='profile-banner'>
                 <div className='profile-img-div'>
-                    <img className='profile-img' src={user.imgUrl || 'https://recipeer-bucket.s3.us-west-1.amazonaws.com/tmpdefault-profile.jpeg'} alt={user.username} width='300px'/>
+                    <img className='profile-img' onClick={e=>setShowImageModal(true)} src={user.imgUrl || 'https://recipeer-bucket.s3.us-west-1.amazonaws.com/tmpdefault-profile.jpeg'} alt={user.username} width='300px'/>
+                    { showImageModal && <ImageModal imgUrl={user.imgUrl} showModal={showImageModal} setShowModal={setShowImageModal}/>}
                 </div>
                 <div className='username-div'>
                     <h2 className='header'>{user.username}</h2>
@@ -43,7 +46,7 @@ function User({profile = false}) {
                 }
             </div>
             <h2 className='header'>Recipes</h2>
-            <div className='user-recipes'>
+            <div className='recipe-cards'>
                 {userRecipes?.map(recipe => 
                     // <div key={recipe.id}><Link to={`/recipes/${recipe.id}`}>{recipe.title}</Link></div>
                     <RecipeCard key={recipe.id} recipe={recipe} />

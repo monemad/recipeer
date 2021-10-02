@@ -7,6 +7,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 2;
 }
 
 #modal-background {
@@ -40,4 +41,18 @@
 
 .auth-modal {
     width: 50%;
+}
+
+#modal-content.image-modal {
+    padding: 0;
+}
+
+.modal-image-div {
+    height:fit-content;
+    width: fit-content;
+}
+
+.modal-image {
+    max-height: 80vh;
+    max-width: 80vw;
 }

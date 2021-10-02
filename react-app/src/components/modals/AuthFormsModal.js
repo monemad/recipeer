@@ -10,7 +10,7 @@ function AuthFormsModal({ forbidden=true }) {
 
     const handleClose = () => {
         setShowModal(false);
-        if (forbidden) history.goBack()
+        if (forbidden) history.push('/')
     }
 
     return (
