@@ -35,8 +35,6 @@ function Recipe() {
     })
 
     useEffect(() => {
-        // const recipePicDiv = document.querySelector('.recipe-picture-div')
-        // recipePicDiv?.style.backgroundImage = `url(${pictureObj[0].imgUrl})`;
         const stars = Array.from(document.querySelectorAll('.fa-star'));
         stars.forEach(star => {
             star.classList.remove('user-rating')
@@ -80,7 +78,7 @@ function Recipe() {
                         <>
                             <img className='recipe-picture' onClick={e=>setShowImageModal(true)} src={pictureObj[0].imgUrl} alt={recipe.title}/>
                             { showImageModal && <ImageModal imgUrl={pictureObj[0].imgUrl} showModal={showImageModal} setShowModal={setShowImageModal}/>}
-                            { editRecipe &&  <ConfirmDeletePictureModal pictureId={pictureObj[0].id} />}
+                            { editRecipe && <ConfirmDeletePictureModal pictureId={pictureObj[0].id} />}
                         </>
                         :
                         <div className='picture-placeholder'>
@@ -101,9 +99,9 @@ function Recipe() {
                             </div>
                             <div className='average-rating'>
                                 { recipe?.ratings.length ? 
-                                    <span>{rating} stars ({recipe.ratings.length} ratings)</span> 
+                                    <span>{rating} stars ({recipe.ratings.length} {recipe.ratings.length === 1 ? 'rating' : 'ratings'})</span> 
                                     : 
-                                    <span>Be the first to rate this recipe!</span>
+                                    <span>No ratings.</span>
                                 }
                             </div>
                         </div>
@@ -115,6 +113,7 @@ function Recipe() {
                         { authorized && <i className="fas fa-edit" onClick={toggleEditRecipe}></i> }
                     </div>                 
                     <p>Recipe Developer: <Link to={`/users/${recipe?.userId}`}>{users[recipe.userId]?.firstName} {users[recipe.userId]?.lastName}</Link></p>
+                    { editRecipe && <EditRecipeFormModal recipe={recipe} /> }
                 </div>
                 <div className='tag-div recipe-attribute-div'>
                     {recipe.attributes.map(id => <div key={id} className='tag recipe-attribute'>{attributes[id].name} </div>)}
@@ -122,7 +121,6 @@ function Recipe() {
                 <div className='tag-div recipe-type-div'>
                     {recipe.types.map(id => <div key={id} className='tag recipe-type'>{types[id].name} </div>)}
                 </div>
-                { editRecipe && <EditRecipeFormModal recipe={recipe} /> }
             </div>
             <RecipeIngredients recipe={recipe} authorized={editRecipe}/>
             <RecipeInstructions recipe={recipe} pictureObj={pictureObj} authorized={editRecipe}/>
