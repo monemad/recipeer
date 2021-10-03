@@ -28,6 +28,7 @@
 
 .login-modal, .signup-modal {
     width: 25%;
+    min-width: 400px;
 }
 
 .auth-forms {

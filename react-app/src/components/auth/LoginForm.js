@@ -10,6 +10,9 @@ const LoginForm = ({ setShowModal }) => {
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
 
+    const emailErrors = errors.filter(error => error.startsWith('email')).map(error => error.slice(8))
+    const passwordErrors = errors.filter(error => error.startsWith('password')).map(error => error.slice(11))
+
     const onLogin = async (e) => {
         e.preventDefault();
         const data = await dispatch(login(email, password));
@@ -33,14 +36,8 @@ const LoginForm = ({ setShowModal }) => {
     }
 
     return (
-        <form onSubmit={onLogin}>
+        <form onSubmit={onLogin} autoComplete='on'>
             <div>
-                {errors.map((error, ind) => (
-                <div key={ind}>{error}</div>
-                ))}
-            </div>
-            <div>
-                <label htmlFor='email'>Email</label>
                 <input
                     name='email'
                     type='text'
@@ -48,9 +45,13 @@ const LoginForm = ({ setShowModal }) => {
                     value={email}
                     onChange={updateEmail}
                 />
+                <div className='errors'>
+                    {emailErrors.map((error, ind) => (
+                    <span key={ind}>{error}</span>
+                    ))}
+                </div>
             </div>
             <div>
-                <label htmlFor='password'>Password</label>
                 <input
                     name='password'
                     type='password'
@@ -58,8 +59,13 @@ const LoginForm = ({ setShowModal }) => {
                     value={password}
                     onChange={updatePassword}
                 />
-                <button type='submit'>Login</button>
+                <div className='errors'>
+                    {passwordErrors.map((error, ind) => (
+                    <span key={ind}>{error}</span>
+                    ))}
+                </div>
             </div>
+            <button type='submit'>Login</button>
         </form>
     );
 };
