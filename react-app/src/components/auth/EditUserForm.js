@@ -3,15 +3,21 @@ import { useSelector, useDispatch } from 'react-redux'
 import { editUser } from '../../store/session';
 
 const EditUserForm = ({ setShowModal }) => {
+    const user = useSelector(state => state.session.user);
     const [errors, setErrors] = useState([]);
-	const [firstName, setFirstName] = useState('');
-	const [lastName, setLastName] = useState('');
-    const [username, setUsername] = useState('');
+	const [firstName, setFirstName] = useState(user.firstName);
+	const [lastName, setLastName] = useState(user.lastName);
+    const [username, setUsername] = useState(user.username);
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
 	const [imgFile, setImgFile] = useState("")
-    const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
+
+    const firstNameErrors = errors.filter(error => error.startsWith('first_name')).map(error => error.slice(13))
+    const lastNameErrors = errors.filter(error => error.startsWith('last_name')).map(error => error.slice(12))
+    const usernameErrors = errors.filter(error => error.startsWith('username')).map(error => error.slice(11))
+    const passwordErrors = errors.filter(error => error.startsWith('password')).map(error => error.slice(11))
+    const otherErrors = errors.filter(error => error.startsWith('other')).map(error => error.slice(8))
 
     const onEditUser = async (e) => {
         e.preventDefault();
@@ -22,6 +28,8 @@ const EditUserForm = ({ setShowModal }) => {
             } else {
                 setShowModal(false)
             }
+        } else {
+            setErrors(['other : Passwords do not match'])
         }
     };
 
@@ -52,9 +60,9 @@ const EditUserForm = ({ setShowModal }) => {
 
     return (
         <form onSubmit={onEditUser}>
-            <div>
-                {errors.map((error, ind) => (
-                <div key={ind}>{error}</div>
+            <div className='errors'>
+                {otherErrors.map((error, ind) => (
+                <span key={ind}>{error}</span>
                 ))}
             </div>
             <div>
@@ -65,6 +73,11 @@ const EditUserForm = ({ setShowModal }) => {
                     onChange={updateFirstName}
                     value={firstName}
                 />
+                <div className='errors'>
+                    {firstNameErrors.map((error, ind) => (
+                    <span key={ind}>{error}</span>
+                    ))}
+                </div>
 			</div>
 			<div>
                 <label>Last Name</label>
@@ -74,6 +87,11 @@ const EditUserForm = ({ setShowModal }) => {
                     onChange={updateLastName}
                     value={lastName}
                 />
+                <div className='errors'>
+                    {lastNameErrors.map((error, ind) => (
+                    <span key={ind}>{error}</span>
+                    ))}
+                </div>
 			</div>
 			<div>
                 <label>User Name</label>
@@ -83,6 +101,11 @@ const EditUserForm = ({ setShowModal }) => {
                     onChange={updateUsername}
                     value={username}
                 />
+                <div className='errors'>
+                    {usernameErrors.map((error, ind) => (
+                    <span key={ind}>{error}</span>
+                    ))}
+                </div>
             </div>
             <div>
                 <label>New Password</label>
@@ -92,6 +115,11 @@ const EditUserForm = ({ setShowModal }) => {
                     onChange={updatePassword}
                     value={password}
                 />
+                <div className='errors'>
+                    {passwordErrors.map((error, ind) => (
+                    <span key={ind}>{error}</span>
+                    ))}
+                </div>
             </div>
             <div>
                 <label>Repeat Password</label>

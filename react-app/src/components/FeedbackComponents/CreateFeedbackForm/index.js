@@ -23,8 +23,8 @@ function CreateFeedbackForm({ recipe, sessionUser }) {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className='create-feedback-div'>
+            <form className='create-feedback-form'onSubmit={handleSubmit}>
                 <div>
                     <textarea
                     value={content}

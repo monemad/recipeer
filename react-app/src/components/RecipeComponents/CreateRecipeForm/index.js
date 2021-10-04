@@ -224,152 +224,160 @@ function CreateRecipeForm({ setShowModal, triggerRender, setTriggerRender }) {
     }
     
     return (
-        <form onSubmit={handleSubmit}>
+        <div className='create-recipe-div'>
             <h2>Create a Recipe!</h2>
-            <div className='recipe-details-form'>
-                <div>
-                    <label>Recipe Title: </label>
-                    <input
-                        type='text'
-                        value={title}
-                        onChange={updateTitle}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Difficulty (1-10)</label>
-                    <input
-                        type='number'
-                        min='1'
-                        max='10'
-                        step='1'
-                        value={difficulty}
-                        onChange={updateDifficulty}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Cook Time (minutes)</label>
-                    <input
-                        type='number'
-                        min='1'
-                        step='1'
-                        value={cookTime}
-                        onChange={updateCookTime}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Picture</label>
-                    <input
-                        id='0'
-                        type='file'
-                        name='recipeImg'
-                        onChange={updatePictures}
-                    />
-                </div>
-            </div>
-            <div className='recipe-ingredients-form'>
-                <h3>Ingredients</h3>
-                {ingredients.map((ing, idx) =>
-                    <div key={idx}>
-                        <div>
-                            <input
-                                id={idx}
-                                className={'quantity'}
-                                type='number'
-                                step='any'
-                                min='0'
-                                value={quantities[idx]}
-                                onChange={updateRecipeIngredient}
-                                required
-                            />
-                            <select 
-                                id={idx}
-                                className='unit'
-                                value={units[idx]}
-                                onChange={updateRecipeIngredient}
-                                required
-                            >
-                                {unitOptions}
-                            </select>    
-                            <input
-                                id={idx}
-                                className={'ingredient'}
-                                type='text'
-                                value={ing}
-                                onChange={updateRecipeIngredient}
-                                required
-                            />
-                            {ingredients.length > 1 && <button value={idx} type='button' onClick={removeRecipeIngredient}>Remove Ingredient</button>}
-                        </div>
-                        <div>
-                            {idx === ingredients.length-1 && <button type='button' onClick={addRecipeIngredient}>Add Ingredient</button>}
-                        </div>
-                    </div>
-                )}
-            </div>
-            <div className='recipe-instructions-form'>
-                <h3>Instructions</h3>
-                {steps.map((step, idx) =>
-                    <div key={idx}>
-                        <div>
-                            <label>Step {idx+1}: </label>
-                            <textarea
-                                id={idx}
-                                value={step}
-                                onChange={updateStep}
-                                required
-                            />
-                            {steps.length > 1 && <button value={idx} type='button' onClick={removeStep}>Remove Step</button>}
-                        </div>
-                        <div>
-                            <label>Picture</label>
-                            <input
-                                id={idx+1}
-                                type='file'
-                                name={`recipeImg${idx+1}`}
-                                onChange={updatePictures}
-                            />
-                        </div>
-                        <div>
-                            {idx === steps.length-1 && <button type='button' onClick={addStep}>Add Step</button>}
-                        </div>
-                    </div>
-                )}
-            </div>
-            <div className='recipe-attributes'>
-                <h3>Attributes</h3>
-                {attributesArray.map((attr, idx) =>
-                    <div key={attr.id}>
-                        <label>{attr.name}</label>
+            <form className='create-recipe-form' onSubmit={handleSubmit}>
+                <div className='recipe-details-form'>
+                    <div>
+                        <label>Recipe Title: </label>
                         <input
-                            id={idx}
-                            className='attribute'
-                            type='checkbox'
-                            checked={attributes[idx] === true}
-                            onChange={updateTag}
+                            type='text'
+                            value={title}
+                            onChange={updateTitle}
+                            required
                         />
                     </div>
-                )}
-            </div>
-            <div className='recipe-types'>
-                <h3>Types</h3>
-                {typesArray.map((type, idx) =>
-                    <div key={type.id}>
-                        <label>{type.name}</label>
+                    <div>
+                        <label>Difficulty (1-10)</label>
                         <input
-                            id={idx}
-                            className='type'
-                            type='checkbox'
-                            checked={types[idx] === true}
-                            onChange={updateTag}
+                            type='number'
+                            min='1'
+                            max='10'
+                            step='1'
+                            value={difficulty}
+                            onChange={updateDifficulty}
+                            required
                         />
                     </div>
-                )}
-            </div>
-            <button>Submit</button>
-        </form>
+                    <div>
+                        <label>Cook Time (minutes)</label>
+                        <input
+                            type='number'
+                            min='1'
+                            step='1'
+                            value={cookTime}
+                            onChange={updateCookTime}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label>Picture</label>
+                        <input
+                            id='0'
+                            type='file'
+                            name='recipeImg'
+                            onChange={updatePictures}
+                        />
+                    </div>
+                </div>
+                <div className='recipe-ingredients-form'>
+                    <h3>Ingredients</h3>
+                    {ingredients.map((ing, idx) =>
+                        <div key={idx}>
+                            <div className='input-recipe-ingredient-div'>
+                                <input
+                                    id={idx}
+                                    className='quantity'
+                                    type='number'
+                                    step='any'
+                                    min='0'
+                                    value={quantities[idx]}
+                                    onChange={updateRecipeIngredient}
+                                    required
+                                />
+                                <select 
+                                    id={idx}
+                                    className='unit'
+                                    value={units[idx]}
+                                    onChange={updateRecipeIngredient}
+                                    required
+                                >
+                                    {unitOptions}
+                                </select>    
+                                <input
+                                    id={idx}
+                                    className='ingredient'
+                                    type='text'
+                                    value={ing}
+                                    onChange={updateRecipeIngredient}
+                                    required
+                                />
+                                {ingredients.length > 1 && <button value={idx} type='button' onClick={removeRecipeIngredient}>Remove</button>}
+                            </div>
+                            <div>
+                                {idx === ingredients.length-1 && <button type='button' onClick={addRecipeIngredient}>Add Ingredient</button>}
+                            </div>
+                        </div>
+                    )}
+                </div>
+                <div className='recipe-instructions-form'>
+                    <h3>Instructions</h3>
+                    {steps.map((step, idx) =>
+                        <div key={idx}>
+                            <div className='input-instruction-div'>
+                                <label>Step {idx+1}: </label>
+                                <textarea
+                                    id={idx}
+                                    value={step}
+                                    onChange={updateStep}
+                                    required
+                                />
+                                {steps.length > 1 && <button value={idx} type='button' onClick={removeStep}>Remove Step</button>}
+                            </div>
+                            <div>
+                                <label>Picture</label>
+                                <input
+                                    id={idx+1}
+                                    type='file'
+                                    name={`recipeImg${idx+1}`}
+                                    onChange={updatePictures}
+                                />
+                            </div>
+                            <div>
+                                {idx === steps.length-1 && <button type='button' onClick={addStep}>Add Step</button>}
+                            </div>
+                        </div>
+                    )}
+                </div>
+                <div className='recipe-checkboxes'>
+                    <div className='recipe-attributes'>
+                        <h3>Attributes</h3>
+                        <div className='checkboxes'>
+                            {attributesArray.map((attr, idx) =>
+                                <div className='input-attributes-div' key={attr.id}>
+                                    <input
+                                        id={idx}
+                                        className='attribute'
+                                        type='checkbox'
+                                        checked={attributes[idx] === true}
+                                        onChange={updateTag}
+                                    />
+                                    <label>{attr.name}</label>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    <div className='recipe-types'>
+                        <h3>Types</h3>
+                        <div className='checkboxes'>
+                            {typesArray.map((type, idx) =>
+                                <div className='input-types-div' key={type.id}>
+                                    <input
+                                        id={idx}
+                                        className='type'
+                                        type='checkbox'
+                                        checked={types[idx] === true}
+                                        onChange={updateTag}
+                                    />
+                                    <label>{type.name}</label>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+                <button>Submit</button>
+            </form>
+        </div>
     )
 }
 

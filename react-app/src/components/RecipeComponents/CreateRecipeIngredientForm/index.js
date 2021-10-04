@@ -48,11 +48,11 @@ function CreateRecipeIngredientForm({ setShowModal, recipe }) {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <div>
+        <div className='create-recipe-ingredient-div'>
+            <form className='create-recipe-ingredient-form' onSubmit={handleSubmit}>
+                <div className='input-recipe-ingredient-div'>
                     <input
-                        className={'quantity'}
+                        className='quantity'
                         type='number'
                         step='any'
                         min='0'
@@ -69,7 +69,7 @@ function CreateRecipeIngredientForm({ setShowModal, recipe }) {
                         {unitOptions}
                     </select>    
                     <input
-                        className={'ingredient'}
+                        className='ingredient'
                         type='text'
                         value={ingredient}
                         onChange={updateRecipeIngredient}

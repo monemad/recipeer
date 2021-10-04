@@ -24,8 +24,8 @@ function CreatePictureForm({ setShowModal, recipe, order }) {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className='create-picture-div'>
+            <form className='create-picture-form' onSubmit={handleSubmit}>
                 <div>
                     <label>Picture</label>
                     <input

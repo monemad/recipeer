@@ -1,5 +1,6 @@
 .feedback-div {
     display: flex;
+    margin-bottom: 1.5em;
 }
 
 .user-comment-img {
@@ -7,4 +8,35 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
+}
+
+.feedback {
+    margin-left: 0.7em;
+}
+
+.feedback-author {
+    margin: 0.2em 0 0;
+    font-weight: bold;
+}
+
+.feedback-content {
+    margin: 0;
+}
+
+.create-feedback-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 2em;
+}
+
+.create-feedback-form div {
+    width: 100%;
+}
+
+textarea {
+    width: 80%;
+    height: 5em;
+    padding: 0.25em 0.5em;
+    resize: none;
 }
