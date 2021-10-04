@@ -96,6 +96,7 @@ function EditRecipeForm({ setShowModal, recipe }) {
                         value={title}
                         onChange={updateTitle}
                         required
+                        maxLength={100}
                     />
                 </div>
                 <div>
@@ -159,7 +160,7 @@ function EditRecipeForm({ setShowModal, recipe }) {
                 </div>
                 <div className='form-buttons'>
                     <button>Update</button>
-                    <button type='button' onClick={e => setShowModal(false)}>Cancel</button>
+                    <button className='cancel-btn' type='button' onClick={e => setShowModal(false)}>Cancel</button>
                     <ConfirmDeleteRecipeModal recipeId={recipe.id} />
                 </div>
             </form>

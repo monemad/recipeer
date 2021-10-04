@@ -44,6 +44,7 @@ const LoginForm = ({ setShowModal }) => {
                     placeholder='Email'
                     value={email}
                     onChange={updateEmail}
+                    maxLength={255}
                 />
                 <div className='errors'>
                     {emailErrors.map((error, ind) => (
@@ -58,6 +59,7 @@ const LoginForm = ({ setShowModal }) => {
                     placeholder='Password'
                     value={password}
                     onChange={updatePassword}
+                    maxLength={50}
                 />
                 <div className='errors'>
                     {passwordErrors.map((error, ind) => (

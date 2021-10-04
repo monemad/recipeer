@@ -35,8 +35,12 @@ body {
 }
 
 .header {
-    width: 100%;
+    width: fit-content;
     font-family: 'Reenie Beanie', cursive;
+}
+
+h2.header {
+    font-size: 2.5em;
 }
 
 nav {
@@ -105,17 +109,30 @@ footer * {
     border-radius: 50%;
 }
 
+a {
+    text-decoration: none;
+}
+
 button {
-    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+button {
+    border: 2px solid var(--primary-color);
     width: fit-content;
-    min-height: 1.7em;
     height: fit-content;
     font-family: 'Martel', serif;
     font-size: 0.9em;
     font-weight: bold;
     background-color: var(--primary-color);
     color: var(--bg-color);
-    cursor: pointer;
+}
+
+button.cancel-btn, button.delete-btn {
+    border: 2px solid var(--primary-color);
+    background-color: var(--bg-color);
+    color: var(--primary-color);
 }
 
 form {
@@ -153,6 +170,16 @@ form .errors {
     padding-left: 1em;
 }
 
+.form-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.form-buttons * {
+    margin: 0 0.25em;
+}
+
 .splash {
     position: absolute;
     top: 0px;
@@ -181,7 +208,6 @@ form .errors {
     user-select: none;
     /* text-shadow: rgb(254, 251, 234) 1px 0px 0px, rgb(254, 251, 234) 0.540302px 0.841471px 0px, rgb(254, 251, 234) -0.416147px 0.909297px 0px, rgb(254, 251, 234) -0.989992px 0.14112px 0px, rgb(254, 251, 234) -0.653644px -0.756802px 0px, rgb(254, 251, 234) 0.283662px -0.958924px 0px, rgb(254, 251, 234) 0.96017px -0.279415px 0px; */
 }
-
 
 .splash > .share-recipes {
     position: inherit;

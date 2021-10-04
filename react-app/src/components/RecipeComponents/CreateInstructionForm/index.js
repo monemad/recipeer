@@ -31,10 +31,13 @@ function CreateInstructionForm({ setShowModal, recipe }) {
                         value={step}
                         onChange={updateStep}
                         required
+                        maxLength={500}
                     />
                 </div>
-                <button>Add Instruction</button>
-                <button type='button' onClick={e => setShowModal(false)}>Cancel</button>
+                <div className='form-buttons'>
+                    <button>Add Instruction</button>
+                    <button className='cancel-btn' type='button' onClick={e => setShowModal(false)}>Cancel</button>
+                </div>
             </form>
         </div>
     )

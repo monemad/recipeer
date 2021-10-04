@@ -7,7 +7,7 @@ function ConfirmDeleteRecipeModal({ recipeId }) {
 
     return (
         <>
-        <button type='button' onClick={() => setShowModal(true)}>Delete Recipe</button>
+        <button className='delete-btn' type='button' onClick={() => setShowModal(true)}>Delete Recipe</button>
         {showModal && (
             <Modal onClose={() => setShowModal(false)} className="confirm-delete-modal">
                 <ConfirmDeleteRecipe setShowModal={setShowModal} recipeId={recipeId}/>

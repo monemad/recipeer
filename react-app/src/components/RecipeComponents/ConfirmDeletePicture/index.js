@@ -11,9 +11,9 @@ function ConfirmDeletePicture({ setShowModal, pictureId }) {
     }
 
     return (
-        <div className='confirm-delete-div'>
+        <div className='form-buttons'>
             <button onClick={handleDelete}>Delete picture?</button>
-            <button onClick={e => setShowModal(false)}>Cancel</button>
+            <button className='cancel-btn' onClick={e => setShowModal(false)}>Cancel</button>
         </div>
     )
 }
