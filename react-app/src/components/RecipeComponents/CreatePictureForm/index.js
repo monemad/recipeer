@@ -32,6 +32,7 @@ function CreatePictureForm({ setShowModal, recipe, order }) {
                         type='file'
                         name={`recipeImg${order}`}
                         onChange={updatePicture}
+                        required
                     />
                 </div>
                 <div className='form-buttons'>
