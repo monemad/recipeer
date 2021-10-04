@@ -312,12 +312,13 @@ div.instruction-picture-div {
 
 @media screen and (max-width: 1250px) {
     .recipe-ingredients-container {
-        position: unset;
+        position: initial;
         width: 100%;
         min-height: fit-content;
+        height: fit-content;
+        max-height: fit-content;
         transform: translate(0%);
         border: none;
-        overflow-y: hidden;
         background-color: transparent;
     }
 }

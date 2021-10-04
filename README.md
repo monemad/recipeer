@@ -55,7 +55,7 @@ flask seed all
 flask run
 ```
 
-6. In the `/reactapp/` directory, install the npm dependencies and start the backend server
+6. In the `/react-app/` directory, install the npm dependencies and start the backend server
 
 ```bash
 npm install
