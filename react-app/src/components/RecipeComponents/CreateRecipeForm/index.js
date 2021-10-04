@@ -235,6 +235,7 @@ function CreateRecipeForm({ setShowModal, triggerRender, setTriggerRender }) {
                             value={title}
                             onChange={updateTitle}
                             required
+                            maxLength={100}
                         />
                     </div>
                     <div>
@@ -301,6 +302,7 @@ function CreateRecipeForm({ setShowModal, triggerRender, setTriggerRender }) {
                                     value={ing}
                                     onChange={updateRecipeIngredient}
                                     required
+                                    maxLength={100}
                                 />
                                 {ingredients.length > 1 && <button value={idx} type='button' onClick={removeRecipeIngredient}>Remove</button>}
                             </div>
@@ -321,6 +323,7 @@ function CreateRecipeForm({ setShowModal, triggerRender, setTriggerRender }) {
                                     value={step}
                                     onChange={updateStep}
                                     required
+                                    maxLength={500}
                                 />
                                 {steps.length > 1 && <button value={idx} type='button' onClick={removeStep}>Remove Step</button>}
                             </div>
@@ -375,7 +378,10 @@ function CreateRecipeForm({ setShowModal, triggerRender, setTriggerRender }) {
                         </div>
                     </div>
                 </div>
-                <button>Submit</button>
+                <div className='form-buttons'>
+                    <button>Submit</button>
+                    <button className='cancel-btn' type='button' onClick={e => setShowModal(false)}>Cancel</button>
+                </div>
             </form>
         </div>
     )

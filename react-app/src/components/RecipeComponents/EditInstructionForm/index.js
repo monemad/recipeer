@@ -29,10 +29,13 @@ function EditInstructionForm({ setShowModal, instruction }) {
                         value={step}
                         onChange={updateStep}
                         required
+                        maxLength={500}
                     />
                 </div>
-                <button>Edit</button>
-                <button type='button' onClick={e => setShowModal(false)}>Cancel</button>
+                <div className='form-buttons'>
+                    <button>Edit</button>
+                    <button className='cancel-btn' type='button' onClick={e => setShowModal(false)}>Cancel</button>
+                </div>
             </form>
             <ConfirmDeleteInstructionModal instructionId={instruction.id} />
         </div>

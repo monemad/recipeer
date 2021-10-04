@@ -72,6 +72,7 @@ const EditUserForm = ({ setShowModal }) => {
                     name='first_name'
                     onChange={updateFirstName}
                     value={firstName}
+                    maxLength={50}
                 />
                 <div className='errors'>
                     {firstNameErrors.map((error, ind) => (
@@ -86,6 +87,7 @@ const EditUserForm = ({ setShowModal }) => {
                     name='last_name'
                     onChange={updateLastName}
                     value={lastName}
+                    maxLength={50}
                 />
                 <div className='errors'>
                     {lastNameErrors.map((error, ind) => (
@@ -100,6 +102,7 @@ const EditUserForm = ({ setShowModal }) => {
                     name='username'
                     onChange={updateUsername}
                     value={username}
+                    maxLength={40}
                 />
                 <div className='errors'>
                     {usernameErrors.map((error, ind) => (
@@ -114,6 +117,7 @@ const EditUserForm = ({ setShowModal }) => {
                     name='password'
                     onChange={updatePassword}
                     value={password}
+                    maxLength={50}
                 />
                 <div className='errors'>
                     {passwordErrors.map((error, ind) => (
@@ -128,6 +132,7 @@ const EditUserForm = ({ setShowModal }) => {
                     name='repeat_password'
                     onChange={updateRepeatPassword}
                     value={repeatPassword}
+                    maxLength={50}
                 />
             </div>
 			<div>
@@ -139,7 +144,10 @@ const EditUserForm = ({ setShowModal }) => {
                 required={false}
                 ></input>
             </div>
-            <button type='submit'>Confirm</button>
+            <div className='form-buttons'>
+                    <button>Edit</button>
+                    <button className='cancel-btn' type='button' onClick={e => setShowModal(false)}>Cancel</button>
+                </div>
         </form>
     );
 };

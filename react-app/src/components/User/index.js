@@ -46,12 +46,12 @@ function User({profile = false}) {
                 }
             </div>
             <h2 className='header'>Recipes</h2>
+            { profile && <CreateRecipeFormModal triggerRender={triggerRender} setTriggerRender={setTriggerRender}/>}
             <div className='recipe-cards'>
                 {userRecipes?.map(recipe => 
                     <RecipeCard key={recipe.id} recipe={recipe} />
                 )}
             </div>
-            { profile && <CreateRecipeFormModal triggerRender={triggerRender} setTriggerRender={setTriggerRender}/>}
         </>
     );
 }

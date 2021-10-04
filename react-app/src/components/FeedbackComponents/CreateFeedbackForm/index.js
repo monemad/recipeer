@@ -30,6 +30,7 @@ function CreateFeedbackForm({ recipe, sessionUser }) {
                     value={content}
                     onChange={updateContent}
                     required
+                    maxLength={500}
                     />
                 </div>
                 <button>Post Feedback</button>

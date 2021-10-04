@@ -7,7 +7,7 @@ function EditRecipeFormModal({ recipe }) {
 
     return (
         <>
-        <button onClick={() => setShowModal(true)}>Edit Details</button>
+        <button onClick={() => setShowModal(true)}>Edit/Delete Recipe</button>
         {showModal && (
             <Modal onClose={() => setShowModal(false)} className="create-recipe-form-modal">
                 <EditRecipeForm setShowModal={setShowModal} recipe={recipe}/>

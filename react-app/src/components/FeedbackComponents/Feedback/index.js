@@ -8,7 +8,7 @@ function Feedback({ recipe, users, sessionUser }) {
 
     return (
         <div className='feedback-section-div'>
-            <h2>Recipe Feedback</h2>
+            <h2 className='header'>Recipe Feedback</h2>
             { sessionUser && <CreateFeedbackForm recipe={recipe} sessionUser={sessionUser} />}
             {recipe.feedback.map(fb => 
                 <div className='feedback-div' key={fb.id}>
@@ -19,7 +19,7 @@ function Feedback({ recipe, users, sessionUser }) {
                         <Link to={`/users/${fb.userId}`}><p className='feedback-author'>{users[fb.userId].firstName}</p></Link>
                         <p className='feedback-content'>{fb.content}</p>
                         { sessionUser?.id === fb.userId && 
-                            <div>
+                            <div className='feedback-buttons'>
                                 <EditFeedbackFormModal feedback={fb}/>
                                 <ConfirmDeleteFeedbackModal feedbackId={fb.id}/>
                             </div>

@@ -83,6 +83,7 @@ const SignUpForm = ({ setShowModal }) => {
                     placeholder='First Name'
                     onChange={updateFirstName}
                     value={firstName}
+                    maxLength={50}
                 />
                 <div className='errors'>
                     {firstNameErrors.map((error, ind) => (
@@ -97,6 +98,7 @@ const SignUpForm = ({ setShowModal }) => {
                     placeholder='Last Name'
                     onChange={updateLastName}
                     value={lastName}
+                    maxLength={50}
                 />
                 <div className='errors'>
                     {lastNameErrors.map((error, ind) => (
@@ -111,6 +113,7 @@ const SignUpForm = ({ setShowModal }) => {
                     placeholder='Username'
                     onChange={updateUsername}
                     value={username}
+                    maxLength={40}
                 />
                 <div className='errors'>
                     {usernameErrors.map((error, ind) => (
@@ -125,6 +128,7 @@ const SignUpForm = ({ setShowModal }) => {
                     placeholder='Email'
                     onChange={updateEmail}
                     value={email}
+                    maxLength={255}
                 />
                 <div className='errors'>
                     {emailErrors.map((error, ind) => (
@@ -139,6 +143,7 @@ const SignUpForm = ({ setShowModal }) => {
                     placeholder='Password'
                     onChange={updatePassword}
                     value={password}
+                    maxLength={50}
                 />
                 <div className='errors'>
                     {passwordErrors.map((error, ind) => (
@@ -154,6 +159,7 @@ const SignUpForm = ({ setShowModal }) => {
                     onChange={updateRepeatPassword}
                     value={repeatPassword}
                     required={true}
+                    maxLength={50}
                 />
             </div>
 			<div>

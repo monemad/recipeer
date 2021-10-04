@@ -32,10 +32,13 @@ function CreatePictureForm({ setShowModal, recipe, order }) {
                         type='file'
                         name={`recipeImg${order}`}
                         onChange={updatePicture}
+                        required
                     />
                 </div>
-                <button>Upload Picture</button>
-                <button type='button' onClick={e => setShowModal(false)}>Cancel</button>
+                <div className='form-buttons'>
+                    <button>Upload Picture</button>
+                    <button className='cancel-btn' type='button' onClick={e => setShowModal(false)}>Cancel</button>
+                </div>
             </form>
         </div>
     )

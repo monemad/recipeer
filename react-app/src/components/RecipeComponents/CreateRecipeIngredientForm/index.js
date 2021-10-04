@@ -74,9 +74,13 @@ function CreateRecipeIngredientForm({ setShowModal, recipe }) {
                         value={ingredient}
                         onChange={updateRecipeIngredient}
                         required
+                        maxLength={100}
                     />
                 </div>
-                <button>Add</button>
+                <div className='form-buttons'>
+                    <button>Add</button>
+                    <button className='cancel-btn' type='button' onClick={e => setShowModal(false)}>Cancel</button>
+                </div>
             </form>
         </div>
     )

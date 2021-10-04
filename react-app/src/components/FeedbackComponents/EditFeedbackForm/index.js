@@ -28,10 +28,13 @@ function EditFeedbackForm({ setShowModal, feedback }) {
                         value={content}
                         onChange={updateContent}
                         required
+                        maxLength={500}
                     />
                 </div>
-                <button>Edit Feedback</button>
-                <button type='button' onClick={e => setShowModal(false)}>Cancel</button>
+                <div className='form-buttons'>
+                    <button>Edit</button>
+                    <button className='cancel-btn' type='button' onClick={e => setShowModal(false)}>Cancel</button>
+                </div>
             </form>
         </div>
     )
