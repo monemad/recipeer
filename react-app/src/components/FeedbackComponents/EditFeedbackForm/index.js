@@ -21,8 +21,8 @@ function EditFeedbackForm({ setShowModal, feedback }) {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className='edit-feedback-div'>
+            <form className='edit-feedback-form' onSubmit={handleSubmit}>
                 <div>
                     <textarea
                         value={content}

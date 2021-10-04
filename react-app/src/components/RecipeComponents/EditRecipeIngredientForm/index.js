@@ -48,11 +48,11 @@ function EditRecipeIngredientForm({ setShowModal, recipeIngredient }) {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <div>
+        <div className='edit-recipe-ingredient-div'>
+            <form className='edit-recipe-ingredient-form' onSubmit={handleSubmit}>
+                <div className='input-recipe-ingredient-div'>
                     <input
-                        className={'quantity'}
+                        className='quantity'
                         type='number'
                         step='any'
                         min='0'
@@ -69,7 +69,7 @@ function EditRecipeIngredientForm({ setShowModal, recipeIngredient }) {
                         {unitOptions}
                     </select>    
                     <input
-                        className={'ingredient'}
+                        className='ingredient'
                         type='text'
                         value={ingredient}
                         onChange={updateRecipeIngredient}

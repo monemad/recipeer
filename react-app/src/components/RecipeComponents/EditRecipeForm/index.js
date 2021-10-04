@@ -87,8 +87,8 @@ function EditRecipeForm({ setShowModal, recipe }) {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className='edit-recipe-div'>
+            <form className='edit-recipe-form' onSubmit={handleSubmit}>
                 <div>
                     <label>Recipe Title: </label>
                     <input
@@ -121,40 +121,48 @@ function EditRecipeForm({ setShowModal, recipe }) {
                         required
                     />
                 </div>
-                <div className='recipe-attributes'>
-                    <h3>Attributes</h3>
-                    {attributesArray.map((attr, idx) =>
-                        <div key={attr.id}>
-                            <label>{attr.name}</label>
-                            <input
-                                id={idx}
-                                className='attribute'
-                                type='checkbox'
-                                checked={attributes[idx]}
-                                onChange={updateTag}
-                            />
+                <div className='recipe-checkboxes'>
+                    <div className='recipe-attributes'>
+                        <h3>Attributes</h3>
+                        <div className='checkboxes'>
+                            {attributesArray.map((attr, idx) =>
+                                <div key={attr.id}>
+                                    <label>{attr.name}</label>
+                                    <input
+                                        id={idx}
+                                        className='attribute'
+                                        type='checkbox'
+                                        checked={attributes[idx]}
+                                        onChange={updateTag}
+                                    />
+                                </div>
+                            )}
                         </div>
-                    )}
-                </div>
-                <div className='recipe-types'>
-                    <h3>Types</h3>
-                    {typesArray.map((type, idx) =>
-                        <div key={type.id}>
-                            <label>{type.name}</label>
-                            <input
-                                id={idx}
-                                className='type'
-                                type='checkbox'
-                                checked={types[idx]}
-                                onChange={updateTag}
-                            />
+                    </div>
+                    <div className='recipe-types'>
+                        <h3>Types</h3>
+                        <div className='checkboxes'>
+                            {typesArray.map((type, idx) =>
+                                <div key={type.id}>
+                                    <label>{type.name}</label>
+                                    <input
+                                        id={idx}
+                                        className='type'
+                                        type='checkbox'
+                                        checked={types[idx]}
+                                        onChange={updateTag}
+                                    />
+                                </div>
+                            )}
                         </div>
-                    )}
+                    </div>
                 </div>
-                <button>Update</button>
-                <button type='button' onClick={e => setShowModal(false)}>Cancel</button>
+                <div className='form-buttons'>
+                    <button>Update</button>
+                    <button type='button' onClick={e => setShowModal(false)}>Cancel</button>
+                    <ConfirmDeleteRecipeModal recipeId={recipe.id} />
+                </div>
             </form>
-            <ConfirmDeleteRecipeModal recipeId={recipe.id} />
         </div>
     )
 }

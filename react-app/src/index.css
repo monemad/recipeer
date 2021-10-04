@@ -65,14 +65,13 @@ nav a:visited {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 25%;
+    padding: 0 25% 3em;
     position: absolute;
     top: var(--navbar-height);
     width: 100%;
     height: var(--content-height);
     overflow-y: auto;
     background-color: var(--bg-color);
-    /* text-align: center; */
 }
 
 #content > div {
@@ -109,9 +108,10 @@ footer * {
 button {
     border: none;
     width: fit-content;
-    height: 1.7em;
-    font-family: 'Reenie Beanie', cursive;
-    font-size: 1.3em;
+    min-height: 1.7em;
+    height: fit-content;
+    font-family: 'Martel', serif;
+    font-size: 0.9em;
     font-weight: bold;
     background-color: var(--primary-color);
     color: var(--bg-color);
@@ -139,6 +139,10 @@ form input:not(.upload-img) {
     background-color: transparent;
     border-bottom: 1px solid var(--primary-color);
     margin-bottom: 0.7em;
+}
+
+form select {
+    height: 2em;
 }
 
 form .errors {

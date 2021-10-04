@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, Link, Redirect } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 import EditUserFormModal from '../modals/EditUserFormModal';
 import CreateRecipeFormModal from '../modals/CreateRecipeFormModal';
 import { authenticate } from '../../store/session';
@@ -48,7 +48,6 @@ function User({profile = false}) {
             <h2 className='header'>Recipes</h2>
             <div className='recipe-cards'>
                 {userRecipes?.map(recipe => 
-                    // <div key={recipe.id}><Link to={`/recipes/${recipe.id}`}>{recipe.title}</Link></div>
                     <RecipeCard key={recipe.id} recipe={recipe} />
                 )}
             </div>

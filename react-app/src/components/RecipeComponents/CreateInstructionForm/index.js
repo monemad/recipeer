@@ -24,9 +24,9 @@ function CreateInstructionForm({ setShowModal, recipe }) {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <div>
+        <div className='create-instruction-div'>
+            <form className='create-instruction-form' onSubmit={handleSubmit}>
+                <div className='input-instruction-div'>
                     <textarea
                         value={step}
                         onChange={updateStep}

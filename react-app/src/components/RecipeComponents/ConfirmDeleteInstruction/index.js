@@ -11,7 +11,7 @@ function ConfirmDeleteInstruction({ setShowModal, instructionId }) {
     }
 
     return (
-        <div>
+        <div className='confirm-delete-div'>
             <button onClick={handleDelete}>Delete instruction?</button>
             <button onClick={e => setShowModal(false)}>Cancel</button>
         </div>

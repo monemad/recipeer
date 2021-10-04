@@ -11,7 +11,7 @@ function ConfirmDeleteRecipeIngredient({ setShowModal, recipeIngredientId }) {
     }
 
     return (
-        <div>
+        <div className='confirm-delete-div'>
             <button onClick={handleDelete}>Delete ingredient?</button>
             <button onClick={e => setShowModal(false)}>Cancel</button>
         </div>

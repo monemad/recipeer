@@ -11,7 +11,7 @@ function ConfirmDeleteFeedback({ setShowModal, feedbackId }) {
     }
 
     return (
-        <div>
+        <div className='confirm-delete-div'>
             <button onClick={handleDelete}>Delete feedback?</button>
             <button onClick={e => setShowModal(false)}>Cancel</button>
         </div>
