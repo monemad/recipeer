@@ -25,7 +25,7 @@ function Home({ authenticated }) {
     return (
         authenticated ? 
         <>
-            <h1 className='header'>Best of Recipeer</h1>
+            <h1 className='header home'>Best of Recipeer</h1>
             <div className='recipe-cards'>
                 {bestRecipes.map(recipe =>
                     <RecipeCard key={recipe.id} recipe={recipe} />    

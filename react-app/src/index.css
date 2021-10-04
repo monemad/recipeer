@@ -229,6 +229,15 @@ img {
     margin: 0 auto;
 }
 
+.home.header {
+    font-size: 3em;
+    margin-top: 1em;
+}
+
+.profile-img:not(.nav-profile-img) {
+    margin-top: 3em;
+}
+
 @media screen and (max-width: 1250px) {
     #content {
         padding: 0 5% 2em;
