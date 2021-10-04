@@ -41,7 +41,7 @@ const LoginForm = ({ setShowModal }) => {
                 <input
                     name='email'
                     type='text'
-                    placeholder='Email'
+                    placeholder='Email/Username'
                     value={email}
                     onChange={updateEmail}
                     maxLength={255}
