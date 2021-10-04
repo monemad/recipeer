@@ -46,7 +46,13 @@ nav * {
 }
 
 .welcome {
-    font-size: 50px;
+    font-size: 35px;
+}
+
+@media screen and (max-width: 2100px) {
+    .welcome {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 1200px) {
@@ -61,15 +67,5 @@ nav * {
 
     .nav-auth button {
         font-size: 30px;
-    }
-
-    .welcome {
-        font-size: 30px;
-    }
-}
-
-@media screen and (max-width: 700px) {
-    .welcome {
-        display: none;
     }
 }
