@@ -7,9 +7,10 @@
 - [Functionality](#functionality)
 - [Future Goals](#future-goals)
 
+Check it out [here](https://the-real-recipeer.herokuapp.com)!
 <br></br>
 
-# What is Recipeer?
+# What is [Recipeer](https://the-real-recipeer.herokuapp.com)?
 
 Recipeer is a full-stack web application designed to fill the void when it comes to peer-to-peer recipe sharing. I strove to create a website where users can easily share their favorite recipes for others to discover. My inspiration for this app stems from my background as a line cook and passionate home cook. I aim to create an ecosystem of recipes driven by the end-user, rather than an accumulation of recipes curated by site editors. Anyone can create and post a recipe, complete with pictures, for others to discover and enjoy. Recipes are easily accessible, without the trudgery of scrolling past articles and blog posts to view them.
 
