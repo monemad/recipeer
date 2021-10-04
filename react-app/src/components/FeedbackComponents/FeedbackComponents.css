@@ -34,7 +34,11 @@
     margin-bottom: 2em;
 }
 
-.create-feedback-form div {
+.edit-feedback-div {
+    width: 40vw;
+}
+
+.create-feedback-form div, .edit-feedback-form div {
     width: 100%;
 }
 
@@ -43,7 +47,7 @@
 }
 
 textarea {
-    width: 80%;
+    width: 100%;
     height: 5em;
     padding: 0.25em 0.5em;
     resize: none;

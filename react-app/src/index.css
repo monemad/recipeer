@@ -46,7 +46,8 @@ h2.header {
 nav {
     position: fixed;
     display: grid;
-    grid-template-columns: 25% 50% 25%;
+    /* grid-template-columns: 25% 50% 25%; */
+    grid-template-columns: 1fr auto 1fr;
     grid-template-rows: var(--navbar-height);
     text-align: center;
     min-height: var(--navbar-height);
@@ -199,7 +200,7 @@ form .errors {
 }
 
 .splash > span {
-    font-size: 5vw;
+    font-size: 7em;
     font-weight: bold;
     font-family: "Reenie Beanie", cursive;
     color: black;
@@ -226,4 +227,20 @@ form .errors {
 img {
     display: block;
     margin: 0 auto;
+}
+
+@media screen and (max-width: 1250px) {
+    #content {
+        padding: 0 5% 2em;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .splash > span {
+        font-size: 10vw;
+    }
+
+    nav {
+        grid-template-columns: auto 1fr;
+    }
 }

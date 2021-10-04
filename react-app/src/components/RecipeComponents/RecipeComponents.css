@@ -130,14 +130,13 @@
     position: fixed;
     width: 16vw;
     padding: 0 2em 1em;
-    /* top: calc(var(--navbar-height) + 40vh); */
     bottom: calc(var(--footer-height) + 1em);
     min-height: calc(var(--content-height) - 40vh - 1em);
     max-height: calc(var(--content-height) - 2em);
-    border: 1px solid black;
     overflow-y: auto;
     background-color: white;
     border: 2px solid var(--primary-color);
+    transform: translate(-110%);
 }
 
 .recipe-ingredients-container .header {
@@ -147,10 +146,6 @@
 
 .recipe-ingredients-container.hide {
     z-index: -1;
-}
-
-.recipe-ingredients-container {
-    transform: translate(-110%);
 }
 
 .recipe-ingredients {
@@ -313,4 +308,16 @@ div.instruction-picture-div {
 
 .create-instruction-form textarea, .edit-instruction-form textarea {
     width: 100%
+}
+
+@media screen and (max-width: 1250px) {
+    .recipe-ingredients-container {
+        position: unset;
+        width: 100%;
+        min-height: fit-content;
+        transform: translate(0%);
+        border: none;
+        overflow-y: hidden;
+        background-color: transparent;
+    }
 }
