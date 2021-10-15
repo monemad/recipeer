@@ -119,7 +119,7 @@ export const editUser = (firstName, lastName, username, password, imgFile, userI
 
     const response = await fetch('/api/auth/edit', {
         method: 'PUT',
-        body: form,
+        body: form
     });
     
     if (response.ok) {
@@ -133,6 +133,56 @@ export const editUser = (firstName, lastName, username, password, imgFile, userI
         }
     } else {
         return ['An error occurred. Please try again.']
+    }
+}
+
+export const createUserIngredient = (order, multiplier, recipeIngredientId, userId) => async (dispatch) => {
+
+    const form = new FormData()
+    form.append("order", order)
+    form.append("multiplier", multiplier)
+    form.append("recipe_ingredient_id", recipeIngredientId)
+    form.append("user_id", userId)
+
+    const response = await fetch('/api/user-ingredients/', {
+        method: 'POST',
+        body: form
+    })
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setUser(data))
+        return null;
+    }
+}
+
+export const updateUserIngredient = (userIngredientId, multiplier) => async (dispatch) => {
+
+    const form = new FormData()
+    form.append("multiplier", multiplier)
+
+    const response = await fetch(`/api/user-ingredients/${userIngredientId}/`, {
+        method: 'PUT',
+        body: form
+    })
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setUser(data))
+        return null;
+    }
+}
+
+export const deleteUserIngredient = (userIngredientId) => async (dispatch) => {
+
+    const response = await fetch(`/api/user-ingredients/${userIngredientId}/`, {
+        method: 'DELETE'
+    })
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setUser(data))
+        return null;
     }
 }
 

@@ -4,8 +4,15 @@ import CreateRecipeIngredientFormModal from '../../modals/CreateRecipeIngredient
 import EditRecipeIngredientFormModal from '../../modals/EditRecipeIngredientFormModal';
 
 function RecipeIngredients({ recipe, authorized }) {
+    const sessionUser = useSelector(state => state.session.user);
+    const shoppingList = sessionUser?.shoppingList
     const units = useSelector(state => state.units);
     const ingredients = useSelector(state => state.ingredients);
+
+    const addToShoppingList = e => {
+        const recipeId = e.target.id;
+        const multiplier = 1;
+    }
 
     return (
         <>
@@ -15,6 +22,7 @@ function RecipeIngredients({ recipe, authorized }) {
                     {recipe.ingredients.map(ing => 
                         <div key={ing.id} className='recipe-ingredient'>
                             {ing.quantity} {units[ing.unitId].name} {ingredients[ing.ingredientId].name}
+                            <button id={ing.id} onClick={addToShoppingList}>+</button>
                             { authorized && <EditRecipeIngredientFormModal recipeIngredient={ing}/> }
                         </div>
                     )}
