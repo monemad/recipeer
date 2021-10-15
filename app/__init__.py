@@ -14,6 +14,7 @@ from .api.unit_routes import unit_routes
 from .api.type_routes import type_routes
 from .api.attribute_routes import attribute_routes
 from .api.recipe_ingredient_routes import recipe_ingredient_routes
+from .api.user_ingredient_routes import user_ingredient_routes
 from .api.instruction_routes import instruction_routes
 from .api.picture_routes import picture_routes
 from .api.feedback_routes import feedback_routes
@@ -47,6 +48,7 @@ app.register_blueprint(unit_routes, url_prefix='/api/units')
 app.register_blueprint(type_routes, url_prefix='/api/types')
 app.register_blueprint(attribute_routes, url_prefix='/api/attributes')
 app.register_blueprint(recipe_ingredient_routes, url_prefix='/api/recipe-ingredients')
+app.register_blueprint(user_ingredient_routes, url_prefix='/api/user-ingredients')
 app.register_blueprint(instruction_routes, url_prefix='/api/instructions')
 app.register_blueprint(picture_routes, url_prefix='/api/pictures')
 app.register_blueprint(feedback_routes, url_prefix='/api/feedback')
