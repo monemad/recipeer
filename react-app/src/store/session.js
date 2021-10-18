@@ -136,17 +136,19 @@ export const editUser = (firstName, lastName, username, password, imgFile, userI
     }
 }
 
-export const createUserIngredient = (order, multiplier, recipeIngredientId, userId) => async (dispatch) => {
-
-    const form = new FormData()
-    form.append("order", order)
-    form.append("multiplier", multiplier)
-    form.append("recipe_ingredient_id", recipeIngredientId)
-    form.append("user_id", userId)
+export const createUserIngredient = (data) => async (dispatch) => {
 
     const response = await fetch('/api/user-ingredients/', {
         method: 'POST',
-        body: form
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            order: data.order,
+            multiplier: data.multiplier,
+            recipe_ingredient_id: data.recipeIngredientId,
+            user_id: data.userId
+        })
     })
 
     if (response.ok) {
@@ -156,14 +158,16 @@ export const createUserIngredient = (order, multiplier, recipeIngredientId, user
     }
 }
 
-export const updateUserIngredient = (userIngredientId, multiplier) => async (dispatch) => {
+export const updateUserIngredient = (data) => async (dispatch) => {
 
-    const form = new FormData()
-    form.append("multiplier", multiplier)
-
-    const response = await fetch(`/api/user-ingredients/${userIngredientId}/`, {
+    const response = await fetch(`/api/user-ingredients/${data.userIngredientId}/`, {
         method: 'PUT',
-        body: form
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            multiplier: data.multiplier
+        })
     })
 
     if (response.ok) {

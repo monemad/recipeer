@@ -2,6 +2,8 @@ from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
+def sort_by_order(e):
+    return e['order']
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -44,6 +46,7 @@ class User(db.Model, UserMixin):
 
     def to_session_dict(self):
         recipes = [recipe.id for recipe in self.recipes]
+
         shopping_list = [{
             'id': item.id,
             'order': item.order,
@@ -53,6 +56,9 @@ class User(db.Model, UserMixin):
             'unitId': item.recipe_ingredient.unit_id,
             'recipeId': item.recipe_ingredient.recipe_id
         } for item in self.shopping_list]
+
+        shopping_list.sort(key=sort_by_order)
+
         ratings = [{
             'id': rating.id,
             'recipeId': rating.recipe_id,

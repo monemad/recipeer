@@ -1,17 +1,25 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import CreateRecipeIngredientFormModal from '../../modals/CreateRecipeIngredientFormModal';
 import EditRecipeIngredientFormModal from '../../modals/EditRecipeIngredientFormModal';
+import { createUserIngredient } from '../../../store/session';
 
 function RecipeIngredients({ recipe, authorized }) {
+    const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const shoppingList = sessionUser?.shoppingList
     const units = useSelector(state => state.units);
     const ingredients = useSelector(state => state.ingredients);
 
-    const addToShoppingList = e => {
-        const recipeId = e.target.id;
+    const addToShoppingList = async e => {
+        const order = shoppingList[shoppingList.length - 1]?.order + 1
         const multiplier = 1;
+        const recipeIngredientId = +e.target.id;
+        const userId = sessionUser?.id;
+
+        const data = {order, multiplier, recipeIngredientId, userId}
+
+        await dispatch(createUserIngredient(data))
     }
 
     return (
@@ -22,7 +30,7 @@ function RecipeIngredients({ recipe, authorized }) {
                     {recipe.ingredients.map(ing => 
                         <div key={ing.id} className='recipe-ingredient'>
                             {ing.quantity} {units[ing.unitId].name} {ingredients[ing.ingredientId].name}
-                            <button id={ing.id} onClick={addToShoppingList}>+</button>
+                            { !shoppingList?.find(i => i.ingredientId === ing.ingredientId) && <button id={ing.id} onClick={addToShoppingList}>+</button>}
                             { authorized && <EditRecipeIngredientFormModal recipeIngredient={ing}/> }
                         </div>
                     )}
