@@ -14,6 +14,7 @@ nav * {
     align-items: center;
     /* padding-right: 5vw; */
     height: fit-content;
+    grid-area: auth;
 }
 
 .nav-auth button {
@@ -35,10 +36,19 @@ nav * {
     font-size: 50px;
     text-decoration: none;
     margin-left: 5vw;
+    grid-area: home;
+}
+
+.search-link {
+    width: fit-content;
+    font-size: 35px;
+    margin-left: 3vw;
+    grid-area: search;
 }
 
 .logo-link {
     text-decoration: none;
+    grid-area: logo;
 }
 
 .logo {
