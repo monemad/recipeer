@@ -15,6 +15,7 @@ const Search = () => {
     const [typeFilters, setTypeFilters] = useState(Array(types.length).fill(false));
     const [ingredient, setIngredient] = useState('');
     const [ingredientFilters, setIngredientFilters] = useState([]);
+    const [difficulty, setDifficulty] = useState(10);
 
     
     const updateSearchQuery = e => {
@@ -54,7 +55,11 @@ const Search = () => {
     }
 
     const updateIngredient = e => {
-        setIngredient(e.target.value)
+        setIngredient(e.target.value);
+    }
+
+    const updateDifficulty = e => {
+        setDifficulty(e.target.value);
     }
 
     const handleIngredientSubmit = e => {
@@ -147,6 +152,28 @@ const Search = () => {
             </div>
             { showFilters && 
                 <div className='filters-div'>
+                    <div className='slider-filters'>
+                        <div className='rating-filter'>
+                            <input
+                                type='range'>
+                            </input>
+                        </div>
+                        <div className='difficulty-filter'>
+                            <input
+                                type='range'
+                                min='1'
+                                max='2'
+                                step='1'
+                                value={difficulty}
+                                onChange={updateDifficulty}>
+                            </input>
+                        </div>
+                        <div className='cooktime-filter'>
+                            <input
+                                type='range'>
+                            </input>
+                        </div>
+                    </div>
                     <div className='recipe-checkboxes'>
                         <div className='attribute-filters'>
                             {attributes.map((attribute, idx) => 
