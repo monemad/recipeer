@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import NavBar from './components/NavBar';
-import ProtectedRoute from './components/auth/ProtectedRoute';
+import Search from './components/Search';
 import User from './components/User';
 import Recipe from './components/RecipeComponents/Recipe';
 import Footer from './components/Footer';
+import ProtectedRoute from './components/auth/ProtectedRoute';
 import { authenticate } from './store/session';
 import { getUsers } from './store/users';
 import { getRecipes } from './store/recipes';
@@ -44,6 +45,9 @@ function App() {
                 <Switch>
                     <Route exact path='/'>
                         <Home authenticated={sessionUser} />
+                    </Route>
+                    <Route path='/search'>
+                        <Search />
                     </Route>
                     <Route path='/users/:userId'>
                         <User />

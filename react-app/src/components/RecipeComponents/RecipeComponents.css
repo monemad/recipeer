@@ -111,6 +111,11 @@
     flex-wrap: wrap;
 }
 
+.tag-div.start {
+    justify-content: flex-start;
+    cursor: pointer;
+}
+
 .recipe-type-div {
     margin-bottom: 0;
 }

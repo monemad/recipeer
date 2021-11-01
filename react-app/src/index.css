@@ -1,6 +1,7 @@
 @import './components/NavBar/NavBar.css';
 @import './components/RecipeComponents/RecipeComponents.css';
 @import './components/FeedbackComponents/FeedbackComponents.css';
+@import './components/Search/Search.css';
 
 :root {
     --bg-color: #fefbea;
@@ -46,9 +47,10 @@ h2.header {
 nav {
     position: fixed;
     display: grid;
-    /* grid-template-columns: 25% 50% 25%; */
-    grid-template-columns: 1fr auto 1fr;
+    grid-template-columns: 1fr 1fr auto 2fr;
     grid-template-rows: var(--navbar-height);
+    grid-template-areas:
+        "home search logo auth";
     text-align: center;
     min-height: var(--navbar-height);
     height: fit-content;
@@ -251,6 +253,8 @@ img {
     }
 
     nav {
-        grid-template-columns: auto 1fr;
+        grid-template-columns: 1fr auto 2fr;
+        grid-template-areas: 
+            "logo search auth"
     }
 }
