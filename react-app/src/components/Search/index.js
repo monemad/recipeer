@@ -16,6 +16,8 @@ const Search = () => {
     const [ingredient, setIngredient] = useState('');
     const [ingredientFilters, setIngredientFilters] = useState([]);
     const [difficulty, setDifficulty] = useState(10);
+    const [rating, setRating] = useState(0);
+    const [cookTime, setCookTime] = useState(0);
 
     
     const updateSearchQuery = e => {
@@ -30,10 +32,20 @@ const Search = () => {
         setAttributeFilters([...attributeFilters].fill(false));
         setTypeFilters([...typeFilters].fill(false));
         setIngredientFilters([]);
+        setRating(0);
+        setDifficulty(10);
+        setCookTime(0);
     }
     
     const renderResetButton = () => {
-        return attributeFilters.includes(true) || typeFilters.includes(true) || ingredientFilters.length > 0
+        return (
+            attributeFilters.includes(true) || 
+            typeFilters.includes(true) || 
+            ingredientFilters.length > 0 ||
+            rating > 0 ||
+            difficulty < 10 ||
+            cookTime > 0
+        )    
     }
     
     const updateTag = e => {
@@ -60,6 +72,14 @@ const Search = () => {
 
     const updateDifficulty = e => {
         setDifficulty(e.target.value);
+    }
+
+    const updateRating = e => {
+        setRating(e.target.value);
+    }
+
+    const updateCookTime = e => {
+        setCookTime(+e.target.value)
     }
 
     const handleIngredientSubmit = e => {
@@ -93,6 +113,10 @@ const Search = () => {
         let attributeFiltered = [...recipes];
         let typeFiltered = [...recipes];
         let ingredientFiltered = [...recipes];
+        let ratingFiltered = [...recipes];
+        let difficultyFiltered = [...recipes];
+        let cookTimeFiltered = [...recipes];
+        let allFiltered = []
         
         if (searchQuery.length) {
             searchFiltered = recipes.filter(recipe => recipe.title.toLowerCase().includes(searchQuery.toLowerCase()))
@@ -124,10 +148,30 @@ const Search = () => {
                 return true;
             })
         }
-        
-        setFilteredRecipes(findIntersection(searchFiltered, attributeFiltered, typeFiltered, ingredientFiltered));
 
-    }, [searchQuery, attributeFilters, typeFilters, ingredientFilters])
+        ratingFiltered = recipes.filter(recipe => {
+            let recipeRating = 0;
+            if (recipe.ratings.length)
+                recipeRating = recipe.ratings.reduce((accum, rating) => accum + rating.value, 0)/recipe.ratings.length;
+            return recipeRating.toFixed(2) >= rating;
+        })
+
+        difficultyFiltered = recipes.filter(recipe => recipe.difficulty <= difficulty);
+
+        if (cookTime && cookTime < 1000)
+            cookTimeFiltered = recipes.filter(recipe => recipe.cookTime <= cookTime)
+
+        allFiltered.push(searchFiltered);
+        allFiltered.push(attributeFiltered);
+        allFiltered.push(typeFiltered);
+        allFiltered.push(ingredientFiltered);
+        allFiltered.push(ratingFiltered);
+        allFiltered.push(difficultyFiltered);
+        allFiltered.push(cookTimeFiltered);
+        
+        setFilteredRecipes(findIntersection(...allFiltered));
+
+    }, [searchQuery, attributeFilters, typeFilters, ingredientFilters, rating, difficulty, cookTime])
 
     return (
         <>
@@ -155,23 +199,39 @@ const Search = () => {
                     <div className='slider-filters'>
                         <div className='rating-filter'>
                             <input
-                                type='range'>
+                                type='range'
+                                min='0'
+                                max='5'
+                                step='0.5'
+                                value={rating}
+                                onChange={updateRating}>
                             </input>
+                            <span>Min Rating: {rating}</span>
                         </div>
                         <div className='difficulty-filter'>
                             <input
                                 type='range'
                                 min='1'
-                                max='2'
+                                max='10'
                                 step='1'
                                 value={difficulty}
                                 onChange={updateDifficulty}>
                             </input>
+                            <span>Max Difficulty: {difficulty}</span>
                         </div>
                         <div className='cooktime-filter'>
-                            <input
-                                type='range'>
-                            </input>
+                            <select
+                                value={cookTime}
+                                onChange={updateCookTime}>
+                                <option value='0' disabled>Select Max Cook Time</option>
+                                <option value='30'>30 minutes</option>
+                                <option value='60'>1 hour</option>
+                                <option value='120'>2 hours</option>
+                                <option value='180'>3 hours</option>
+                                <option value='240'>4 hours</option>
+                                <option value='300'>5 hours</option>
+                                <option value='1000'>No limit</option>
+                            </select>
                         </div>
                     </div>
                     <div className='recipe-checkboxes'>
