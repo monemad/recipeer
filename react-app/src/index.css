@@ -1,6 +1,7 @@
 @import './components/NavBar/NavBar.css';
 @import './components/RecipeComponents/RecipeComponents.css';
 @import './components/FeedbackComponents/FeedbackComponents.css';
+@import './components/Search/Search.css';
 
 :root {
     --bg-color: #fefbea;

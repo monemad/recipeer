@@ -28,10 +28,11 @@ const Search = () => {
     const resetFilters = _e => {
         setAttributeFilters([...attributeFilters].fill(false));
         setTypeFilters([...typeFilters].fill(false));
+        setIngredientFilters([]);
     }
     
     const renderResetButton = () => {
-        return attributeFilters.includes(true) || typeFilters.includes(true)
+        return attributeFilters.includes(true) || typeFilters.includes(true) || ingredientFilters.length > 0
     }
     
     const updateTag = e => {
@@ -63,6 +64,14 @@ const Search = () => {
         let ingFilterCopy = [...ingredientFilters]
         if (!ingFilterCopy.includes(ing))
             ingFilterCopy.push(ing)
+        setIngredientFilters(ingFilterCopy);
+        setIngredient('');
+    }
+
+    const removeIngredient = e => {
+        const ing = e.target.id;
+        let ingFilterCopy = [...ingredientFilters];
+        ingFilterCopy.splice(ingFilterCopy.indexOf(ing), 1);
         setIngredientFilters(ingFilterCopy);
     }
                 
@@ -103,7 +112,6 @@ const Search = () => {
         if (ingredientFilters.length) {
             ingredientFiltered = recipes.filter(recipe => {
                 let recipeIngredients = recipe.ingredients.map(ing => ingredients[ing.ingredientId].name).join(';');
-                console.log(recipeIngredients)
                 for (let i = 0; i < ingredientFilters.length; i++) {
                     if (!recipeIngredients.includes(ingredientFilters[i]))
                         return false;
@@ -129,12 +137,14 @@ const Search = () => {
                     />
                 </form>
             </div>
-            <button onClick={toggleFilterDropdown}>
-                { showFilters ? 'Hide Filters' : 'Show Filters'}
-            </button>
-            {renderResetButton() && <button onClick={resetFilters}>
-                Reset Filters
-            </button>}
+            <div className='filter-buttons'>
+                <button onClick={toggleFilterDropdown}>
+                    { showFilters ? 'Hide Filters' : 'Show Filters'}
+                </button>
+                {renderResetButton() && <button onClick={resetFilters}>
+                    Reset Filters
+                </button>}
+            </div>
             { showFilters && 
                 <div className='filters-div'>
                     <div className='recipe-checkboxes'>
@@ -178,6 +188,7 @@ const Search = () => {
                                 </div>
                             )}
                         </div>
+                        {ingredientFilters.length ? <p>Click ingredient to remove</p> : <></>}
                         <div className='ingredient-input'>
                             <form onSubmit={handleIngredientSubmit}>
                                 <input
