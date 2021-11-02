@@ -19,7 +19,7 @@ const Search = () => {
     const [rating, setRating] = useState(0);
     const [cookTime, setCookTime] = useState(0);
     const [sortBy, setSortBy] = useState('rating');
-    const [sortOrder, setSortOrder] = useState('des');
+    const [sortOrder, setSortOrder] = useState(-1);
 
     
     const updateSearchQuery = e => {
@@ -89,7 +89,7 @@ const Search = () => {
     }
 
     const toggleSortOrder = _e => {
-        setSortOrder(sortOrder === 'des' ? 'asc' : 'des');
+        setSortOrder(sortOrder * -1);
     }
 
     const handleIngredientSubmit = e => {
@@ -121,31 +121,18 @@ const Search = () => {
     const averageRating = recipe => recipe.ratings.length ? recipe.ratings.reduce((accum, rating) => accum + rating.value, 0)/recipe.ratings.length : 0;
 
     const sort = arr => {
-        const sortMethod = sortBy + '-' + sortOrder
-        switch (sortMethod) {
-            case 'name-asc':
-                arr.sort((a,b) => a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1)
+        switch (sortBy) {
+            case 'name':
+                arr.sort((a,b) => a.title.toLowerCase() < b.title.toLowerCase() ? -sortOrder : sortOrder)
                 break;
-            case 'name-des':
-                arr.sort((a,b) => a.title.toLowerCase() < b.title.toLowerCase() ? 1 : -1)
+            case 'rating':
+                arr.sort((a,b) => averageRating(a) < averageRating(b) ? -sortOrder : sortOrder);
                 break;
-            case 'rating-asc':
-                arr.sort((a,b) => averageRating(a) < averageRating(b) ? -1 : 1);
+            case 'difficulty':
+                arr.sort((a,b) => a.difficulty < b.difficulty ? -sortOrder : sortOrder);
                 break;
-            case 'rating-des':
-                arr.sort((a,b) => averageRating(a) < averageRating(b) ? 1 : -1);
-                break;
-            case 'difficulty-asc':
-                arr.sort((a,b) => a.difficulty < b.difficulty ? -1 : 1);
-                break;
-            case 'difficulty-des':
-                arr.sort((a,b) => a.difficulty < b.difficulty ? 1 : -1);
-                break;
-            case 'cook-time-asc':
-                arr.sort((a,b) => a.cookTime < b.cookTime ? -1 : 1);
-                break;
-            case 'cook-time-des':
-                arr.sort((a,b) => a.cookTime < b.cookTime ? 11 : -1);
+            case 'cook-time':
+                arr.sort((a,b) => a.cookTime < b.cookTime ? -sortOrder : sortOrder);
                 break;
             default:
                 break;
@@ -346,7 +333,7 @@ const Search = () => {
                     <option value='difficulty'>Difficulty</option>
                     <option value='cook-time'>Cook Time</option>
                 </select>
-                { sortOrder === 'asc' ?
+                { sortOrder > 0 ?
                     <i className="fas fa-long-arrow-alt-up" onClick={toggleSortOrder}></i>
                     :
                     <i className="fas fa-long-arrow-alt-down" onClick={toggleSortOrder}></i>
