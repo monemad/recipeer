@@ -201,7 +201,6 @@ const Search = () => {
         let filtered = findIntersection(...allFiltered);
 
         sort(filtered);
-        console.log('in it')
         setFilteredRecipes(filtered);
 
     }, [searchQuery, attributeFilters, typeFilters, ingredientFilters, rating, difficulty, cookTime, sortBy, sortOrder]);
