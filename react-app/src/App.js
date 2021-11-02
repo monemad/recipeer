@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import NavBar from './components/NavBar';
 import Search from './components/Search';
@@ -19,9 +19,17 @@ import Home from './components/Home';
 function App() {
     const [loaded, setLoaded] = useState(false);
     const dispatch = useDispatch();
+    const history = useHistory();
     const sessionUser = useSelector(state => state.session.user)
+    let firstLoad = true;
 
     useEffect(() => {
+        if (firstLoad) {
+            history.listen(() => {
+                document.querySelector('#content').scrollTop = 0;
+            });
+            firstLoad = false;
+        }
         (async() => {
         await dispatch(authenticate());
         await dispatch(getUsers());
