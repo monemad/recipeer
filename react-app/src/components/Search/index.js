@@ -187,7 +187,7 @@ const Search = () => {
 
         difficultyFiltered = recipes.filter(recipe => recipe.difficulty <= difficulty);
 
-        if (cookTime && cookTime < 1000)
+        if (cookTime)
             cookTimeFiltered = recipes.filter(recipe => recipe.cookTime <= cookTime)
 
         allFiltered.push(searchFiltered);
@@ -205,6 +205,27 @@ const Search = () => {
         setFilteredRecipes(filtered);
 
     }, [searchQuery, attributeFilters, typeFilters, ingredientFilters, rating, difficulty, cookTime, sortBy, sortOrder]);
+
+    const formattedCookTime = () => {
+        switch(cookTime) {
+            case 0: 
+                return 'No limit';
+            case 30:
+                return '30 minutes';
+            case 60:
+                return '1 hour';
+            case 120:
+                return '2 hours';
+            case 180:
+                return '3 hours';
+            case 240:
+                return '4 hours';
+            case 300:
+                return '5 hours';
+            default:
+                return;
+        }
+    }
 
     return (
         <>
@@ -256,15 +277,15 @@ const Search = () => {
                             <select
                                 value={cookTime}
                                 onChange={updateCookTime}>
-                                <option value='0' disabled>Select Max Cook Time</option>
+                                <option value='0'>{formattedCookTime()}</option>
                                 <option value='30'>30 minutes</option>
                                 <option value='60'>1 hour</option>
                                 <option value='120'>2 hours</option>
                                 <option value='180'>3 hours</option>
                                 <option value='240'>4 hours</option>
                                 <option value='300'>5 hours</option>
-                                <option value='1000'>No limit</option>
                             </select>
+                            <span>Cook Time: {formattedCookTime()}</span>
                         </div>
                     </div>
                     <div className='recipe-checkboxes'>
@@ -300,16 +321,8 @@ const Search = () => {
                         </div>
                     </div>
                     <div className='include-ingredients'>
-                        <h4>Include Ingredients:</h4>
-                        <div className='included tag-div start'>
-                            {ingredientFilters.map(ing => 
-                                <div key={ing} id={ing} className='tag' onClick={removeIngredient}>
-                                    {ing}
-                                </div>
-                            )}
-                        </div>
-                        {ingredientFilters.length ? <p>Click ingredient to remove</p> : <></>}
                         <div className='ingredient-input'>
+                            <h4>Include Ingredients:</h4>
                             <form onSubmit={handleIngredientSubmit}>
                                 <input
                                     type='text'
@@ -319,6 +332,14 @@ const Search = () => {
                                 </input>
                             </form>
                         </div>
+                        <div className='included tag-div start'>
+                            {ingredientFilters.map(ing => 
+                                <div key={ing} id={ing} className='tag' onClick={removeIngredient}>
+                                    {ing}
+                                </div>
+                            )}
+                        </div>
+                        {ingredientFilters.length ? <p>Click ingredient to remove</p> : <></>}
                     </div>
                 </div>
             }
@@ -334,9 +355,9 @@ const Search = () => {
                     <option value='cook-time'>Cook Time</option>
                 </select>
                 { sortOrder > 0 ?
-                    <i className="fas fa-long-arrow-alt-up" onClick={toggleSortOrder}></i>
+                    <i className="fas fa-long-arrow-alt-up sort-order" onClick={toggleSortOrder}></i>
                     :
-                    <i className="fas fa-long-arrow-alt-down" onClick={toggleSortOrder}></i>
+                    <i className="fas fa-long-arrow-alt-down sort-order" onClick={toggleSortOrder}></i>
                 }
             </div>
             <div className='search-results recipe-cards'>
