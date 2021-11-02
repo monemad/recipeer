@@ -18,6 +18,8 @@ const Search = () => {
     const [difficulty, setDifficulty] = useState(10);
     const [rating, setRating] = useState(0);
     const [cookTime, setCookTime] = useState(0);
+    const [sortBy, setSortBy] = useState('rating');
+    const [sortOrder, setSortOrder] = useState('des');
 
     
     const updateSearchQuery = e => {
@@ -79,16 +81,24 @@ const Search = () => {
     }
 
     const updateCookTime = e => {
-        setCookTime(+e.target.value)
+        setCookTime(+e.target.value);
+    }
+
+    const updateSortBy = e => {
+        setSortBy(e.target.value);
+    }
+
+    const toggleSortOrder = _e => {
+        setSortOrder(sortOrder === 'des' ? 'asc' : 'des');
     }
 
     const handleIngredientSubmit = e => {
         e.preventDefault();
         const ing = ingredient.toLowerCase();
         if (!ing.length) return;
-        let ingFilterCopy = [...ingredientFilters]
+        let ingFilterCopy = [...ingredientFilters];
         if (!ingFilterCopy.includes(ing))
-            ingFilterCopy.push(ing)
+            ingFilterCopy.push(ing);
         setIngredientFilters(ingFilterCopy);
         setIngredient('');
     }
@@ -103,9 +113,43 @@ const Search = () => {
     const findIntersection = (...filtered) => {
         let intersection = [...filtered[0]];
         for (let i = 1; i < filtered.length; i++) {
-            intersection = intersection.filter(ele => filtered[i].includes(ele))
+            intersection = intersection.filter(ele => filtered[i].includes(ele));
         }
         return intersection;
+    }
+
+    const averageRating = recipe => recipe.ratings.length ? recipe.ratings.reduce((accum, rating) => accum + rating.value, 0)/recipe.ratings.length : 0;
+
+    const sort = arr => {
+        const sortMethod = sortBy + '-' + sortOrder
+        switch (sortMethod) {
+            case 'name-asc':
+                arr.sort((a,b) => a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1)
+                break;
+            case 'name-des':
+                arr.sort((a,b) => a.title.toLowerCase() < b.title.toLowerCase() ? 1 : -1)
+                break;
+            case 'rating-asc':
+                arr.sort((a,b) => averageRating(a) < averageRating(b) ? -1 : 1);
+                break;
+            case 'rating-des':
+                arr.sort((a,b) => averageRating(a) < averageRating(b) ? 1 : -1);
+                break;
+            case 'difficulty-asc':
+                arr.sort((a,b) => a.difficulty < b.difficulty ? -1 : 1);
+                break;
+            case 'difficulty-des':
+                arr.sort((a,b) => a.difficulty < b.difficulty ? 1 : -1);
+                break;
+            case 'cook-time-asc':
+                arr.sort((a,b) => a.cookTime < b.cookTime ? -1 : 1);
+                break;
+            case 'cook-time-des':
+                arr.sort((a,b) => a.cookTime < b.cookTime ? 11 : -1);
+                break;
+            default:
+                break;
+        }
     }
 
     useEffect(() => {
@@ -116,7 +160,7 @@ const Search = () => {
         let ratingFiltered = [...recipes];
         let difficultyFiltered = [...recipes];
         let cookTimeFiltered = [...recipes];
-        let allFiltered = []
+        let allFiltered = [];
         
         if (searchQuery.length) {
             searchFiltered = recipes.filter(recipe => recipe.title.toLowerCase().includes(searchQuery.toLowerCase()))
@@ -150,9 +194,7 @@ const Search = () => {
         }
 
         ratingFiltered = recipes.filter(recipe => {
-            let recipeRating = 0;
-            if (recipe.ratings.length)
-                recipeRating = recipe.ratings.reduce((accum, rating) => accum + rating.value, 0)/recipe.ratings.length;
+            let recipeRating = averageRating(recipe);
             return recipeRating.toFixed(2) >= rating;
         })
 
@@ -168,10 +210,14 @@ const Search = () => {
         allFiltered.push(ratingFiltered);
         allFiltered.push(difficultyFiltered);
         allFiltered.push(cookTimeFiltered);
-        
-        setFilteredRecipes(findIntersection(...allFiltered));
 
-    }, [searchQuery, attributeFilters, typeFilters, ingredientFilters, rating, difficulty, cookTime])
+        let filtered = findIntersection(...allFiltered);
+
+        sort(filtered);
+        console.log('in it')
+        setFilteredRecipes(filtered);
+
+    }, [searchQuery, attributeFilters, typeFilters, ingredientFilters, rating, difficulty, cookTime, sortBy, sortOrder]);
 
     return (
         <>
@@ -289,6 +335,23 @@ const Search = () => {
                     </div>
                 </div>
             }
+            <div className='sort-dropdown'>
+                <label htmlFor='sort-by'>Sort By:</label>
+                <select
+                    value={sortBy}
+                    onChange={updateSortBy}
+                    name='sort-by'>
+                    <option value='rating'>Rating</option>
+                    <option value='name'>Name</option>
+                    <option value='difficulty'>Difficulty</option>
+                    <option value='cook-time'>Cook Time</option>
+                </select>
+                { sortOrder === 'asc' ?
+                    <i className="fas fa-long-arrow-alt-up" onClick={toggleSortOrder}></i>
+                    :
+                    <i className="fas fa-long-arrow-alt-down" onClick={toggleSortOrder}></i>
+                }
+            </div>
             <div className='search-results recipe-cards'>
                 {filteredRecipes.map(recipe => <RecipeCard key={recipe.id} recipe={recipe}/>)}
             </div>
