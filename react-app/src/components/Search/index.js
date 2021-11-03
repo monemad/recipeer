@@ -276,7 +276,7 @@ const Search = () => {
                             <select
                                 value={cookTime}
                                 onChange={updateCookTime}>
-                                <option value='0'>{formattedCookTime()}</option>
+                                <option value='0'>No Limit</option>
                                 <option value='30'>30 minutes</option>
                                 <option value='60'>1 hour</option>
                                 <option value='120'>2 hours</option>
