@@ -12,13 +12,13 @@ function RecipeIngredients({ recipe, authorized }) {
     const ingredients = useSelector(state => state.ingredients);
 
     const addToShoppingList = async e => {
-        const order = shoppingList[shoppingList.length - 1]?.order + 1
+        console.log(shoppingList);
+        const order = shoppingList.length ? shoppingList[shoppingList.length - 1]?.order + 1 : 1
         const multiplier = 1;
         const recipeIngredientId = +e.target.id;
         const userId = sessionUser?.id;
 
         const data = {order, multiplier, recipeIngredientId, userId}
-
         await dispatch(createUserIngredient(data))
     }
 
