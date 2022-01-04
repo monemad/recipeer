@@ -14,9 +14,9 @@ const NavBar = ({ sessionUser }) => {
             <NavLink to='/' exact={true} className='home-link'>
                 Home
             </NavLink>
-            {/* <NavLink to='/' exact={true} activeClassName='active'>
-                Search
-            </NavLink> */}
+            <NavLink to='/search' exact={true} className='search-link' activeClassName='active'>
+                <i className="fas fa-search"></i>
+            </NavLink>
 
             <Link to='/' className='logo-link'><h2 className='logo'>Recipeer</h2></Link>
 
