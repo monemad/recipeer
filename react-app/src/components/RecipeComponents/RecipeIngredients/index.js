@@ -8,11 +8,12 @@ function RecipeIngredients({ recipe, authorized }) {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const shoppingList = sessionUser?.shoppingList
+    shoppingList?.sort((a,b) => a.order - b.order)
+    console.log(shoppingList)
     const units = useSelector(state => state.units);
     const ingredients = useSelector(state => state.ingredients);
 
     const addToShoppingList = async e => {
-        console.log(shoppingList);
         const order = shoppingList.length ? shoppingList[shoppingList.length - 1]?.order + 1 : 1
         const multiplier = 1;
         const recipeIngredientId = +e.target.id;
@@ -30,7 +31,7 @@ function RecipeIngredients({ recipe, authorized }) {
                     {recipe.ingredients.map(ing => 
                         <div key={ing.id} className='recipe-ingredient'>
                             {ing.quantity} {units[ing.unitId].name} {ingredients[ing.ingredientId].name}
-                            { !shoppingList?.find(i => i.ingredientId === ing.ingredientId) && <button id={ing.id} onClick={addToShoppingList}>+</button>}
+                            { sessionUser && !shoppingList?.find(i => i.ingredientId === ing.ingredientId) && <button id={ing.id} onClick={addToShoppingList}>+</button>}
                             { authorized && <EditRecipeIngredientFormModal recipeIngredient={ing}/> }
                         </div>
                     )}
