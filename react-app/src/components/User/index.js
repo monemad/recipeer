@@ -46,7 +46,9 @@ function User({profile = false}) {
                     <EditUserFormModal />
                 }
             </div>
-            { profile && <UserIngredients user={sessionUser} />}
+            <div>
+            { profile && <UserIngredients user={sessionUser} recipes={recipes}/>}
+            </div>
             <h2 className='header'>Recipes</h2>
             { profile && <CreateRecipeFormModal triggerRender={triggerRender} setTriggerRender={setTriggerRender}/>}
             <div className='recipe-cards'>

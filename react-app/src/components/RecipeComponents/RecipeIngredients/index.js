@@ -28,13 +28,15 @@ function RecipeIngredients({ recipe, authorized }) {
             <div className='recipe-ingredients-container'>
                 <h2 className='header'>Ingredients</h2>
                 <div className='recipe-ingredients'>
-                    {recipe.ingredients.map(ing => 
-                        <div key={ing.id} className='recipe-ingredient'>
-                            {ing.quantity} {units[ing.unitId].name} {ingredients[ing.ingredientId].name}
-                            { sessionUser && !shoppingList?.find(i => i.ingredientId === ing.ingredientId) && <button id={ing.id} onClick={addToShoppingList}>+</button>}
-                            { authorized && <EditRecipeIngredientFormModal recipeIngredient={ing}/> }
-                        </div>
-                    )}
+                    {
+                        recipe.ingredients.map(ing => 
+                            <div key={ing.id} className='recipe-ingredient'>
+                                {ing.quantity} {units[ing.unitId].name} {ingredients[ing.ingredientId].name}
+                                { sessionUser && !shoppingList?.find(i => i.ingredientId === ing.ingredientId) && <button id={ing.id} onClick={addToShoppingList}>+</button>}
+                                { authorized && <EditRecipeIngredientFormModal recipeIngredient={ing}/> }
+                            </div>
+                        )
+                    }
                 </div>
                 { authorized && 
                     <CreateRecipeIngredientFormModal recipe={recipe}/>
