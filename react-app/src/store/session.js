@@ -119,7 +119,7 @@ export const editUser = (firstName, lastName, username, password, imgFile, userI
 
     const response = await fetch('/api/auth/edit', {
         method: 'PUT',
-        body: form,
+        body: form
     });
     
     if (response.ok) {
@@ -133,6 +133,60 @@ export const editUser = (firstName, lastName, username, password, imgFile, userI
         }
     } else {
         return ['An error occurred. Please try again.']
+    }
+}
+
+export const createUserIngredient = (data) => async (dispatch) => {
+
+    const response = await fetch('/api/user-ingredients/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            order: data.order,
+            multiplier: data.multiplier,
+            recipe_ingredient_id: data.recipeIngredientId,
+            user_id: data.userId
+        })
+    })
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setUser(data))
+        return null;
+    }
+}
+
+export const updateUserIngredient = (data) => async (dispatch) => {
+
+    const response = await fetch(`/api/user-ingredients/${data.userIngredientId}/`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            multiplier: data.multiplier
+        })
+    })
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setUser(data))
+        return null;
+    }
+}
+
+export const deleteUserIngredient = (userIngredientId) => async (dispatch) => {
+
+    const response = await fetch(`/api/user-ingredients/${userIngredientId}/`, {
+        method: 'DELETE'
+    })
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setUser(data))
+        return null;
     }
 }
 
