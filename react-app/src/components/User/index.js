@@ -6,7 +6,7 @@ import CreateRecipeFormModal from '../modals/CreateRecipeFormModal';
 import { authenticate } from '../../store/session';
 import RecipeCard from '../RecipeComponents/RecipeCard';
 import ImageModal from '../modals/ImageModal';
-import RecipeIngredients from '../RecipeComponents/RecipeIngredients';
+import UserIngredients from '../RecipeComponents/UserIngredients';
 
 function User({profile = false}) {
     const dispatch = useDispatch()
@@ -46,7 +46,7 @@ function User({profile = false}) {
                     <EditUserFormModal />
                 }
             </div>
-            <RecipeIngredients />
+            { profile && <UserIngredients user={sessionUser} />}
             <h2 className='header'>Recipes</h2>
             { profile && <CreateRecipeFormModal triggerRender={triggerRender} setTriggerRender={setTriggerRender}/>}
             <div className='recipe-cards'>
